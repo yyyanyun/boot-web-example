@@ -17,6 +17,7 @@
 
   <modules>
     <module>qf-member</module>
+    <module>qf-account</module>
   </modules>
 
 
