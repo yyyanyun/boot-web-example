@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.account.mapper.AccountMapper">
+    <resultMap id="BaseResultMap" type="com.qf.account.entity.Account">
+        <!--@mbg.generated-->
+        <!--@Table t_account-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="member_type" jdbcType="INTEGER" property="memberType"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="balance" jdbcType="DECIMAL" property="balance"/>
+        <result column="available_balance" jdbcType="DECIMAL" property="availableBalance"/>
+        <result column="pending_balance" jdbcType="DECIMAL" property="pendingBalance"/>
+        <result column="frozen_balance" jdbcType="DECIMAL" property="frozenBalance"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id,
+        member_type,
+        phone,
+        balance,
+        available_balance,
+        pending_balance,
+        frozen_balance,
+        create_time,
+        last_login_time,
+        `status`
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from t_account
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        <!--@mbg.generated-->
+        delete
+        from t_account
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <insert id="insert" parameterType="com.qf.account.entity.Account">
+        <!--@mbg.generated-->
+        insert into t_account (id, member_type, phone,
+                               balance, available_balance, pending_balance,
+                               frozen_balance, create_time, last_login_time,
+                               `status`)
+        values (#{id,jdbcType=BIGINT}, #{memberType,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR},
+                #{balance,jdbcType=DECIMAL}, #{availableBalance,jdbcType=DECIMAL}, #{pendingBalance,jdbcType=DECIMAL},
+                #{frozenBalance,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP},
+                #{lastLoginTime,jdbcType=TIMESTAMP},
+                #{status,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.qf.account.entity.Account">
+        <!--@mbg.generated-->
+        insert into t_account
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="memberType != null">
+                member_type,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="balance != null">
+                balance,
+            </if>
+            <if test="availableBalance != null">
+                available_balance,
+            </if>
+            <if test="pendingBalance != null">
+                pending_balance,
+            </if>
+            <if test="frozenBalance != null">
+                frozen_balance,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="memberType != null">
+                #{memberType,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                #{balance,jdbcType=DECIMAL},
+            </if>
+            <if test="availableBalance != null">
+                #{availableBalance,jdbcType=DECIMAL},
+            </if>
+            <if test="pendingBalance != null">
+                #{pendingBalance,jdbcType=DECIMAL},
+            </if>
+            <if test="frozenBalance != null">
+                #{frozenBalance,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.qf.account.entity.Account">
+        <!--@mbg.generated-->
+        update t_account
+        <set>
+            <if test="memberType != null">
+                member_type = #{memberType,jdbcType=INTEGER},
+            </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="balance != null">
+                balance = #{balance,jdbcType=DECIMAL},
+            </if>
+            <if test="availableBalance != null">
+                available_balance = #{availableBalance,jdbcType=DECIMAL},
+            </if>
+            <if test="pendingBalance != null">
+                pending_balance = #{pendingBalance,jdbcType=DECIMAL},
+            </if>
+            <if test="frozenBalance != null">
+                frozen_balance = #{frozenBalance,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.qf.account.entity.Account">
+        <!--@mbg.generated-->
+        update t_account
+        set member_type       = #{memberType,jdbcType=INTEGER},
+            phone             = #{phone,jdbcType=VARCHAR},
+            balance           = #{balance,jdbcType=DECIMAL},
+            available_balance = #{availableBalance,jdbcType=DECIMAL},
+            pending_balance   = #{pendingBalance,jdbcType=DECIMAL},
+            frozen_balance    = #{frozenBalance,jdbcType=DECIMAL},
+            create_time       = #{createTime,jdbcType=TIMESTAMP},
+            last_login_time   = #{lastLoginTime,jdbcType=TIMESTAMP},
+            `status`          = #{status,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+
+    <select id="selectByPhoneOrId" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from t_account
+        <where>
+            <if test="id != null">
+                id like concat('%', #{id}, '%')
+            </if>
+            <if test="phone != null">
+                or phone like concat('%', #{phone}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectAdvancedSearch" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from t_account
+        <where>
+            <if test="Account.id != null">
+                id like concat('%', #{Account.id}, '%')
+            </if>
+            <if test="Account.phone != null">
+                or phone like concat('%', #{Account.phone}, '%')
+            </if>
+            <if test="Account.memberType != null and Account.memberType == 1">
+                or member_type = #{Account.memberType}
+            </if>
+            <if test="Account.memberType != null and Account.memberType == 2">
+                or member_type = #{Account.memberType}
+            </if>
+            <if test="Account.status != null and Account.status == 1">
+                or status = #{Account.status}
+            </if>
+            <if test="Account.status != null and Account.status == 0">
+                or status = #{Account.status}
+            </if>
+            <if test="Account.createTime != null">
+                or( create_time = #{Account.createTime}
+            </if>
+            <if test="Account.lastLoginTime != null">
+                and last_login_time = #{Account.lastLoginTime})
+            </if>
+        </where>
+    </select>
+</mapper>
