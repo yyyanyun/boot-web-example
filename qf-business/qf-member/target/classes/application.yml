@@ -1,0 +1,10 @@
+spring:
+  # 指定当前应用程序要使用的环境
+  profiles:
+    active: "dev,common-db"
+
+  jackson:
+    date-format: "yyyy-MM-dd hh:mm:ss"
+
+
+

@@ -1,0 +1,9 @@
+swagger:
+  enable: true
+  base-package: "com.qf.swagger.controller"
+  title: "接口文档"
+  description: "有关接口的使用"
+  version: "v 1.0.0"
+  name: "liuQi"
+  url: "wangZhan"
+  email: "5442@@qq.com"

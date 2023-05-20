@@ -1,0 +1,20 @@
+
+logging:
+  level:
+    com.qf: debug
+
+
+
+
+spring:
+  datasource:
+    druid:
+      url: "jdbc:mysql://localhost:3306/spring_web?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&autoReconnect=true&failOverReadOnly=false"
+      password: "as200108"
+      username: "root"
+      max-active: 20
+
+
+
+
+
