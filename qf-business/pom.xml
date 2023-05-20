@@ -17,7 +17,7 @@
 
   <modules>
     <module>qf-member</module>
-      <module>qf-system-config-module</module>
+    <module>qf-advertisement</module>
   </modules>
 
 
