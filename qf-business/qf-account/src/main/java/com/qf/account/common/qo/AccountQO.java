@@ -22,10 +22,14 @@ public class AccountQO {
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
+    @ApiModelProperty(value = "完成时间")
+    private Date completion_time;
+
     @ApiModelProperty(value = "最近登录时间")
     private Date lastLoginTime;
 
     @ApiModelProperty(value = "状态 1表示正常  0表示锁定")
     private Integer status;
+
 
 }

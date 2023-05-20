@@ -201,26 +201,24 @@
                 id like concat('%', #{Account.id}, '%')
             </if>
             <if test="Account.phone != null">
-                or phone like concat('%', #{Account.phone}, '%')
+                and phone like concat('%', #{Account.phone}, '%')
             </if>
             <if test="Account.memberType != null and Account.memberType == 1">
-                or member_type = #{Account.memberType}
+                and member_type = #{Account.memberType}
             </if>
             <if test="Account.memberType != null and Account.memberType == 2">
-                or member_type = #{Account.memberType}
+                and member_type = #{Account.memberType}
             </if>
             <if test="Account.status != null and Account.status == 1">
-                or status = #{Account.status}
+                and status = #{Account.status}
             </if>
             <if test="Account.status != null and Account.status == 0">
-                or status = #{Account.status}
+                and status = #{Account.status}
             </if>
-            <if test="Account.createTime != null">
-                or( create_time = #{Account.createTime}
+            <if test="Account.createTime != null and Account.completion_time != null">
+                and create_time between #{Account.createTime} and #{Account.completion_time}
             </if>
-            <if test="Account.lastLoginTime != null">
-                and last_login_time = #{Account.lastLoginTime})
-            </if>
+
         </where>
     </select>
 </mapper>

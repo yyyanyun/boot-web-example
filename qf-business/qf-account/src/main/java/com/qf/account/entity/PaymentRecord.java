@@ -29,7 +29,7 @@ public class PaymentRecord {
     /**
      * 会员类型
      */
-    @ApiModelProperty(value = "会员类型")
+    @ApiModelProperty(value = "会员类型 1表示快递员  2 表示普通会员")
     private Integer memberType;
 
     /**
@@ -86,11 +86,19 @@ public class PaymentRecord {
     @ApiModelProperty(value = "创建时间")
     private Date createdTime;
 
+
+    @ApiModelProperty(value = "创建时间")
+    private Date createDate;
+
     /**
      * 完成时间
      */
     @ApiModelProperty(value = "完成时间")
     private Date completedTime;
+
+
+    @ApiModelProperty(value = "完成时间")
+    private Date finishTime;
 
     /**
      * 支付状态 1表示支付成功 2表示尚未付款 3表示交易关闭

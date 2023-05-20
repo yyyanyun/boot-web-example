@@ -35,4 +35,22 @@ public class PaymentRecordController {
     public RespResult<PageInfo<PaymentRecordVO>> list(@RequestParam(defaultValue = "1") Integer currentPageNo, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody PaymentRecordQO paymentRecordQO) {
         return RespResult.success(paymentRecordService.selectList(currentPageNo, pageSize, paymentRecordQO));
     }
+
+    @PostMapping("/query/list")
+    @ApiOperation("查询所有支付记录信息高级搜索")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "currentPageNo", value = "当前页", defaultValue = "1"),
+            @ApiImplicitParam(name = "pageSize", value = "页量", defaultValue = "10"),
+            @ApiImplicitParam(name = "paymentRecordQO", value = "请求对象参数"),
+
+
+    })
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "成功"),
+            @ApiResponse(code = 400, message = "失败")
+    })
+    public RespResult<PageInfo<PaymentRecordVO>> queryList(@RequestParam(defaultValue = "1") Integer currentPageNo, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody PaymentRecordQO paymentRecordQO){
+
+        return RespResult.success(paymentRecordService.QueryList(currentPageNo,pageSize,paymentRecordQO));
+    }
 }

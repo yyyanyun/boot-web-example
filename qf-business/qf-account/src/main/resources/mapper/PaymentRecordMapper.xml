@@ -238,4 +238,64 @@
             </if>
         </where>
     </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from payment_record
+        <where>
+            <if test="PaymentRecord.tradeNo != null">
+                trade_no=#{PaymentRecord.tradeNo}
+            </if>
+            <if test="PaymentRecord.orderNo != null">
+                and order_no=#{PaymentRecord.orderNo}
+            </if>
+            <if test="PaymentRecord.phoneNumber != null">
+                and phone_number=#{PaymentRecord.phoneNumber}
+            </if>
+            <if test="PaymentRecord.memberType != null and PaymentRecord.memberType==1">
+                and member_type=#{PaymentRecord.memberType}
+            </if>
+            <if test="PaymentRecord.memberType != null and PaymentRecord.memberType==2">
+                and member_type=#{PaymentRecord.memberType}
+            </if>
+            <if test="PaymentRecord.status != null and PaymentRecord.status==1">
+                and status=#{PaymentRecord.status}
+            </if>
+            <if test="PaymentRecord.status != null and PaymentRecord.status==2">
+                and status=#{PaymentRecord.status}
+            </if>
+            <if test="PaymentRecord.status != null and PaymentRecord.status==3">
+                and status=#{PaymentRecord.status}
+            </if>
+            <if test="PaymentRecord.orderType != null and PaymentRecord.orderType==1">
+                and order_no=#{PaymentRecord.orderType}
+            </if>
+            <if test="PaymentRecord.orderType != null and PaymentRecord.orderType==2">
+                and order_no=#{PaymentRecord.orderType}
+            </if>
+            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel==1">
+                and payment_channel=#{PaymentRecord.paymentChannel}
+            </if>
+            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel==2">
+                and payment_channel=#{PaymentRecord.paymentChannel}
+            </if>
+            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel==3">
+                and payment_channel=#{PaymentRecord.paymentChannel}
+            </if>
+            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel==4">
+                and payment_channel=#{PaymentRecord.paymentChannel}
+            </if>
+            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel==5">
+                and payment_channel=#{PaymentRecord.paymentChannel}
+            </if>
+            <if test="PaymentRecord.createdTime!= null and PaymentRecord.createDate!=null ">
+                and created_time between #{PaymentRecord.createdTime} and #{PaymentRecord.createDate}
+            </if>
+            <if test="PaymentRecord.completedTime!=null and PaymentRecord.finishTime != null">
+                and completed_time between #{PaymentRecord.completedTime} and #{PaymentRecord.finishTime}
+            </if>
+        </where>
+    </select>
 </mapper>

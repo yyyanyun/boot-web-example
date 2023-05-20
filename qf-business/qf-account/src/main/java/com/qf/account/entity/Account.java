@@ -79,5 +79,8 @@ public class Account {
     private Integer status;
 
 
+    @ApiModelProperty(value = "完成时间")
+    private Date completion_time;
+
 
 }

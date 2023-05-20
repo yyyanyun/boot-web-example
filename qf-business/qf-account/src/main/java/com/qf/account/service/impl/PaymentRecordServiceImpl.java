@@ -27,6 +27,17 @@ public class PaymentRecordServiceImpl implements PaymentRecordService {
 
         PageInfo<PaymentRecordVO> pageInfo = PageHelper.startPage(currentPageNo, pageSize).doSelectPageInfo(() -> paymentRecordMapper.selectByPhoneOrTradeNoOrOrderNo(paymentRecord));
 
-        return PageInfoUtils.copyPage(pageInfo,new PageInfo<>(),PaymentRecordVO::new);
+        return PageInfoUtils.copyPage(pageInfo, new PageInfo<>(), PaymentRecordVO::new);
+    }
+
+    @Override
+    public PageInfo<PaymentRecordVO> QueryList(Integer currentPageNo, Integer pageSize, PaymentRecordQO paymentRecordQO) {
+
+        PaymentRecord paymentRecord = new PaymentRecord();
+        BeanUtils.copyProperties(paymentRecordQO, paymentRecord);
+
+        PageInfo<PaymentRecordVO> selectPageInfoList = PageHelper.startPage(currentPageNo, pageSize).doSelectPageInfo(() -> paymentRecordMapper.selectList(paymentRecord));
+
+        return PageInfoUtils.copyPage(selectPageInfoList, new PageInfo<>(), PaymentRecordVO::new);
     }
 }

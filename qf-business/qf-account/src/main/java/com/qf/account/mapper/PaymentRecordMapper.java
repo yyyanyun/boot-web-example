@@ -21,4 +21,5 @@ public interface PaymentRecordMapper {
 
     List<PaymentRecord> selectByPhoneOrTradeNoOrOrderNo(@Param("PaymentRecord") PaymentRecord paymentRecord);
 
+    List<PaymentRecord> selectList(@Param("PaymentRecord") PaymentRecord paymentRecord);
 }
