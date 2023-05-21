@@ -54,4 +54,19 @@ public class AccountController {
     public RespResult<PageInfo<AccountVO>> queryList(@RequestParam(defaultValue = "1") Integer currentPageNo, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody AccountQO accountQO) {
         return RespResult.success(accountService.pageInfoList(accountQO, currentPageNo, pageSize));
     }
+
+
+    @PutMapping("/update/unlock")
+    @ApiOperation("修改状态")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "账户id", required = true),
+            @ApiImplicitParam(name = "status", value = "状态", required = true)
+    })
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "修改成功"),
+            @ApiResponse(code = 400, message = "修改失败")
+    })
+    public RespResult<Integer> updateUnlock(@RequestParam Long id, @RequestParam int status) {
+        return RespResult.success(accountService.updateUnlock(id, status));
+    }
 }

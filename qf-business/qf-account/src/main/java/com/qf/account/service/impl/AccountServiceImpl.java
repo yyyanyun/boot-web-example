@@ -1,5 +1,6 @@
 package com.qf.account.service.impl;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.account.common.qo.AccountQO;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements AccountService  {
 
     @Resource
     private AccountMapper accountMapper;
@@ -39,4 +40,13 @@ public class AccountServiceImpl implements AccountService {
         return PageInfoUtils.copyPage(accountVOPageInfo, new PageInfo<>(), AccountVO::new);
 
     }
+
+
+
+    @Override
+    public int updateUnlock(Long id, int status) {
+        return accountMapper.updateUnlock(id,status);
+    }
+
+
 }

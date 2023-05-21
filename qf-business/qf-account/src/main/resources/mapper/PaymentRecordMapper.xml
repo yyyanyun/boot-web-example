@@ -36,190 +36,6 @@
         completed_time,
         `status`
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        <!--@mbg.generated-->
-        select
-        <include refid="Base_Column_List"/>
-        from payment_record
-        where id = #{id,jdbcType=BIGINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        <!--@mbg.generated-->
-        delete
-        from payment_record
-        where id = #{id,jdbcType=BIGINT}
-    </delete>
-    <insert id="insert" parameterType="com.qf.account.entity.PaymentRecord">
-        <!--@mbg.generated-->
-        insert into payment_record (id, trade_no, member_type,
-                                    phone_number, order_type, order_no,
-                                    amount, payment_channel, payment_currency,
-                                    actual_payment_cny, exchange_rate, created_time,
-                                    completed_time, `status`)
-        values (#{id,jdbcType=BIGINT}, #{tradeNo,jdbcType=BIGINT}, #{memberType,jdbcType=INTEGER},
-                #{phoneNumber,jdbcType=VARCHAR}, #{orderType,jdbcType=INTEGER}, #{orderNo,jdbcType=INTEGER},
-                #{amount,jdbcType=DECIMAL}, #{paymentChannel,jdbcType=INTEGER}, #{paymentCurrency,jdbcType=INTEGER},
-                #{actualPaymentCny,jdbcType=DECIMAL}, #{exchangeRate,jdbcType=DECIMAL},
-                #{createdTime,jdbcType=TIMESTAMP},
-                #{completedTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
-    </insert>
-    <insert id="insertSelective" parameterType="com.qf.account.entity.PaymentRecord">
-        <!--@mbg.generated-->
-        insert into payment_record
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="tradeNo != null">
-                trade_no,
-            </if>
-            <if test="memberType != null">
-                member_type,
-            </if>
-            <if test="phoneNumber != null">
-                phone_number,
-            </if>
-            <if test="orderType != null">
-                order_type,
-            </if>
-            <if test="orderNo != null">
-                order_no,
-            </if>
-            <if test="amount != null">
-                amount,
-            </if>
-            <if test="paymentChannel != null">
-                payment_channel,
-            </if>
-            <if test="paymentCurrency != null">
-                payment_currency,
-            </if>
-            <if test="actualPaymentCny != null">
-                actual_payment_cny,
-            </if>
-            <if test="exchangeRate != null">
-                exchange_rate,
-            </if>
-            <if test="createdTime != null">
-                created_time,
-            </if>
-            <if test="completedTime != null">
-                completed_time,
-            </if>
-            <if test="status != null">
-                `status`,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
-            <if test="tradeNo != null">
-                #{tradeNo,jdbcType=BIGINT},
-            </if>
-            <if test="memberType != null">
-                #{memberType,jdbcType=INTEGER},
-            </if>
-            <if test="phoneNumber != null">
-                #{phoneNumber,jdbcType=VARCHAR},
-            </if>
-            <if test="orderType != null">
-                #{orderType,jdbcType=INTEGER},
-            </if>
-            <if test="orderNo != null">
-                #{orderNo,jdbcType=INTEGER},
-            </if>
-            <if test="amount != null">
-                #{amount,jdbcType=DECIMAL},
-            </if>
-            <if test="paymentChannel != null">
-                #{paymentChannel,jdbcType=INTEGER},
-            </if>
-            <if test="paymentCurrency != null">
-                #{paymentCurrency,jdbcType=INTEGER},
-            </if>
-            <if test="actualPaymentCny != null">
-                #{actualPaymentCny,jdbcType=DECIMAL},
-            </if>
-            <if test="exchangeRate != null">
-                #{exchangeRate,jdbcType=DECIMAL},
-            </if>
-            <if test="createdTime != null">
-                #{createdTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="completedTime != null">
-                #{completedTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=INTEGER},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.qf.account.entity.PaymentRecord">
-        <!--@mbg.generated-->
-        update payment_record
-        <set>
-            <if test="tradeNo != null">
-                trade_no = #{tradeNo,jdbcType=BIGINT},
-            </if>
-            <if test="memberType != null">
-                member_type = #{memberType,jdbcType=INTEGER},
-            </if>
-            <if test="phoneNumber != null">
-                phone_number = #{phoneNumber,jdbcType=VARCHAR},
-            </if>
-            <if test="orderType != null">
-                order_type = #{orderType,jdbcType=INTEGER},
-            </if>
-            <if test="orderNo != null">
-                order_no = #{orderNo,jdbcType=INTEGER},
-            </if>
-            <if test="amount != null">
-                amount = #{amount,jdbcType=DECIMAL},
-            </if>
-            <if test="paymentChannel != null">
-                payment_channel = #{paymentChannel,jdbcType=INTEGER},
-            </if>
-            <if test="paymentCurrency != null">
-                payment_currency = #{paymentCurrency,jdbcType=INTEGER},
-            </if>
-            <if test="actualPaymentCny != null">
-                actual_payment_cny = #{actualPaymentCny,jdbcType=DECIMAL},
-            </if>
-            <if test="exchangeRate != null">
-                exchange_rate = #{exchangeRate,jdbcType=DECIMAL},
-            </if>
-            <if test="createdTime != null">
-                created_time = #{createdTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="completedTime != null">
-                completed_time = #{completedTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="status != null">
-                `status` = #{status,jdbcType=INTEGER},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.qf.account.entity.PaymentRecord">
-        <!--@mbg.generated-->
-        update payment_record
-        set trade_no           = #{tradeNo,jdbcType=BIGINT},
-            member_type        = #{memberType,jdbcType=INTEGER},
-            phone_number       = #{phoneNumber,jdbcType=VARCHAR},
-            order_type         = #{orderType,jdbcType=INTEGER},
-            order_no           = #{orderNo,jdbcType=INTEGER},
-            amount             = #{amount,jdbcType=DECIMAL},
-            payment_channel    = #{paymentChannel,jdbcType=INTEGER},
-            payment_currency   = #{paymentCurrency,jdbcType=INTEGER},
-            actual_payment_cny = #{actualPaymentCny,jdbcType=DECIMAL},
-            exchange_rate      = #{exchangeRate,jdbcType=DECIMAL},
-            created_time       = #{createdTime,jdbcType=TIMESTAMP},
-            completed_time     = #{completedTime,jdbcType=TIMESTAMP},
-            `status`           = #{status,jdbcType=INTEGER}
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-
 
     <select id="selectByPhoneOrTradeNoOrOrderNo" resultMap="BaseResultMap">
         select
@@ -246,54 +62,54 @@
         from payment_record
         <where>
             <if test="PaymentRecord.tradeNo != null">
-                trade_no=#{PaymentRecord.tradeNo}
+                trade_no = #{PaymentRecord.tradeNo}
             </if>
             <if test="PaymentRecord.orderNo != null">
-                and order_no=#{PaymentRecord.orderNo}
+                and order_no = #{PaymentRecord.orderNo}
             </if>
             <if test="PaymentRecord.phoneNumber != null">
-                and phone_number=#{PaymentRecord.phoneNumber}
+                and phone_number = #{PaymentRecord.phoneNumber}
             </if>
-            <if test="PaymentRecord.memberType != null and PaymentRecord.memberType==1">
-                and member_type=#{PaymentRecord.memberType}
+            <if test="PaymentRecord.memberType != null and PaymentRecord.memberType == 1">
+                and member_type = #{PaymentRecord.memberType}
             </if>
-            <if test="PaymentRecord.memberType != null and PaymentRecord.memberType==2">
-                and member_type=#{PaymentRecord.memberType}
+            <if test="PaymentRecord.memberType != null and PaymentRecord.memberType == 2">
+                and member_type = #{PaymentRecord.memberType}
             </if>
-            <if test="PaymentRecord.status != null and PaymentRecord.status==1">
-                and status=#{PaymentRecord.status}
+            <if test="PaymentRecord.status != null and PaymentRecord.status == 1">
+                and status = #{PaymentRecord.status}
             </if>
-            <if test="PaymentRecord.status != null and PaymentRecord.status==2">
-                and status=#{PaymentRecord.status}
+            <if test="PaymentRecord.status != null and PaymentRecord.status == 2">
+                and status = #{PaymentRecord.status}
             </if>
-            <if test="PaymentRecord.status != null and PaymentRecord.status==3">
-                and status=#{PaymentRecord.status}
+            <if test="PaymentRecord.status != null and PaymentRecord.status == 3">
+                and status = #{PaymentRecord.status}
             </if>
-            <if test="PaymentRecord.orderType != null and PaymentRecord.orderType==1">
-                and order_no=#{PaymentRecord.orderType}
+            <if test="PaymentRecord.orderType != null and PaymentRecord.orderType == 1">
+                and order_no = #{PaymentRecord.orderType}
             </if>
-            <if test="PaymentRecord.orderType != null and PaymentRecord.orderType==2">
-                and order_no=#{PaymentRecord.orderType}
+            <if test="PaymentRecord.orderType != null and PaymentRecord.orderType == 2">
+                and order_no = #{PaymentRecord.orderType}
             </if>
-            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel==1">
-                and payment_channel=#{PaymentRecord.paymentChannel}
+            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel == 1">
+                and payment_channel = #{PaymentRecord.paymentChannel}
             </if>
-            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel==2">
-                and payment_channel=#{PaymentRecord.paymentChannel}
+            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel == 2">
+                and payment_channel = #{PaymentRecord.paymentChannel}
             </if>
-            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel==3">
-                and payment_channel=#{PaymentRecord.paymentChannel}
+            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel == 3">
+                and payment_channel = #{PaymentRecord.paymentChannel}
             </if>
-            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel==4">
-                and payment_channel=#{PaymentRecord.paymentChannel}
+            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel == 4">
+                and payment_channel = #{PaymentRecord.paymentChannel}
             </if>
-            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel==5">
-                and payment_channel=#{PaymentRecord.paymentChannel}
+            <if test="PaymentRecord.paymentChannel != null and PaymentRecord.paymentChannel == 5">
+                and payment_channel = #{PaymentRecord.paymentChannel}
             </if>
-            <if test="PaymentRecord.createdTime!= null and PaymentRecord.createDate!=null ">
+            <if test="PaymentRecord.createdTime != null and PaymentRecord.createDate != null">
                 and created_time between #{PaymentRecord.createdTime} and #{PaymentRecord.createDate}
             </if>
-            <if test="PaymentRecord.completedTime!=null and PaymentRecord.finishTime != null">
+            <if test="PaymentRecord.completedTime != null and PaymentRecord.finishTime != null">
                 and completed_time between #{PaymentRecord.completedTime} and #{PaymentRecord.finishTime}
             </if>
         </where>
