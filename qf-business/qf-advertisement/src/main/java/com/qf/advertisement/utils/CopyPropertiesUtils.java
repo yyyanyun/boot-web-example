@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qf.advertisement.entity.Advertising;
 import com.qf.advertisement.entity.Video;
+import com.qf.advertisement.vo.AdvertisingQo;
 import com.qf.advertisement.vo.AdvertisingVo;
 import org.springframework.beans.BeanUtils;
 
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class CopyPropertiesUtils {
+public class CopyPropertiesUtils extends BeanUtils {
 
     /**
      * 自定义 工具类
@@ -41,12 +42,20 @@ public class CopyPropertiesUtils {
         System.out.println(collect);
 
         //复制  源数据 其他 数据
-
         BeanUtils.copyProperties(source,voIPage);
 
 
         return voIPage.setRecords(collect);
+    }
 
 
+    public static  Advertising  copyLocalDateTime(AdvertisingQo advertisingQo, Advertising advertising){
+        // 将 其他属性 赋值
+        copyProperties(advertisingQo,advertising);
+        //将 LocalDateTime 属性赋值
+        advertising.setPushTime(advertisingQo.getPushTime());
+        advertising.setExpiryTime(advertisingQo.getExpiryTime());
+        advertising.setCreateTime(advertisingQo.getCreateTime());
+        return advertising;
     }
 }

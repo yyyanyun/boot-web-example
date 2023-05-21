@@ -4,14 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qf.advertisement.entity.Advertising;
-import com.qf.advertisement.entity.Video;
+
 import com.qf.advertisement.mapper.AdvertisingMapper;
 import com.qf.advertisement.mapper.VideoMapper;
 import com.qf.advertisement.server.AdvertisingServer;
 import com.qf.advertisement.utils.CopyPropertiesUtils;
 import com.qf.advertisement.vo.AdvertisingQo;
 import com.qf.advertisement.vo.AdvertisingVo;
-import com.qf.common.db.utils.PageCommonUtils;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.core.convert.ConversionService;
+import org.springframework.core.convert.support.DefaultConversionService;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -35,19 +38,22 @@ public class AdvertisingServerImpl  implements AdvertisingServer {
     public IPage<AdvertisingVo> queryList(int page,int size,AdvertisingQo advertisingQo) {
 
         Advertising advertising = new Advertising();
-        copyProperties(advertisingQo,advertising);
+        //注意： BeanUtils.copyProperties() 不能将 LocalDateTime 类型的属性 赋值给 目标对象
+        // 如果想  赋值 调用  可以定义 自己 定义工具类
+        CopyPropertiesUtils.copyLocalDateTime(advertisingQo,advertising);
+
 
         LambdaQueryWrapper<Advertising> queryWrapper = new LambdaQueryWrapper<>();
         if (!ObjectUtils.isEmpty(advertisingQo.getAdvertisingTitle())){
-            queryWrapper.like(Advertising::getAdvertisingTitle,advertisingQo.getAdvertisingTitle());
+            queryWrapper.like(Advertising::getAdvertisingTitle,advertising.getAdvertisingTitle());
         }
 
         if (!ObjectUtils.isEmpty(advertisingQo.getCreateTime()) && !ObjectUtils.isEmpty(advertisingQo.getExpiryTime())){
-            queryWrapper.between(Advertising::getCreateTime,advertisingQo.getCreateTime(),advertisingQo.getExpiryTime());
+            queryWrapper.between(Advertising::getCreateTime,advertising.getCreateTime(),advertising.getExpiryTime());
         }
 
         if (!ObjectUtils.isEmpty(advertisingQo.getExpiryTime())){
-            queryWrapper.le(Advertising::getExpiryTime,advertisingQo.getExpiryTime());
+            queryWrapper.le(Advertising::getExpiryTime,advertising.getExpiryTime());
         }
 
         //查询 出

@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -51,21 +52,21 @@ public class Advertising {
     */
     @ApiModelProperty(value="推送时间")
     @Schema(description="推送时间")
-    private Date pushTime;
+    private  LocalDateTime pushTime;
 
     /**
     * 失效时间
     */
     @ApiModelProperty(value="失效时间")
     @Schema(description="失效时间")
-    private Date expiryTime;
+    private LocalDateTime expiryTime;
 
     /**
     * 创建时间
     */
     @ApiModelProperty(value="创建时间")
     @Schema(description="创建时间")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     /**
     * 广告状态，0:下架，1:上架 2: 删除
