@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.account.mapper.ExchangeRateDetailMapper">
+  <resultMap id="BaseResultMap" type="com.qf.account.entity.ExchangeRateDetail">
+    <!--@mbg.generated-->
+    <!--@Table exchange_rate_detail-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="exchange_rate_id" jdbcType="BIGINT" property="exchangeRateId" />
+    <result column="quote_currency" jdbcType="INTEGER" property="quoteCurrency" />
+    <result column="quote_currency_unit" jdbcType="VARCHAR" property="quoteCurrencyUnit" />
+    <result column="base_currency" jdbcType="VARCHAR" property="baseCurrency" />
+    <result column="spot_buying_rate" jdbcType="DECIMAL" property="spotBuyingRate" />
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, exchange_rate_id, quote_currency, quote_currency_unit, base_currency, spot_buying_rate, 
+    publish_time
+  </sql>
+
+  <select id="slectList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List">
+    </include>
+
+      from exchange_rate_detail
+      where exchange_rate_id = #{exchangeRateId}
+  </select>
+</mapper>

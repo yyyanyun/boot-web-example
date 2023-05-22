@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.account.mapper.PaymentDetailMapper">
+  <resultMap id="BaseResultMap" type="com.qf.account.entity.PaymentDetail">
+    <!--@mbg.generated-->
+    <!--@Table payment_detail-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="trade_no" jdbcType="BIGINT" property="tradeNo" />
+    <result column="fee_type" jdbcType="INTEGER" property="feeType" />
+    <result column="discount" jdbcType="DECIMAL" property="discount" />
+    <result column="closed_time" jdbcType="TIMESTAMP" property="closedTime" />
+    <result column="payment_amount" jdbcType="DECIMAL" property="paymentAmount" />
+  </resultMap>
+
+
+
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, trade_no, fee_type, discount, closed_time, payment_amount
+  </sql>
+
+
+  <select id="selectByTradeNo" resultMap="BaseResultMap">
+      select
+
+      <include refid="Base_Column_List">
+      </include>
+
+      from payment_detail where trade_no= #{tradeNo}
+  </select>
+
+
+</mapper>

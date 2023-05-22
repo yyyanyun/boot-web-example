@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.account.mapper.RechargeRecordMapper">
+    <resultMap id="BaseResultMap" type="com.qf.account.entity.RechargeRecord">
+        <!--@mbg.generated-->
+        <!--@Table recharge_record-->
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="account_id" jdbcType="BIGINT" property="accountId"/>
+        <result column="trade_no" jdbcType="BIGINT" property="tradeNo"/>
+        <result column="member_type" jdbcType="INTEGER" property="memberType"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="channel" jdbcType="INTEGER" property="channel"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="balance" jdbcType="DECIMAL" property="balance"/>
+        <result column="currency_type" jdbcType="INTEGER" property="currencyType"/>
+        <result column="actual_amount" jdbcType="DECIMAL" property="actualAmount"/>
+        <result column="exchange_rate" jdbcType="DECIMAL" property="exchangeRate"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="complete_time" jdbcType="TIMESTAMP" property="completeTime"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id,
+        account_id,
+        trade_no,
+        member_type,
+        mobile,
+        channel,
+        amount,
+        balance,
+        currency_type,
+        actual_amount,
+        exchange_rate,
+        create_time,
+        complete_time,
+        `status`
+    </sql>
+
+    <select id="selectByAccountIdORMobile" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from recharge_record
+        <where>
+            <if test="RechargeRecord.accountId != null">
+                account_id like concat('%', #{RechargeRecord.accountId}, '%')
+            </if>
+            <if test="RechargeRecord.mobile != null">
+                or mobile like concat('%', #{RechargeRecord.mobile}, '%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from recharge_record
+        <where>
+            <if test="RechargeRecord.tradeNo != null">
+                trade_no = #{RechargeRecord.tradeNo}
+            </if>
+            <if test="RechargeRecord.mobile != null">
+                and mobile = #{RechargeRecord.mobile}
+            </if>
+            <if test="RechargeRecord.memberType != null and RechargeRecord.memberType == 1">
+                and member_type = #{RechargeRecord.memberType}
+            </if>
+            <if test="RechargeRecord.memberType != null and RechargeRecord.memberType == 2">
+                and member_type = #{RechargeRecord.memberType}
+            </if>
+            <if test="RechargeRecord.status != null and RechargeRecord.status == 1">
+                and status = #{RechargeRecord.status}
+            </if>
+            <if test="RechargeRecord.status != null and RechargeRecord.status == 2">
+                and status = #{RechargeRecord.status}
+            </if>
+            <if test="RechargeRecord.status != null and RechargeRecord.status == 3">
+                and status = #{RechargeRecord.status}
+            </if>
+            <if test="RechargeRecord.status != null and RechargeRecord.status == 4">
+                and status = #{RechargeRecord.status}
+            </if>
+            <if test="RechargeRecord.status != null and RechargeRecord.status == 5">
+                and status = #{RechargeRecord.status}
+            </if>
+            <if test="RechargeRecord.channel != null and RechargeRecord.channel==1">
+                and channel= #{RechargeRecord.channel}
+            </if>
+            <if test="RechargeRecord.channel != null and RechargeRecord.channel==2">
+                and channel= #{RechargeRecord.channel}
+            </if>
+            <if test="RechargeRecord.channel != null and RechargeRecord.channel==3">
+                and channel= #{RechargeRecord.channel}
+            </if>
+            <if test="RechargeRecord.channel != null and RechargeRecord.channel==4">
+                and channel= #{RechargeRecord.channel}
+            </if>
+            <if test="RechargeRecord.channel != null and RechargeRecord.channel==5">
+                and channel= #{RechargeRecord.channel}
+            </if>
+            <if test="RechargeRecord.createTime!=null">
+                and create_time between #{RechargeRecord.createTime} and #{RechargeRecord.createTimeFinish}
+            </if>
+            <if test="RechargeRecord.completeTime != null">
+                and complete_time between #{RechargeRecord.completeTime} and #{RechargeRecord.completeTimeFinish}
+            </if>
+        </where>
+    </select>
+</mapper>
