@@ -27,6 +27,14 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.qf.common.api</groupId>
+            <artifactId>qf-common-base</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.qf.common.db</groupId>
+            <artifactId>qf-common-db</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
