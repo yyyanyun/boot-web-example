@@ -95,4 +95,7 @@ public class PaymentRecordVO {
     @ApiModelProperty(value = "支付状态 1表示支付成功 2表示尚未付款 3表示交易关闭")
     private Integer status;
 
+
+    @ApiModelProperty(value = "所属账户id")
+    private Long account_id;
 }

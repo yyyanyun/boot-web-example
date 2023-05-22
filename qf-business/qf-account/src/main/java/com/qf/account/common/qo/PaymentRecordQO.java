@@ -43,4 +43,7 @@ public class PaymentRecordQO {
     @ApiModelProperty(value = "完成时间")
     private Date finishTime;
 
+    @ApiModelProperty(value = "所属账户id")
+    private Long account_id;
+
 }

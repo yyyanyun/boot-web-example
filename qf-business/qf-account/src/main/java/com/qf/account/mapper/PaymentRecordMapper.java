@@ -1,12 +1,13 @@
 package com.qf.account.mapper;
 
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.qf.account.entity.PaymentRecord;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface PaymentRecordMapper {
+public interface PaymentRecordMapper extends BaseMapper<PaymentRecord> {
 
 
     List<PaymentRecord> selectByPhoneOrTradeNoOrOrderNo(@Param("PaymentRecord") PaymentRecord paymentRecord);
