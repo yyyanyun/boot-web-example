@@ -2,9 +2,10 @@ package com.qf.cabinet.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.qf.cabinet.qo.CabinetQo;
-import com.qf.cabinet.qo.CabinetsQo;
 import com.qf.cabinet.service.CabinetService;
 import com.qf.cabinet.vo.CabinetVo;
+import com.qf.common.base.exception.ControllerException;
+import com.qf.common.base.result.RespResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -63,9 +64,14 @@ public class CabinetController {
     @PostMapping("/list/{page}/{size}")
     public IPage<CabinetVo> list(@PathVariable @RequestParam(defaultValue = "1") int page,
                                  @PathVariable @RequestParam(defaultValue = "5") int size,
-                                 CabinetsQo cabinetsQo) throws CancellationException {
+                                 CabinetQo cabinetQo) throws CancellationException {
         System.out.println(page+size);
-        return cabinetService.list(page, size, cabinetsQo);
+        return cabinetService.list(page, size, cabinetQo);
+    }
+
+    public RespResult<Integer> add(@RequestBody ) throws ControllerException {
+
+return null;
     }
 
 
