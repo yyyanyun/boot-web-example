@@ -1,17 +1,17 @@
-package com.qf.cabinet.vo;
+package com.qf.cabinet.qo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-@ApiModel(description = "响应柜机表")
 @Data
-public class CabinetVo {
-
+@ApiModel("柜机高级查询请求参数表")
+public class CabinetHighQo {
     /**
      * 主键
      */
@@ -48,11 +48,6 @@ public class CabinetVo {
     @ApiModelProperty(value = "存储类型（1.常温 2.冷藏）")
     private Integer storageType;
 
-    /**
-     * 箱格
-     */
-    @ApiModelProperty(value = "箱格")
-    private String box;
 
     /**
      * 系统版本
@@ -64,12 +59,14 @@ public class CabinetVo {
      * 安装日期
      */
     @ApiModelProperty(value = "安装日期")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createData;
 
     /**
      * 开通时间
      */
     @ApiModelProperty(value = "开通时间")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date activationData;
 
 
@@ -91,45 +88,4 @@ public class CabinetVo {
     @ApiModelProperty(value = "柜机状态(5.禁用 1.正常、启用 2.未开通 3.已关机 4.重启中)")
     private Integer cabinetStatus;
 
-    /**
-     * MAC地址
-     */
-    @ApiModelProperty(value = "MAC地址")
-    private String mac;
-
-    /**
-     * 主柜宽度（cm）
-     */
-    @ApiModelProperty(value = "主柜宽度（cm）")
-    private Double hostWidth;
-
-    /**
-     * 主柜深度（cm）
-     */
-    @ApiModelProperty(value = "主柜深度（cm）")
-    private Double hostDepth;
-
-    /**
-     * 主柜高度（cm）
-     */
-    @ApiModelProperty(value = "主柜高度（cm）")
-    private Double hostHeight;
-
-    /**
-     * 副柜宽度（cm）
-     */
-    @ApiModelProperty(value = "副柜宽度（cm）")
-    private Double viceWidth;
-
-    /**
-     * 副柜深度（cm）
-     */
-    @ApiModelProperty(value = "副柜深度（cm）")
-    private Double viceDepth;
-
-    /**
-     * 副柜高度（cm）
-     */
-    @ApiModelProperty(value = "副柜高度（cm）")
-    private Double viceHeight;
 }

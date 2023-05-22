@@ -34,6 +34,9 @@ public interface CabinetMapper extends BaseMapper<Cabinet> {
         return this.selectPage(new Page<>(page, size), queryWrapper);
     }
 
+    /**
+     * 高级条件查询
+     */
     default IPage<Cabinet> selectBy(int page, int size, Cabinet cabinet) throws DaoException {
         LambdaQueryWrapper<Cabinet> queryWrapper = new LambdaQueryWrapper<>();
         if (!ObjectUtils.isEmpty(cabinet.getCabinetId())) {
@@ -54,11 +57,11 @@ public interface CabinetMapper extends BaseMapper<Cabinet> {
         if (!ObjectUtils.isEmpty(cabinet.getAddress())) {
             queryWrapper.eq(Cabinet::getAddress, cabinet.getAddress());
         }
-        if (!ObjectUtils.isEmpty(cabinet.getCreateData()) && !ObjectUtils.isEmpty(cabinet.getEndData())) {
-            queryWrapper.between(Cabinet::getCreateData, cabinet.getCreateData(), cabinet.getEndData());
+        if (!ObjectUtils.isEmpty(cabinet.getCreateData())) {
+            queryWrapper.eq(Cabinet::getCreateData, cabinet.getCreateData());
         }
-        if (!ObjectUtils.isEmpty(cabinet.getActivationData()) && !ObjectUtils.isEmpty(cabinet.getEndData())) {
-            queryWrapper.between(Cabinet::getActivationData, cabinet.getActivationData(), cabinet.getEndData());
+        if (!ObjectUtils.isEmpty(cabinet.getActivationData())) {
+            queryWrapper.eq(Cabinet::getActivationData, cabinet.getActivationData());
         }
         if (!ObjectUtils.isEmpty(cabinet.getCabinetStatus())) {
             queryWrapper.eq(Cabinet::getCabinetStatus, cabinet.getCabinetStatus());
@@ -74,4 +77,5 @@ public interface CabinetMapper extends BaseMapper<Cabinet> {
         }
         return this.selectPage(new Page<>(page, size), queryWrapper);
     }
+
 }

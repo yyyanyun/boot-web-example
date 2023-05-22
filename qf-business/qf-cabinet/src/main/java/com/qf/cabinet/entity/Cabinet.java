@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -19,7 +20,7 @@ public class Cabinet {
     /**
      * 主键
      */
-    @TableId(value = "cabinet_id", type = IdType.INPUT)
+    @TableId(value = "cabinet_id", type = IdType.ASSIGN_ID)
     @ApiModelProperty(value = "主键")
     private Long cabinetId;
 
@@ -77,6 +78,7 @@ public class Cabinet {
      */
     @TableField(value = "create_data")
     @ApiModelProperty(value = "安装日期")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createData;
 
     /**
@@ -84,14 +86,9 @@ public class Cabinet {
      */
     @TableField(value = "activation_data")
     @ApiModelProperty(value = "开通时间")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date activationData;
 
-    /**
-     * 结束时间
-     */
-    @TableField(value = "end_data")
-    @ApiModelProperty(value = "结束时间")
-    private Date endData;
 
     /**
      * 箱门状态(1.正常 2.异常)
