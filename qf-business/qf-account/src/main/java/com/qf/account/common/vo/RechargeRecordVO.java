@@ -116,6 +116,4 @@ public class RechargeRecordVO {
 
     private RechargeDetails rechargeDetails;
 
-
-
 }
