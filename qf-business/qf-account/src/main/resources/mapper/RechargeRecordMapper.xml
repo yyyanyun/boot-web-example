@@ -85,27 +85,40 @@
             <if test="RechargeRecord.status != null and RechargeRecord.status == 5">
                 and status = #{RechargeRecord.status}
             </if>
-            <if test="RechargeRecord.channel != null and RechargeRecord.channel==1">
-                and channel= #{RechargeRecord.channel}
+            <if test="RechargeRecord.channel != null and RechargeRecord.channel == 1">
+                and channel = #{RechargeRecord.channel}
             </if>
-            <if test="RechargeRecord.channel != null and RechargeRecord.channel==2">
-                and channel= #{RechargeRecord.channel}
+            <if test="RechargeRecord.channel != null and RechargeRecord.channel == 2">
+                and channel = #{RechargeRecord.channel}
             </if>
-            <if test="RechargeRecord.channel != null and RechargeRecord.channel==3">
-                and channel= #{RechargeRecord.channel}
+            <if test="RechargeRecord.channel != null and RechargeRecord.channel == 3">
+                and channel = #{RechargeRecord.channel}
             </if>
-            <if test="RechargeRecord.channel != null and RechargeRecord.channel==4">
-                and channel= #{RechargeRecord.channel}
+            <if test="RechargeRecord.channel != null and RechargeRecord.channel == 4">
+                and channel = #{RechargeRecord.channel}
             </if>
-            <if test="RechargeRecord.channel != null and RechargeRecord.channel==5">
-                and channel= #{RechargeRecord.channel}
+            <if test="RechargeRecord.channel != null and RechargeRecord.channel == 5">
+                and channel = #{RechargeRecord.channel}
             </if>
-            <if test="RechargeRecord.createTime!=null">
+            <if test="RechargeRecord.createTime != null">
                 and create_time between #{RechargeRecord.createTime} and #{RechargeRecord.createTimeFinish}
             </if>
             <if test="RechargeRecord.completeTime != null">
                 and complete_time between #{RechargeRecord.completeTime} and #{RechargeRecord.completeTimeFinish}
             </if>
         </where>
+    </select>
+    <resultMap id="BaseResultMapRe" type="com.qf.account.entity.RechargeRecord">
+        <association property="rechargeDetails" javaType="com.qf.account.entity.RechargeDetails" column="id"
+                     select="com.qf.account.mapper.RechargeDetailsMapper.selectByRechargeId">
+        </association>
+    </resultMap>
+
+    <select id="selectById" resultMap="BaseResultMapRe">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from recharge_record
+        where id = #{id}
     </select>
 </mapper>
