@@ -24,6 +24,19 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--   阿里云 oss 文件上传依赖       -->
+            <dependency>
+                <groupId>com.aliyun.oss</groupId>
+                <artifactId>aliyun-sdk-oss</artifactId>
+                <version>3.15.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>1.4</version>
+            </dependency>
+
             <!--     数据层       -->
 
             <!--   druid  数据源     -->

@@ -2,13 +2,14 @@ package com.qf.advertisement.vo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 @Data
 @ApiModel("给前端展示广告信息的类")
@@ -41,6 +42,7 @@ public class AdvertisingVo {
     /**
      * 推送时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     @ApiModelProperty(value="推送时间")
     @Schema(description="推送时间")
     private LocalDateTime pushTime;
@@ -50,6 +52,7 @@ public class AdvertisingVo {
      */
     @ApiModelProperty(value="失效时间")
     @Schema(description="失效时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime expiryTime;
 
     /**
@@ -57,6 +60,7 @@ public class AdvertisingVo {
      */
     @ApiModelProperty(value="创建时间")
     @Schema(description="创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private LocalDateTime createTime;
 
     /**

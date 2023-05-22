@@ -7,7 +7,9 @@ import com.qf.advertisement.server.AdvertisingServer;
 import com.qf.advertisement.vo.AdvertisingQo;
 import com.qf.advertisement.vo.AdvertisingVo;
 import com.qf.common.base.result.RespResult;
+import com.qf.common.base.result.ResultCode;
 import io.swagger.annotations.*;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,6 +21,7 @@ public class AdvertisingController {
 
     @Resource
     AdvertisingServer  advertisingServer;
+
 
     /**
      * DateTimeFormat  和  JsonFormat  主键的 区别
@@ -46,8 +49,40 @@ public class AdvertisingController {
         return  RespResult.success(advertisingServer.queryList(page,size,advertisingQo));
     }
 
+    /**
+     * 插入广告数据
+     * @param advertisingQo
+     * @return
+     */
     @PostMapping("insert")
-    public String  insertAdvertising(@RequestParam AdvertisingVo advertisingVo) {
-        return null;
+    public RespResult<Object>  insertAdvertising(@ModelAttribute  AdvertisingQo advertisingQo) {
+         return advertisingServer.addAdvertising(advertisingQo)>0? RespResult.success("提交成功"): RespResult.error(ResultCode.SYS_ERROR);
     }
+
+    /**
+     *  根据 id 查询 出  详细  信息
+     * @param advertisingId
+     * @return
+     */
+    @GetMapping("query")
+    public RespResult<Object>   query(@RequestParam("id")Long advertisingId){
+        AdvertisingVo advertisingVo = advertisingServer.queryAdvertising(advertisingId);
+        return !ObjectUtils.isEmpty(advertisingVo)? RespResult.success(advertisingVo):RespResult.error(ResultCode.SYS_ERROR);
+    }
+
+
+    /**
+     *  修改 广告信息 比如  更改视频  (先查询,才能修改，所以传输的对象有ID, 和 修改的信息)
+     * @param advertisingQo
+     * @return
+     */
+    @PostMapping("/update")
+   public RespResult<Object>  mod(@ModelAttribute AdvertisingQo advertisingQo){
+        return advertisingServer.update(advertisingQo);
+   }
+
+
+
+
+
 }

@@ -8,7 +8,6 @@ import com.qf.advertisement.entity.Video;
 import com.qf.advertisement.vo.AdvertisingQo;
 import com.qf.advertisement.vo.AdvertisingVo;
 import org.springframework.beans.BeanUtils;
-
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -43,8 +42,6 @@ public class CopyPropertiesUtils extends BeanUtils {
 
         //复制  源数据 其他 数据
         BeanUtils.copyProperties(source,voIPage);
-
-
         return voIPage.setRecords(collect);
     }
 
@@ -58,4 +55,15 @@ public class CopyPropertiesUtils extends BeanUtils {
         advertising.setCreateTime(advertisingQo.getCreateTime());
         return advertising;
     }
+
+    public static  AdvertisingVo  copyLocalDateTime( Advertising advertising,AdvertisingVo advertisingVo){
+        // 将 其他属性 赋值
+        copyProperties(advertising,advertisingVo);
+        //将 LocalDateTime 属性赋值
+        advertisingVo.setCreateTime(advertising.getCreateTime());
+        advertisingVo.setExpiryTime(advertising.getExpiryTime());
+        advertisingVo.setPushTime(advertising.getPushTime());
+        return  advertisingVo;
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.qf.advertisement.vo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -10,12 +12,18 @@ import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Data
 @ApiModel("前端请求类")
 @Getter
 public class AdvertisingQo {
+
+    /**
+     * 广告ID
+     */
+    @ApiModelProperty(value="广告ID")
+    @Schema(description="广告ID")
+    private Long advertisingId;
 
     /**
      * 广告标题
@@ -37,7 +45,7 @@ public class AdvertisingQo {
      */
     @ApiModelProperty(value="推送时间")
     @Schema(description="推送时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime pushTime;
 
     /**
@@ -45,7 +53,7 @@ public class AdvertisingQo {
      */
     @ApiModelProperty(value="失效时间")
     @Schema(description="失效时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime expiryTime;
 
     /**
@@ -53,7 +61,7 @@ public class AdvertisingQo {
      */
     @ApiModelProperty(value="创建时间")
     @Schema(description="创建时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
     private LocalDateTime createTime;
 
     /**
