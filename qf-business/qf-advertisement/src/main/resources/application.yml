@@ -13,7 +13,7 @@ spring:
       max-active: 10
 
   profiles:
-    active: "oss"
+    active: "oss,common-db"
 
 
 #spring:

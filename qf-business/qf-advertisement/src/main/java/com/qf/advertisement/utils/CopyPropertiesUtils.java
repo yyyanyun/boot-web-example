@@ -5,14 +5,15 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qf.advertisement.entity.Advertising;
 import com.qf.advertisement.entity.Video;
-import com.qf.advertisement.vo.AdvertisingQo;
+import com.qf.advertisement.qo.AdvertisingQo;
 import com.qf.advertisement.vo.AdvertisingVo;
+import com.qf.common.base.utils.CommonBeanUtils;
 import org.springframework.beans.BeanUtils;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class CopyPropertiesUtils extends BeanUtils {
+public class CopyPropertiesUtils extends CommonBeanUtils {
 
     /**
      * 自定义 工具类
@@ -64,6 +65,22 @@ public class CopyPropertiesUtils extends BeanUtils {
         advertisingVo.setExpiryTime(advertising.getExpiryTime());
         advertisingVo.setPushTime(advertising.getPushTime());
         return  advertisingVo;
+    }
+
+
+
+    public static <E,T> IPage<E>  copyIPage( IPage<T> source, IPage<E> target,Supplier<E> supplier){
+
+
+        copyProperties(source,target);
+        target.setRecords(source.getRecords().stream().map(a->{
+            E e = supplier.get();
+            copyProperties(a,e);
+            return e;
+        }).collect(Collectors.toList()));
+
+
+        return  target;
     }
 
 }

@@ -1,7 +1,7 @@
 package com.qf.advertisement.server;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.qf.advertisement.vo.AdvertisingQo;
+import com.qf.advertisement.qo.AdvertisingQo;
 import com.qf.advertisement.vo.AdvertisingVo;
 import com.qf.common.base.result.RespResult;
 

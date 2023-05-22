@@ -1,4 +1,4 @@
-package com.qf.advertisement.vo;
+package com.qf.advertisement.qo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;

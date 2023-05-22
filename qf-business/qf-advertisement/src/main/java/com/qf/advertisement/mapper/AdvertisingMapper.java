@@ -1,9 +1,37 @@
 package com.qf.advertisement.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.qf.advertisement.entity.Advertising;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.util.ObjectUtils;
 
+@Mapper
 public interface AdvertisingMapper extends BaseMapper<Advertising> {
+
+    default LambdaQueryWrapper<Advertising>     queryWrapper(Advertising advertising){
+
+        //多条件查询判断
+        LambdaQueryWrapper<Advertising> queryWrapper = new LambdaQueryWrapper<>();
+        if (!ObjectUtils.isEmpty(advertising.getAdvertisingTitle())) {
+            queryWrapper.like(Advertising::getAdvertisingTitle, advertising.getAdvertisingTitle());
+        }
+
+        if (!ObjectUtils.isEmpty(advertising.getCreateTime()) && !ObjectUtils.isEmpty(advertising.getExpiryTime())) {
+            queryWrapper.between(Advertising::getCreateTime, advertising.getCreateTime(), advertising.getExpiryTime());
+        }
+
+        if (!ObjectUtils.isEmpty(advertising.getExpiryTime())) {
+            queryWrapper.le(Advertising::getExpiryTime, advertising.getExpiryTime());
+        }
+
+        if (!ObjectUtils.isEmpty(advertising.getStatus())){
+            queryWrapper.eq(Advertising::getStatus,advertising.getStatus());
+        }
+
+        return queryWrapper;
+    }
+
     /**
      * delete by primary key
      * @param advertisingId primaryKey

@@ -10,7 +10,7 @@ import com.qf.advertisement.mapper.VideoMapper;
 import com.qf.advertisement.server.AdvertisingServer;
 import com.qf.advertisement.utils.CopyPropertiesUtils;
 import com.qf.advertisement.utils.FileUpdateUtils;
-import com.qf.advertisement.vo.AdvertisingQo;
+import com.qf.advertisement.qo.AdvertisingQo;
 import com.qf.advertisement.vo.AdvertisingVo;
 import com.qf.common.base.result.RespResult;
 import org.springframework.beans.BeanUtils;
@@ -41,25 +41,10 @@ public class AdvertisingServerImpl implements AdvertisingServer {
         // 如果想  赋值 调用  可以定义 自己 定义工具类
         CopyPropertiesUtils.copyLocalDateTime(advertisingQo, advertising);
 
-        //多条件查询判断
-        LambdaQueryWrapper<Advertising> queryWrapper = new LambdaQueryWrapper<>();
-        if (!ObjectUtils.isEmpty(advertising.getAdvertisingTitle())) {
-            queryWrapper.like(Advertising::getAdvertisingTitle, advertising.getAdvertisingTitle());
-        }
+        // 高级查询 判断
+        LambdaQueryWrapper<Advertising> queryWrapper = advertisingMapper.queryWrapper(advertising);
 
-        if (!ObjectUtils.isEmpty(advertising.getCreateTime()) && !ObjectUtils.isEmpty(advertising.getExpiryTime())) {
-            queryWrapper.between(Advertising::getCreateTime, advertising.getCreateTime(), advertising.getExpiryTime());
-        }
-
-        if (!ObjectUtils.isEmpty(advertising.getExpiryTime())) {
-            queryWrapper.le(Advertising::getExpiryTime, advertising.getExpiryTime());
-        }
-
-        if (!ObjectUtils.isEmpty(advertising.getStatus())){
-            queryWrapper.eq(Advertising::getStatus,advertising.getStatus());
-        }
-
-        //查询 出
+        //查询
         Page<Advertising> aPage = advertisingMapper.selectPage(new Page<>(page, size), queryWrapper);
         return CopyPropertiesUtils.copyPageToAdvertisingVo(aPage, new Page<AdvertisingVo>(), videoMapper, AdvertisingVo::new);
     }
