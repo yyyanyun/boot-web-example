@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.account.mapper.RechargeDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.qf.account.entity.RechargeDetails">
+    <!--@mbg.generated-->
+    <!--@Table recharge_details-->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="recharge_id" jdbcType="BIGINT" property="rechargeId" />
+    <result column="payment_time" jdbcType="TIMESTAMP" property="paymentTime" />
+    <result column="close_time" jdbcType="TIMESTAMP" property="closeTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, recharge_id, payment_time, close_time
+  </sql>
+
+  <select id="selectByRechargeId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List">
+    </include>
+    from recharge_details where recharge_id= #{rechargeId}
+  </select>
+</mapper>
