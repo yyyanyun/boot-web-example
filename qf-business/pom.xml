@@ -17,9 +17,8 @@
 
   <modules>
     <module>qf-member</module>
+      <module>qf-system-config-module</module>
   </modules>
-
-
 
 
   <packaging>pom</packaging>
