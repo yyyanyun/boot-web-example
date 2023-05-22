@@ -54,7 +54,7 @@ public class AppAdvertisingServerImpl implements AppAdvertisingServer {
     public int updateAppAdvertising(AppAdvertisingQo appAdvertisingQo) {
         AppAdvertising appAdvertising = new AppAdvertising();
         BeanUtils.copyProperties(appAdvertisingQo,appAdvertising);
-        // 条件判断
+
         LambdaQueryWrapper<AppAdvertising> wrapper = appAdvertisingMapper.QueryWrapper(appAdvertising);
 
         return appAdvertisingMapper.update(appAdvertising, wrapper);
