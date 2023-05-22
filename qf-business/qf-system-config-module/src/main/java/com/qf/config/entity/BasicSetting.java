@@ -4,23 +4,28 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
     * 基础设置表
     */
 @Data
+@ApiModel(description = "派件设置表")
 @TableName(value = "basic_setting")
 public class BasicSetting {
     /**
      * 主键
      */
-    @TableId(value = "basic_id", type = IdType.AUTO)
+    @ApiModelProperty(value = "主键")
+    @TableId(value = "basic_id", type = IdType.INPUT)
     private Integer basicId;
 
     /**
      * APP下载倒计时（分钟）
      */
+    @ApiModelProperty(value = "APP下载倒计时")
     @TableField(value = "app_countdown")
     private Integer appCountdown;
 

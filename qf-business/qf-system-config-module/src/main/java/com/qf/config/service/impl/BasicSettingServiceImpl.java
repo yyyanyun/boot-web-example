@@ -23,4 +23,15 @@ public class BasicSettingServiceImpl implements BasicSettingService {
            return RespResult.error(ResultCode.SYS_ERROR);
         }
     }
+
+    @Override
+    public RespResult<String> updateBasicSetting(BasicSetting basicSetting) {
+        int i = basicSettingMapper.updateBasicSetting(basicSetting);
+        if (i>0){
+            return RespResult.success("修改成功");
+        }else {
+            return RespResult.error("修改失败");
+        }
+    }
+
 }
