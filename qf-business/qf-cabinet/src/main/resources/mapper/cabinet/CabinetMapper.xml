@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.cabinet.mapper.CabinetMapper">
+    <resultMap id="ResultCabinetMap" type="Cabinet">
+        <id column="cabinet_id" property="cabinetId"/>
+        <result column="cabinet_code" property="cabinetCode"/>
+        <result column="region" property="region"/>
+        <result column="address" property="address"/>
+        <result column="device_model" property="deviceModel"/>
+        <result column="storage_type" property="storageType"/>
+        <result column="box" property="box"/>
+        <result column="sys_version" property="sysVersion"/>
+        <result column="create_data" property="createData"/>
+        <result column="activation_data" property="activationData"/>
+        <result column="box_boor_status" property="boxBoorStatus"/>
+        <result column="box_starter" property="boxStarter"/>
+        <result column="cabinet_status" property="cabinetStatus"/>
+        <result column="MAC" property="mac"/>
+        <result column="host_width" property="hostWidth"/>
+        <result column="host_depth" property="hostDepth"/>
+        <result column="host_height" property="hostHeight"/>
+        <result column="vice_width" property="viceWidth"/>
+        <result column="vice_depth" property="viceDepth"/>
+        <result column="vice_height" property="viceHeight"/>
+        <result column="starter" property="starter"/>
+        <result column="version" property="version"/>
+    </resultMap>
+    <select id="insertList" resultMap="ResultCabinetMap">
+        insert into t_cabinet(`cabinet_code`, `region`, `address`, `device_model`, `storage_type`, `MAC`,
+                              `create_data`, `cabinet_status`, `activation_data`) value
+        <foreach collection="cabinetList" item="li" separator=",">
+            (#{li.cabinetCode}, #{li.region}, #{li.address}, #{li.deviceModel}, #{li.storageType}, #{li.mac},
+             #{li.createData}, #{li.cabinetStatus}
+            <if test="li.cabinetStatus == 1">
+                , #{li.activationData}
+            </if>
+            )
+        </foreach>
+    </select>
+</mapper>

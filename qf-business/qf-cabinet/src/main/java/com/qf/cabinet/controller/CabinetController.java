@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.concurrent.CancellationException;
 
 @Api("快递柜机接口")
@@ -73,8 +74,16 @@ public class CabinetController {
     @PostMapping("/add")
     @ApiOperation(value = "add",tags = "添加柜机")
     public RespResult<Integer> add(@RequestBody @Valid CabinetQo cabinetQo) throws ControllerException {
-        return RespResult.success(cabinetService.add(cabinetQo));
+        return cabinetService.add(cabinetQo);
     }
+
+
+    @PostMapping("/listAdd")
+    @ApiOperation(value = "listAdd",tags = "批量添加柜机")
+    public RespResult<Integer> listAdd(List<CabinetQo> cabinetQoList) throws CancellationException{
+        return cabinetService.listAdd(cabinetQoList);
+    }
+
 
 
 }

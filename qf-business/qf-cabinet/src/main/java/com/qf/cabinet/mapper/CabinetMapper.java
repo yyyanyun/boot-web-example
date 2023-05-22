@@ -6,9 +6,18 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qf.cabinet.entity.Cabinet;
 import com.qf.common.base.exception.DaoException;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.util.ObjectUtils;
 
-public interface CabinetMapper extends BaseMapper<Cabinet> {
+import java.util.List;
+
+
+public interface CabinetMapper extends BaseMapper<Cabinet>{
+    /**
+     * 批量添加
+     */
+    int insertList(@Param("cabinetList") List<Cabinet> cabinetList);
+
     /**
      * 简单条件查询
      */
@@ -77,5 +86,6 @@ public interface CabinetMapper extends BaseMapper<Cabinet> {
         }
         return this.selectPage(new Page<>(page, size), queryWrapper);
     }
+
 
 }

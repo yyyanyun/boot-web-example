@@ -10,13 +10,18 @@ import com.qf.cabinet.qo.CabinetQo;
 import com.qf.cabinet.service.CabinetService;
 import com.qf.cabinet.vo.CabinetVo;
 import com.qf.common.base.exception.ServiceException;
+import com.qf.common.base.result.RespResult;
 import com.qf.common.base.result.ResultCode;
+import com.qf.common.base.utils.CommonBeanUtils;
 import com.qf.common.db.utils.PageCommonUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.function.Supplier;
 
 @Service
 public class CabinetServiceImpl implements CabinetService {
@@ -41,9 +46,26 @@ public class CabinetServiceImpl implements CabinetService {
     }
 
     @Override
-    public int add(CabinetQo cabinetQo) throws ServiceException{
+    public RespResult<Integer> add(CabinetQo cabinetQo) throws ServiceException{
         Cabinet cabinet = new Cabinet();
         BeanUtils.copyProperties(cabinetQo,cabinet);
-        return cabinetMapper.insert(cabinet);
+        int insert = cabinetMapper.insert(cabinet);
+        if (insert>0){
+            return RespResult.success(insert);
+        }else {
+            throw new ServiceException(ResultCode.SYS_ERROR);
+        }
+    }
+
+    @Override
+    public RespResult<Integer> listAdd(List<CabinetQo> cabinetQoList) {
+        Cabinet cabinet = new Cabinet();
+        List<Cabinet> copyList = CommonBeanUtils.copyList(cabinetQoList, (Supplier<Cabinet>) cabinet);
+        int count = cabinetMapper.insertList(copyList);
+        if (count>0){
+            return RespResult.success(count);
+        }else {
+            throw new ServiceException(ResultCode.SYS_ERROR);
+        }
     }
 }
