@@ -15,4 +15,6 @@ public interface RechargeRecordMapper extends BaseMapper<RechargeRecord> {
     //高级搜索
     List<RechargeRecord> selectList(@Param("RechargeRecord") RechargeRecord rechargeRecord);
 
+    RechargeRecord selectById(@Param("id") Long id);
+
 }

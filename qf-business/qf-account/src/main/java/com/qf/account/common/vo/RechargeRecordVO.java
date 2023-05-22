@@ -3,6 +3,7 @@ package com.qf.account.common.vo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.qf.account.entity.RechargeDetails;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -111,6 +112,10 @@ public class RechargeRecordVO {
     @TableField(value = "`status`")
     @ApiModelProperty(value = "状态：1-充值中，2-充值成功，3-充值失败，4-待支付，5-交易关闭")
     private Integer status;
+
+
+    private RechargeDetails rechargeDetails;
+
 
 
 }

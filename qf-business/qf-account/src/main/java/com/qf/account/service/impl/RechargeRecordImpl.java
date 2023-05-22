@@ -44,6 +44,17 @@ public class RechargeRecordImpl implements RechargeRecordService {
 
         PageInfo<RechargeRecordVO> pageInfo = PageHelper.startPage(currentPageNO, pageSize).doSelectPageInfo(() -> rechargeRecordMapper.selectList(rechargeRecord));
 
-        return PageInfoUtils.copyPage(pageInfo,new PageInfo<>(),RechargeRecordVO::new);
+        return PageInfoUtils.copyPage(pageInfo, new PageInfo<>(), RechargeRecordVO::new);
+    }
+
+    @Override
+    public RechargeRecordVO selectById(Long id) {
+
+        RechargeRecord rechargeRecord = rechargeRecordMapper.selectById(id);
+        RechargeRecordVO rechargeRecordVO = new RechargeRecordVO();
+
+        BeanUtils.copyProperties(rechargeRecord, rechargeRecordVO);
+        return rechargeRecordVO;
+
     }
 }

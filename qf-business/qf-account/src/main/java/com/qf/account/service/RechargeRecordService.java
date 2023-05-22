@@ -14,4 +14,7 @@ public interface RechargeRecordService {
     //高级搜索分页
 
     PageInfo<RechargeRecordVO> queryList(Integer currentPageNO, Integer pageSize, RechargeRecordQO rechargeRecordQO);
+
+    //查询充值详情
+    RechargeRecordVO selectById(Long id);
 }

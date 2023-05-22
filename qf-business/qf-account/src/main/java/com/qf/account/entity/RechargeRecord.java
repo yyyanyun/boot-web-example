@@ -125,6 +125,9 @@ public class RechargeRecord {
     @ApiModelProperty(value = "状态：1-充值中，2-充值成功，3-充值失败，4-待支付，5-交易关闭")
     private Integer status;
 
+
+    private RechargeDetails rechargeDetails;
+
     public static final String COL_ID = "id";
 
     public static final String COL_ACCOUNT_ID = "account_id";

@@ -37,4 +37,13 @@ public class RechargeRecordController {
         return RespResult.success(rechargeRecordService.queryList(currentPageNo, pageSize, rechargeRecordQO));
 
     }
+
+
+    @GetMapping("/id")
+    @ApiOperation("查询充值记录详情")
+    public RespResult<RechargeRecordVO> result(@RequestParam Long id) {
+        return RespResult.success(rechargeRecordService.selectById(id));
+    }
+
+
 }
