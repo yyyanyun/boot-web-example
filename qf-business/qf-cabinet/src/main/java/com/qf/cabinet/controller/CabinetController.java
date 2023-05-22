@@ -52,7 +52,7 @@ public class CabinetController {
      *
      * @param page:当前页
      * @param size：页量
-     * @param cabinetsQo：请求参数对象
+     * @param cabinetQo：请求参数对象
      * @return ：IPage<CabinetVo>响应对象
      * @throws CancellationException： 控制层异常
      */
@@ -69,7 +69,7 @@ public class CabinetController {
         return cabinetService.list(page, size, cabinetQo);
     }
 
-    public RespResult<Integer> add(@RequestBody ) throws ControllerException {
+    public RespResult<Integer> add(@RequestBody CabinetQo cabinetQo) throws ControllerException {
 
 return null;
     }
