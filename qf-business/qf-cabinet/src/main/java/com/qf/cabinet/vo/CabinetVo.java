@@ -1,11 +1,9 @@
 package com.qf.cabinet.vo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @ApiModel(description = "响应柜机表")
