@@ -1,5 +1,6 @@
 package com.qf.account.common.vo;
 
+import com.qf.account.entity.PaymentDetail;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -96,6 +97,11 @@ public class PaymentRecordVO {
     private Integer status;
 
 
+
     @ApiModelProperty(value = "所属账户id")
-    private Long account_id;
+    private Long accountId;
+
+
+    private PaymentDetail paymentDetail;
+
 }

@@ -10,7 +10,7 @@ public interface AccountService {
     PageInfo<AccountVO> pageInfo(Integer currentPageNO, Integer pageSize, Long id, String phone);
 
     //高级搜索
-    PageInfo<AccountVO> pageInfoList(AccountQO accountQO, Integer currentPageNO, Integer pageSize);
+    PageInfo<AccountVO> pageInfoList(AccountQO accountQO, Integer currentPageNO, Integer pageSize,int paymentStatus);
 
 
 

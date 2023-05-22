@@ -13,4 +13,8 @@ public interface PaymentRecordMapper extends BaseMapper<PaymentRecord> {
     List<PaymentRecord> selectByPhoneOrTradeNoOrOrderNo(@Param("PaymentRecord") PaymentRecord paymentRecord);
 
     List<PaymentRecord> selectList(@Param("PaymentRecord") PaymentRecord paymentRecord);
+
+    //查询支付详情信息
+    PaymentRecord selectByIdAndStatus(@Param("id") Long id);
+
 }

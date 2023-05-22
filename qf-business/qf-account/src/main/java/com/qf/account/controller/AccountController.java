@@ -51,8 +51,8 @@ public class AccountController {
             @ApiResponse(code = 200, message = "成功"),
             @ApiResponse(code = 400, message = "失败")
     })
-    public RespResult<PageInfo<AccountVO>> queryList(@RequestParam(defaultValue = "1") Integer currentPageNo, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody AccountQO accountQO) {
-        return RespResult.success(accountService.pageInfoList(accountQO, currentPageNo, pageSize));
+    public RespResult<PageInfo<AccountVO>> queryList(@RequestParam(defaultValue = "1") Integer currentPageNo, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody AccountQO accountQO, int paymentStatus) {
+        return RespResult.success(accountService.pageInfoList(accountQO, currentPageNo, pageSize, paymentStatus));
     }
 
 

@@ -107,6 +107,8 @@ public class PaymentRecord {
     private Integer status;
 
     @ApiModelProperty(value = "所属账户id")
-    private Long account_id;
+    private Long accountId;
+
+    private PaymentDetail paymentDetail;
 
 }

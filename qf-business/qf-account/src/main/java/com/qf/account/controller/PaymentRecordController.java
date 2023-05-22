@@ -49,8 +49,14 @@ public class PaymentRecordController {
             @ApiResponse(code = 200, message = "成功"),
             @ApiResponse(code = 400, message = "失败")
     })
-    public RespResult<PageInfo<PaymentRecordVO>> queryList(@RequestParam(defaultValue = "1") Integer currentPageNo, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody PaymentRecordQO paymentRecordQO){
+    public RespResult<PageInfo<PaymentRecordVO>> queryList(@RequestParam(defaultValue = "1") Integer currentPageNo, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody PaymentRecordQO paymentRecordQO) {
 
-        return RespResult.success(paymentRecordService.QueryList(currentPageNo,pageSize,paymentRecordQO));
+        return RespResult.success(paymentRecordService.QueryList(currentPageNo, pageSize, paymentRecordQO));
+    }
+
+    @ApiOperation("支付记录的详细信息")
+    @GetMapping("/id")
+    public RespResult<PaymentRecordVO> selectById(@RequestParam Long id) {
+        return RespResult.success(paymentRecordService.selectById(id));
     }
 }

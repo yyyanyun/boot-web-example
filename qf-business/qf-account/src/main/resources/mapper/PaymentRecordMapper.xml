@@ -18,6 +18,7 @@
         <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
         <result column="completed_time" jdbcType="TIMESTAMP" property="completedTime"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="account_id" property="accountId"/>
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
@@ -34,7 +35,8 @@
         exchange_rate,
         created_time,
         completed_time,
-        `status`
+        `status`,
+        account_id
     </sql>
 
     <select id="selectByPhoneOrTradeNoOrOrderNo" resultMap="BaseResultMap">
@@ -113,5 +115,18 @@
                 and completed_time between #{PaymentRecord.completedTime} and #{PaymentRecord.finishTime}
             </if>
         </where>
+    </select>
+
+    <resultMap id="BaseResultMapPy" type="com.qf.account.entity.PaymentRecord" extends="BaseResultMap">
+        <association property="paymentDetail" column="trade_no" javaType="com.qf.account.entity.PaymentDetail"
+                     select="com.qf.account.mapper.PaymentDetailMapper.selectByTradeNo">
+        </association>
+    </resultMap>
+    <select id="selectByIdAndStatus" resultMap="BaseResultMapPy">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from payment_record
+        where id = #{id}
     </select>
 </mapper>

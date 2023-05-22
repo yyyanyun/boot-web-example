@@ -6,6 +6,7 @@ import com.qf.account.common.qo.PaymentRecordQO;
 import com.qf.account.common.utils.PageInfoUtils;
 import com.qf.account.common.vo.PaymentRecordVO;
 import com.qf.account.entity.PaymentRecord;
+import com.qf.account.mapper.PaymentDetailMapper;
 import com.qf.account.mapper.PaymentRecordMapper;
 import com.qf.account.service.PaymentRecordService;
 import org.springframework.beans.BeanUtils;
@@ -39,5 +40,15 @@ public class PaymentRecordServiceImpl implements PaymentRecordService {
         PageInfo<PaymentRecordVO> selectPageInfoList = PageHelper.startPage(currentPageNo, pageSize).doSelectPageInfo(() -> paymentRecordMapper.selectList(paymentRecord));
 
         return PageInfoUtils.copyPage(selectPageInfoList, new PageInfo<>(), PaymentRecordVO::new);
+    }
+
+    @Override
+    public PaymentRecordVO selectById(Long id) {
+
+        PaymentRecord paymentRecord1 = paymentRecordMapper.selectByIdAndStatus(id);
+
+        PaymentRecordVO paymentRecordVO = new PaymentRecordVO();
+        BeanUtils.copyProperties(paymentRecord1, paymentRecordVO);
+        return paymentRecordVO;
     }
 }

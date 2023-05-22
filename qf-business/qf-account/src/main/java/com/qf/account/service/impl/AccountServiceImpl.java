@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-public class AccountServiceImpl implements AccountService  {
+public class AccountServiceImpl implements AccountService {
 
     @Resource
     private AccountMapper accountMapper;
@@ -31,21 +31,20 @@ public class AccountServiceImpl implements AccountService  {
     }
 
     @Override
-    public PageInfo<AccountVO> pageInfoList(AccountQO accountQO, Integer currentPageNO, Integer pageSize) {
+    public PageInfo<AccountVO> pageInfoList(AccountQO accountQO, Integer currentPageNO, Integer pageSize, int paymentStatus) {
 
         Account account = new Account();
         BeanUtils.copyProperties(accountQO, account);
 
-        PageInfo<AccountVO> accountVOPageInfo = PageHelper.startPage(currentPageNO, pageSize).doSelectPageInfo(() -> accountMapper.selectAdvancedSearch(account));
+        PageInfo<AccountVO> accountVOPageInfo = PageHelper.startPage(currentPageNO, pageSize).doSelectPageInfo(() -> accountMapper.selectAdvancedSearch(account, paymentStatus));
         return PageInfoUtils.copyPage(accountVOPageInfo, new PageInfo<>(), AccountVO::new);
 
     }
 
 
-
     @Override
     public int updateUnlock(Long id, int status) {
-        return accountMapper.updateUnlock(id,status);
+        return accountMapper.updateUnlock(id, status);
     }
 
 

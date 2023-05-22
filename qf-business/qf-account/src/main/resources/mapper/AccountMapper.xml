@@ -45,34 +45,72 @@
         </where>
     </select>
 
-    <select id="selectAdvancedSearch" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List">
-        </include>
-        from t_account
+
+    <resultMap id="BaseResultMapSub" type="com.qf.account.entity.Account" extends="BaseResultMap">
+        <collection property="paymentRecordList" resultMap="com.qf.account.mapper.PaymentRecordMapper.BaseResultMap">
+        </collection>
+    </resultMap>
+
+
+    <select id="selectAdvancedSearch" resultMap="BaseResultMapSub">
+        select a.id,
+               a.member_type,
+               a.phone,
+               a.balance,
+               a.available_balance,
+               a.pending_balance,
+               a.frozen_balance,
+               a.create_time,
+               a.last_login_time,
+               a.status,
+               p.id,
+               p.account_id,
+               p.trade_no,
+               p.member_type,
+               p.phone_number,
+               p.order_type,
+               p.order_no,
+               p.amount,
+               p.payment_channel,
+               p.payment_currency,
+               p.actual_payment_cny,
+               p.exchange_rate,
+               p.created_time,
+               p.completed_time,
+               p.status
+        from t_account a
+                 join payment_record p on a.id = p.account_id
         <where>
             <if test="Account.id != null">
-                id like concat('%', #{Account.id}, '%')
+                a.id= #{Account.id}
             </if>
             <if test="Account.phone != null">
-                and phone like concat('%', #{Account.phone}, '%')
+                and a.phone= #{Account.phone}
             </if>
             <if test="Account.memberType != null and Account.memberType == 1">
-                and member_type = #{Account.memberType}
+                and a.member_type = #{Account.memberType}
             </if>
             <if test="Account.memberType != null and Account.memberType == 2">
-                and member_type = #{Account.memberType}
+                and a.member_type = #{Account.memberType}
             </if>
             <if test="Account.status != null and Account.status == 1">
-                and status = #{Account.status}
+                and a.status = #{Account.status}
             </if>
             <if test="Account.status != null and Account.status == 0">
-                and status = #{Account.status}
+                and a.status = #{Account.status}
             </if>
             <if test="Account.createTime != null and Account.completionTime != null">
-                and create_time between #{Account.createTime} and #{Account.completionTime}
+                and a.create_time between #{Account.createTime} and #{Account.completionTime}
             </if>
-
+            <if test="paymentStatus != null and paymentStatus == 1">
+                and p.status = #{paymentStatus}
+            </if>
+            <if test="paymentStatus != null and paymentStatus == 2">
+                and p.status = #{paymentStatus}
+            </if>
+            <if test="paymentStatus != null and paymentStatus == 3">
+                and p.status = #{paymentStatus}
+            </if>
         </where>
     </select>
 </mapper>

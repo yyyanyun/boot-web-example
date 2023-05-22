@@ -1,11 +1,13 @@
 package com.qf.account.common.vo;
 
+import com.qf.account.entity.PaymentRecord;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @ApiModel("响应信息")
@@ -70,5 +72,6 @@ public class AccountVO {
     @ApiModelProperty(value = "状态 1表示正常  0表示锁定")
     private Integer status;
 
+    private List<PaymentRecord> paymentRecordList;
 
 }

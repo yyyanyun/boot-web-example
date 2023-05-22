@@ -12,4 +12,8 @@ public interface PaymentRecordService {
 
     //分页模糊高级搜索
     PageInfo<PaymentRecordVO> QueryList(Integer currentPageNo, Integer pageSize, PaymentRecordQO paymentRecordQO);
+
+    //查询支付记录详情
+    PaymentRecordVO selectById(Long id);
+
 }

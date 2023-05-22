@@ -18,7 +18,7 @@ public interface AccountMapper extends BaseMapper<Account> {
 
     default int updateUnlock(Long id, int status) {
         Account account = this.selectById(id);
-        if(ObjectUtils.isEmpty(account)){
+        if (ObjectUtils.isEmpty(account)) {
             throw new DaoException(ResultCode.SYS_ERROR);
         }
         return this.update(new Account(), new UpdateWrapper<Account>().eq("id", id).set("status", status));
@@ -28,5 +28,5 @@ public interface AccountMapper extends BaseMapper<Account> {
     List<Account> selectByPhoneOrId(@Param("id") Long id, @Param("phone") String phone);
 
 
-    List<Account> selectAdvancedSearch(@Param("Account") Account account);
+    List<Account> selectAdvancedSearch(@Param("Account") Account account, @Param("paymentStatus") int paymentStatus);
 }

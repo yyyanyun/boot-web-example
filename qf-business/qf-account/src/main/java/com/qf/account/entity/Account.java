@@ -12,6 +12,7 @@ import lombok.Data;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 账户表
@@ -94,5 +95,11 @@ public class Account {
     @ApiModelProperty(value = "完成时间")
     @TableField(value = "completion_time")
     private Date completionTime;
+
+
+
+    private List<PaymentRecord> paymentRecordList;
+
+
 
 }
