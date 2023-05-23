@@ -31,12 +31,16 @@
         insert into t_cabinet(`cabinet_code`, `region`, `address`, `device_model`, `storage_type`, `MAC`,
                               `create_data`, `cabinet_status`, `activation_data`) value
         <foreach collection="cabinetList" item="li" separator=",">
-            (#{li.cabinetCode}, #{li.region}, #{li.address}, #{li.deviceModel}, #{li.storageType}, #{li.mac},
-             #{li.createData}, #{li.cabinetStatus}
-            <if test="li.cabinetStatus == 1">
-                , #{li.activationData}
-            </if>
-            )
+            (#{li.cabinetCode},
+             #{li.region},
+             #{li.address},
+             #{li.deviceModel},
+             #{li.storageType},
+             #{li.mac},
+             #{li.createData},
+             #{li.cabinetStatus},
+             #{li.activationData}
+                )
         </foreach>
     </select>
 </mapper>

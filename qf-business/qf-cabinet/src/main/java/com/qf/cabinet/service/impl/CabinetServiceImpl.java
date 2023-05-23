@@ -71,8 +71,7 @@ public class CabinetServiceImpl implements CabinetService {
      */
     @Override
     public RespResult<Integer> listAdd(List<CabinetQo> cabinetQoList) {
-        Cabinet cabinet = new Cabinet();
-        List<Cabinet> copyList = CommonBeanUtils.copyList(cabinetQoList, (Supplier<Cabinet>) cabinet);
+        List<Cabinet> copyList = CommonBeanUtils.copyList(cabinetQoList,Cabinet::new);
         int count = cabinetMapper.insertList(copyList);
         if (count>0){
             return RespResult.success(count);

@@ -80,7 +80,7 @@ public class CabinetController {
 
     @PostMapping("/listAdd")
     @ApiOperation(value = "listAdd",tags = "批量添加柜机")
-    public RespResult<Integer> listAdd(List<CabinetQo> cabinetQoList) throws CancellationException{
+    public RespResult<Integer> listAdd(@RequestBody List<CabinetQo> cabinetQoList) throws CancellationException{
         return cabinetService.listAdd(cabinetQoList);
     }
 
