@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -124,5 +126,11 @@ public class ExpressBox {
     @ApiModelProperty(value="乐观锁")
     @Version
     private Integer version;
+
+    /**
+     * 映射箱格记录
+     */
+    @TableField(value = "logBoxList")
+    private List<LogBox> logBoxList;
 
 }
