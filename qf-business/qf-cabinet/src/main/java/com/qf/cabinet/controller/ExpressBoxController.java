@@ -35,6 +35,7 @@ public class ExpressBoxController {
         return expressBoxService.listBy(page, size, expressBoxQo);
     }
 
+
     /**
      * 箱格记录
      */
