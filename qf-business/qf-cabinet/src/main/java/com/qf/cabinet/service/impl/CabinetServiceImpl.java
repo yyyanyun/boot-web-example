@@ -15,7 +15,6 @@ import com.qf.common.base.result.ResultCode;
 import com.qf.common.base.utils.CommonBeanUtils;
 import com.qf.common.db.utils.PageCommonUtils;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeansException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -27,6 +26,10 @@ import java.util.function.Supplier;
 public class CabinetServiceImpl implements CabinetService {
     @Resource
     private CabinetMapper cabinetMapper;
+
+    /**
+     * 简单查询
+     */
     @Override
     public IPage<CabinetVo> listSimple(int page, int size, CabinetEasyQo cabinetEasyQo, String param) throws ServiceException {
         Cabinet cabinet = new Cabinet();
@@ -34,6 +37,9 @@ public class CabinetServiceImpl implements CabinetService {
         return PageCommonUtils.copyPage(cabinetMapper.selectBy(page, size,cabinet, param),new Page<>(),CabinetVo::new);
     }
 
+    /**
+     * 高级查询
+     */
     @Override
     public IPage<CabinetVo> list(int page, int size, CabinetHighQo cabinetHighQo) throws ServiceException {
         Cabinet cabinet = new Cabinet();
@@ -45,6 +51,9 @@ public class CabinetServiceImpl implements CabinetService {
         return cabinetVoIPage;
     }
 
+    /**
+     * 单个添加
+     */
     @Override
     public RespResult<Integer> add(CabinetQo cabinetQo) throws ServiceException{
         Cabinet cabinet = new Cabinet();
@@ -57,6 +66,9 @@ public class CabinetServiceImpl implements CabinetService {
         }
     }
 
+    /**
+     * 批量添加
+     */
     @Override
     public RespResult<Integer> listAdd(List<CabinetQo> cabinetQoList) {
         Cabinet cabinet = new Cabinet();
@@ -67,5 +79,31 @@ public class CabinetServiceImpl implements CabinetService {
         }else {
             throw new ServiceException(ResultCode.SYS_ERROR);
         }
+    }
+
+    /**
+     * 查询单个
+     */
+    @Override
+    public RespResult<CabinetVo> listOne(int cabinetId) throws ServiceException {
+        Cabinet cabinet = cabinetMapper.selectById(cabinetId);
+        if (!ObjectUtils.isEmpty(cabinet)) {
+            CabinetVo cabinetVo = new CabinetVo();
+            BeanUtils.copyProperties(cabinet,cabinetVo);
+            return RespResult.success(cabinetVo);
+        } else {
+            throw new ServiceException(ResultCode.SYS_ERROR);
+        }
+    }
+
+    /**
+     * 修改单个
+     */
+    @Override
+    public RespResult<Integer> alter(int cabinetId, int type) throws ServiceException {
+        Cabinet cabinet = new Cabinet();
+        cabinet.setCabinetId(Integer.toUnsignedLong(cabinetId));
+        cabinet.setCabinetStatus(type);
+        return RespResult.success(cabinetMapper.updateById(cabinet));
     }
 }

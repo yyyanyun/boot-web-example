@@ -1,6 +1,7 @@
 package com.qf.cabinet.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,7 +13,8 @@ import org.springframework.util.ObjectUtils;
 import java.util.List;
 
 
-public interface CabinetMapper extends BaseMapper<Cabinet>{
+public interface CabinetMapper extends BaseMapper<Cabinet> {
+
     /**
      * 批量添加
      */
@@ -86,6 +88,4 @@ public interface CabinetMapper extends BaseMapper<Cabinet>{
         }
         return this.selectPage(new Page<>(page, size), queryWrapper);
     }
-
-
 }

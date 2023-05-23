@@ -18,4 +18,8 @@ public interface CabinetService {
     RespResult<Integer> add(CabinetQo cabinetQo);
 
     RespResult<Integer> listAdd(List<CabinetQo> cabinetQoList);
+
+    RespResult<CabinetVo> listOne(int cabinetId);
+
+    RespResult<Integer> alter(int cabinetId,int type);
 }

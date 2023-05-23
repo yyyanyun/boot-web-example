@@ -20,7 +20,7 @@ public class Cabinet {
     /**
      * 主键
      */
-    @TableId(value = "cabinet_id", type = IdType.ASSIGN_ID)
+    @TableId(value = "cabinet_id")
     @ApiModelProperty(value = "主键")
     private Long cabinetId;
 
