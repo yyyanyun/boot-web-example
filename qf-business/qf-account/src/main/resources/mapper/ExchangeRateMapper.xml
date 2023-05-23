@@ -25,9 +25,9 @@
 
     <resultMap id="BaseResultMapkk" type="com.qf.account.entity.ExchangeRate"
                extends="com.qf.account.mapper.ExchangeRateMapper.BaseResultMap">
-        <collection property="exchangeRateDetailList" column="id"
-                    select="com.qf.account.mapper.ExchangeRateDetailMapper.slectList">
-        </collection>
+        <association property="exchangeRateDetailList" column="id"
+                     select="com.qf.account.mapper.ExchangeRateDetailMapper.selectList">
+        </association>
     </resultMap>
 
     <select id="selectById" resultMap="BaseResultMapkk">
@@ -36,5 +36,20 @@
         </include>
         from exchange_rate
         where id = #{id}
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from exchange_rate
+        <where>
+            <if test="ExchangeRate.startTime != null">
+                start_time > #{ExchangeRate.startTime}
+            </if>
+            <if test="ExchangeRate.endTime != null">
+                and #{ExchangeRate.endTime} > end_time
+            </if>
+        </where>
     </select>
 </mapper>

@@ -18,7 +18,7 @@
     publish_time
   </sql>
 
-  <select id="slectList" resultMap="BaseResultMap">
+  <select id="selectList" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List">
     </include>
@@ -26,4 +26,5 @@
       from exchange_rate_detail
       where exchange_rate_id = #{exchangeRateId}
   </select>
+
 </mapper>
