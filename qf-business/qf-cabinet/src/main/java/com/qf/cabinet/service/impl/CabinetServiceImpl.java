@@ -1,9 +1,7 @@
 package com.qf.cabinet.service.impl;
 
-
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.qf.cabinet.common.utile.MyCommonBeanUtils;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qf.cabinet.entity.Cabinet;
 import com.qf.cabinet.mapper.CabinetMapper;
 import com.qf.cabinet.qo.CabinetEasyQo;
@@ -15,12 +13,14 @@ import com.qf.common.base.exception.ServiceException;
 import com.qf.common.base.result.RespResult;
 import com.qf.common.base.result.ResultCode;
 import com.qf.common.base.utils.CommonBeanUtils;
+import com.qf.common.db.utils.PageCommonUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.function.Supplier;
 
 @Service
 public class CabinetServiceImpl implements CabinetService {
@@ -30,30 +30,25 @@ public class CabinetServiceImpl implements CabinetService {
     /**
      * 简单查询
      */
-    public RespResult<PageInfo<CabinetVo>> listSimple(int page, int size, CabinetEasyQo cabinetEasyQo, String param) throws ServiceException{
+    @Override
+    public IPage<CabinetVo> listSimple(int page, int size, CabinetEasyQo cabinetEasyQo, String param) throws ServiceException {
         Cabinet cabinet = new Cabinet();
         BeanUtils.copyProperties(cabinetEasyQo,cabinet);
-        PageInfo<Cabinet> pageInfo = PageHelper.startPage(page, size).doSelectPageInfo(() ->cabinetMapper.selectBy(cabinet, param));
-        if (!ObjectUtils.isEmpty(pageInfo.getList())){
-            return RespResult.success(MyCommonBeanUtils.copyPageInfo(pageInfo,new PageInfo<>(),CabinetVo::new));
-        }else {
-            throw new ServiceException(ResultCode.SYS_ERROR);
-        }
+        return PageCommonUtils.copyPage(cabinetMapper.selectBy(page, size,cabinet, param),new Page<>(),CabinetVo::new);
     }
 
     /**
      * 高级查询
      */
     @Override
-    public RespResult<PageInfo<CabinetVo>> list(int page, int size, CabinetHighQo cabinetHighQo) throws ServiceException {
+    public IPage<CabinetVo> list(int page, int size, CabinetHighQo cabinetHighQo) throws ServiceException {
         Cabinet cabinet = new Cabinet();
         BeanUtils.copyProperties(cabinetHighQo,cabinet);
-        PageInfo<Cabinet> pageInfo = PageHelper.startPage(page, size).doSelectPageInfo(() -> cabinetMapper.selectBys(cabinet));
-        if (!ObjectUtils.isEmpty(pageInfo.getList())){
-            return RespResult.success(MyCommonBeanUtils.copyPageInfo(pageInfo,new PageInfo<>(),CabinetVo::new));
-        }else {
-            throw new ServiceException(ResultCode.SYS_ERROR);
+        IPage<CabinetVo> cabinetVoIPage = PageCommonUtils.copyPage(cabinetMapper.selectBy(page, size, cabinet), new Page<>(), CabinetVo::new);
+        if (ObjectUtils.isEmpty(cabinetVoIPage.getRecords())){
+            throw new ServiceException(ResultCode.CABINET_NO_EXISTS);
         }
+        return cabinetVoIPage;
     }
 
     /**
@@ -63,31 +58,21 @@ public class CabinetServiceImpl implements CabinetService {
     public RespResult<Integer> add(CabinetQo cabinetQo) throws ServiceException{
         Cabinet cabinet = new Cabinet();
         BeanUtils.copyProperties(cabinetQo,cabinet);
-        if (!ObjectUtils.isEmpty(cabinetMapper.selectExists(cabinet))){
-            int insert = cabinetMapper.insert(cabinet);
-            if (insert>0){
-                return RespResult.success(insert);
-            }else {
-                throw new ServiceException(ResultCode.SYS_ERROR);
-            }
+        int insert = cabinetMapper.insert(cabinet);
+        if (insert>0){
+            return RespResult.success(insert);
         }else {
-            throw new ServiceException(ResultCode.CABINET_EXISTS);
+            throw new ServiceException(ResultCode.SYS_ERROR);
         }
-
     }
 
     /**
      * 批量添加
      */
     @Override
-    public RespResult<Integer> listAdd(List<CabinetQo> cabinetQoList) throws ServiceException {
+    public RespResult<Integer> listAdd(List<CabinetQo> cabinetQoList) {
         List<Cabinet> copyList = CommonBeanUtils.copyList(cabinetQoList,Cabinet::new);
-        copyList.forEach(iter->{
-            if (!ObjectUtils.isEmpty(cabinetMapper.selectExists(iter))){
-                throw new ServiceException(ResultCode.CABINET_EXISTS);
-            }
-        });
-        Integer count = cabinetMapper.insertList(copyList);
+        int count = cabinetMapper.insertList(copyList);
         if (count>0){
             return RespResult.success(count);
         }else {
@@ -96,11 +81,11 @@ public class CabinetServiceImpl implements CabinetService {
     }
 
     /**
-     * 查询柜机详情
+     * 查询单个
      */
     @Override
     public RespResult<CabinetVo> listOne(int cabinetId) throws ServiceException {
-        Cabinet cabinet = cabinetMapper.query(cabinetId);
+        Cabinet cabinet = cabinetMapper.selectById(cabinetId);
         if (!ObjectUtils.isEmpty(cabinet)) {
             CabinetVo cabinetVo = new CabinetVo();
             BeanUtils.copyProperties(cabinet,cabinetVo);
@@ -120,34 +105,4 @@ public class CabinetServiceImpl implements CabinetService {
         cabinet.setCabinetStatus(type);
         return RespResult.success(cabinetMapper.updateById(cabinet));
     }
-
-    /**
-     * 箱格列表
-     */
-    @Override
-    public RespResult<CabinetVo> showBox(int cabinetId) throws ServiceException{
-        Cabinet cabinet = cabinetMapper.selectByCabinetId(cabinetId);
-        if (!ObjectUtils.isEmpty(cabinet)){
-            CabinetVo cabinetVo = new CabinetVo();
-            BeanUtils.copyProperties(cabinet,cabinetVo);
-            return RespResult.success(cabinetVo);
-        }else {
-            throw new ServiceException(ResultCode.SYS_ERROR);
-        }
-
-    }
-
-    @Override
-    public RespResult<CabinetVo> goAlter(int cabinetId, int boxId) throws ServiceException {
-        Cabinet cabinet = cabinetMapper.selectGo(cabinetId, boxId);
-        if (!ObjectUtils.isEmpty(cabinet)){
-            CabinetVo cabinetVo = new CabinetVo();
-            BeanUtils.copyProperties(cabinet,cabinetVo);
-            return RespResult.success(cabinetVo);
-        }else {
-            throw new ServiceException(ResultCode.SYS_ERROR);
-        }
-
-    }
-
 }

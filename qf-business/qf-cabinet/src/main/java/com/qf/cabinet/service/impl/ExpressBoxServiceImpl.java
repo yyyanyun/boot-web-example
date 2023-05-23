@@ -1,17 +1,16 @@
 package com.qf.cabinet.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
-import com.qf.cabinet.common.utile.MyCommonBeanUtils;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qf.cabinet.entity.ExpressBox;
 import com.qf.cabinet.mapper.ExpressBoxMapper;
-import com.qf.cabinet.qo.ExpressBoxQo;
 import com.qf.cabinet.service.ExpressBoxService;
 import com.qf.cabinet.vo.ExpressBoxVo;
 import com.qf.common.base.exception.ServiceException;
 import com.qf.common.base.result.RespResult;
 import com.qf.common.base.result.ResultCode;
-import org.springframework.beans.BeanUtils;
+import com.qf.common.base.utils.CommonBeanUtils;
+import com.qf.common.db.utils.PageCommonUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -21,43 +20,14 @@ import javax.annotation.Resource;
 public class ExpressBoxServiceImpl implements ExpressBoxService {
     @Resource
     private ExpressBoxMapper expressBoxMapper;
-
-    /**
-     * 箱格条件查询
-     */
     @Override
-    public RespResult<PageInfo<ExpressBoxVo>> listBy(int page, int size, ExpressBoxQo expressBoxQo) throws SecurityException {
-        ExpressBox expressBox = new ExpressBox();
-        BeanUtils.copyProperties(expressBoxQo, expressBox);
-        PageInfo<ExpressBox> pageInfo = PageHelper.startPage(page, size).doSelectPageInfo(() -> expressBoxMapper.selectById(expressBox));
-        if (!ObjectUtils.isEmpty(pageInfo.getList())) {
-            return RespResult.success(MyCommonBeanUtils.copyPageInfo(pageInfo, new PageInfo<>(), ExpressBoxVo::new));
-        } else {
-            throw new ServiceException(ResultCode.SYS_ERROR);
-        }
-    }
-
-    @Override
-    public RespResult<PageInfo<ExpressBoxVo>> listByLog(int page, int size, int boxId) {
-        PageInfo<ExpressBox> pageInfo = PageHelper.startPage(page, size).doSelectPageInfo(() -> expressBoxMapper.selectByBoxId(boxId));
-        return RespResult.success(MyCommonBeanUtils.copyPageInfo(pageInfo,new PageInfo<>(),ExpressBoxVo::new));
-    }
-
-    /**
-     * 修改
-     */
-    @Override
-    public RespResult<Integer> alter(ExpressBoxQo expressBoxQo) throws ServiceException {
-        ExpressBox expressBox = new ExpressBox();
-        BeanUtils.copyProperties(expressBoxQo,expressBox);
-        Integer update = expressBoxMapper.update(expressBox);
-        if (update>0){
-            return RespResult.success(update);
+    public RespResult<IPage<ExpressBoxVo>> list(int page, int size, int cabinetId) throws SecurityException {
+        IPage<ExpressBox> expressBoxIPage = expressBoxMapper.selectById(page, size, Integer.toUnsignedLong(cabinetId));
+        if (!ObjectUtils.isEmpty(expressBoxIPage.getRecords())){
+            return RespResult.success(PageCommonUtils.copyPage(expressBoxIPage,new Page<>(),ExpressBoxVo::new));
         }else {
             throw new ServiceException(ResultCode.SYS_ERROR);
         }
 
     }
-
-
 }
