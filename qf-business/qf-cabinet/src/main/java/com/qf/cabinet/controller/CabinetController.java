@@ -84,6 +84,20 @@ public class CabinetController {
         return cabinetService.listAdd(cabinetQoList);
     }
 
+    @GetMapping("/listOne")
+    @ApiOperation(value = "listOne",tags = "柜机操作弹窗")
+    @ApiImplicitParam(name = "cabinetId",value = "柜机ID",required = true)
+    public RespResult<CabinetVo> listOne(@RequestParam Integer cabinetId) throws CancellationException{
+        return cabinetService.listOne(cabinetId);
+    }
+
+    @PutMapping("/alter")
+    @ApiOperation(value = "alter",tags = "修改柜机状态")
+    @ApiImplicitParams({@ApiImplicitParam(name = "cabinetId",value = "柜机ID",dataType = "java.lang.Integer",required = true),@ApiImplicitParam(name = "type",value = "柜机状态",dataType = "java.lang.Integer",required = true)})
+    public RespResult<Integer> alter(@RequestParam Integer cabinetId,@RequestParam Integer type) throws ControllerException{
+        return cabinetService.alter(cabinetId,type);
+    }
+
 
 
 }
