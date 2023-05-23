@@ -1,14 +1,11 @@
 package com.qf.cabinet.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.github.pagehelper.PageInfo;
 import com.qf.cabinet.qo.CabinetEasyQo;
 import com.qf.cabinet.qo.CabinetHighQo;
 import com.qf.cabinet.qo.CabinetQo;
 import com.qf.cabinet.vo.CabinetVo;
-import com.qf.cabinet.vo.ExpressBoxVo;
 import com.qf.common.base.result.RespResult;
-import io.swagger.models.auth.In;
 
 import java.util.List;
 

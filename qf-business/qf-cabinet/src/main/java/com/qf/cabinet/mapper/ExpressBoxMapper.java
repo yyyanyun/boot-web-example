@@ -2,12 +2,9 @@ package com.qf.cabinet.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.github.pagehelper.PageInfo;
 import com.qf.cabinet.entity.ExpressBox;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
