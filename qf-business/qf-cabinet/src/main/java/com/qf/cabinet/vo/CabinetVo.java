@@ -1,10 +1,12 @@
 package com.qf.cabinet.vo;
 
+import com.qf.cabinet.entity.ExpressBox;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @ApiModel(description = "响应柜机表")
 @Data
@@ -130,4 +132,10 @@ public class CabinetVo {
      */
     @ApiModelProperty(value = "副柜高度（cm）")
     private Double viceHeight;
+
+    /**
+     * 箱格映射
+     */
+    @ApiModelProperty(value = "映射箱格")
+    private List<ExpressBox> expressBoxList;
 }

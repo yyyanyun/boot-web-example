@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
+import java.util.List;
+
 import lombok.Data;
 
 /**
@@ -172,4 +174,17 @@ public class Cabinet {
     @ApiModelProperty(value = "乐观锁")
     @Version
     private Byte version;
+
+    /**
+     * 映射箱格
+     */
+    @ApiModelProperty(value = "映射箱格")
+    private List<ExpressBox> expressBoxList;
+
+    /**
+     * 映射Bo_Id
+     */
+    @ApiModelProperty(value = "映射箱格")
+    private int boxId;
+
 }

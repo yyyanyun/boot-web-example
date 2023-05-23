@@ -27,7 +27,14 @@
         <result column="starter" property="starter"/>
         <result column="version" property="version"/>
     </resultMap>
-    <insert id="insertList" >
+    <sql id="Base_Column_List">
+        cabinet_id, cabinet_code, region, address, device_model, storage_type, box, sys_version,
+        create_data, activation_data, end_data, box_boor_status, box_starter, cabinet_status,
+        MAC, host_width, host_depth, host_height, vice_width, vice_depth, vice_height, starter,
+        version
+    </sql>
+
+    <insert id="insertList">
         insert into t_cabinet(`cabinet_code`, `region`, `address`, `device_model`, `storage_type`, `MAC`,
                               `create_data`, `cabinet_status`, `activation_data`) value
         <foreach collection="cabinetList" item="li" separator=",">
@@ -43,4 +50,114 @@
                 )
         </foreach>
     </insert>
+
+
+    <resultMap id="ListResultCabinetMap" type="com.qf.cabinet.entity.Cabinet" extends="ResultCabinetMap">
+        <collection property="expressBoxList" column="cabinet_id"
+                    select="com.qf.cabinet.mapper.ExpressBoxMapper.selectByCabinetId"/>
+    </resultMap>
+    <select id="selectByCabinetId" resultMap="ListResultCabinetMap">
+        select <include refid="Base_Column_List"/>
+        from t_cabinet t
+        <where>
+            t.cabinet_id = #{cabinetId}
+        </where>
+    </select>
+
+    <select id="selectBy" resultMap="ResultCabinetMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_cabinet t
+        <where>
+            <if test="cabinet.cabinetStatus != null">
+                t.cabinet_status = #{cabinet.cabinetStatus}
+            </if>
+            <if test="cabinet.boxBoorStatus != null">
+                and t.box_boor_status = #{cabinet.boxBoorStatus}
+            </if>
+            <if test="param != null and param != ''">
+                and t.address = #{param}
+                or t.cabinet_code = #{param}
+                or t.sys_version = #{param}
+                or t.storage_type = #{param}
+                or  t.cabinet_id = #{param}
+            </if>
+        </where>
+    </select>
+
+    <select id="selectBys" resultMap="ResultCabinetMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_cabinet t
+        <where>
+            <if test="cabinet.cabinetId != null">
+                t.cabinet_id = #{cabinet.cabinetId}
+            </if>
+            <if test="cabinet.cabinetCode != null">
+                and t.cabinet_code = #{cabinet.cabinetCode}
+            </if>
+            <if test="cabinet.deviceModel != null">
+                and t.device_model = #{cabinet.deviceModel}
+            </if>
+            <if test="cabinet.sysVersion != null">
+                and t.sys_version = #{cabinet.sysVersion}
+            </if>
+            <if test="cabinet.region != null">
+                and t.region = #{cabinet.region}
+            </if>
+            <if test="cabinet.address != null">
+                and t.address = #{cabinet.address}
+            </if>
+            <if test="cabinet.createData != null">
+                and t.create_data = #{cabinet.createData}
+            </if>
+            <if test="cabinet.activationData != null">
+                and t.activation_data = #{cabinet.activationData}
+            </if>
+            <if test="cabinet.cabinetStatus  != null">
+                and t.cabinet_status = #{cabinet.cabinetStatus}
+            </if>
+            <if test="cabinet.storageType != null">
+                and t.storage_type = #{cabinet.storageType}
+            </if>
+            <if test="cabinet.boxBoorStatus != null">
+                and t.box_boor_status = #{cabinet.boxBoorStatus}
+            </if>
+            <if test="cabinet.boxStarter != null">
+                and t.box_starter = #{cabinet.boxStarter}
+            </if>
+        </where>
+    </select>
+
+    <select id="query" resultMap="ResultCabinetMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_cabinet t
+        <where>
+        t.cabinet_id = #{cabinetId}
+        </where>
+    </select>
+
+    <select id="selectExists" resultMap="ResultCabinetMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_cabinet t
+        <where>
+            t.cabinet_code = #{cabinet.cabinetCode}
+        </where>
+    </select>
+
+    <select id="selectGo" resultMap="ResultCabinetMap">
+        select t.cabinet_id,
+               t.address,
+               t.region,
+               b.box_id
+        from t_cabinet t,
+             express_box b
+        <where>
+            t.cabinet_id = b.cabinet_id
+              and t.cabinet_id = #{cabinetId}
+              and b.box_id = #{boxId}
+        </where>
+    </select>
 </mapper>

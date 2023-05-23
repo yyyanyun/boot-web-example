@@ -1,6 +1,7 @@
 package com.qf.cabinet.qo;
 
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -28,10 +29,17 @@ public class ExpressBoxQo {
     private Long cabinetId;
 
     /**
-     * 位置
+     * 位置 行
      */
-    @ApiModelProperty(value="位置")
-    private String position;
+    @TableField(value = "`positionLine`")
+    @ApiModelProperty(value="行")
+    private String positionLine;
+    /**
+     * 位置 列
+     */
+    @TableField(value = "`positionColumn`")
+    @ApiModelProperty(value="列")
+    private String positionColumn;
 
     /**
      * 箱格类型（小中大）
