@@ -19,7 +19,11 @@ public enum ResultCode {
     /**
      *
      */
-    USER_EXIST(40101,"账号已存在");
+    USER_EXIST(40101,"账号已存在"),
+
+    PARAMETER_MISSING(40200, "传递的参数为空"),
+
+    RESPONSE_NULL(40201,"返回的结果为空");
 
     final int code;
     final String msg;

@@ -40,7 +40,7 @@ public class RespResult<T> {
     public static <T> RespResult<T> error() {
         return error(ResultCode.SYS_ERROR);
     }
-    public static RespResult<String> error(String message) {
+    public static <T> RespResult<String> error(String message) {
         return common(ResultCode.SYS_ERROR,message);
     }
 
