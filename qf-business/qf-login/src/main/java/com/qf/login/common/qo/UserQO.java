@@ -27,10 +27,11 @@ public class UserQO {
     private String Password;
 
     @ApiModelProperty(value = "新密码")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]+$\n", message = "密码格式不正确")
+    //8-10之间 必须包括大小写和数字
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,10}$", message = "密码格式不正确")
     private String newPassword;
 
     @ApiModelProperty(value = "确认新密码")
-    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]+$\n", message = "密码格式不正确")
+    @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z0-9]{8,10}$", message = "密码格式不正确")
     private String confirmPassword;
 }
