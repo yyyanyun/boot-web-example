@@ -1,6 +1,6 @@
 package com.qf.cabinet.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.github.pagehelper.PageInfo;
 import com.qf.cabinet.qo.CabinetEasyQo;
 import com.qf.cabinet.qo.CabinetHighQo;
 import com.qf.cabinet.qo.CabinetQo;
@@ -43,10 +43,10 @@ public class CabinetController {
     })
     @ApiOperation(value = "list/simple", tags = "简单搜索")
     @PostMapping("/list/simple/{page}/{size}")
-    public IPage<CabinetVo> listSimple(@PathVariable @RequestParam(defaultValue = "1") int page,
-                                       @PathVariable @RequestParam(defaultValue = "5") int size,
-                                       @RequestBody CabinetEasyQo cabinetEasyQo,
-                                       String param) throws CancellationException {
+    public RespResult<PageInfo<CabinetVo>> listSimple(@PathVariable @RequestParam(defaultValue = "1") int page,
+                                                      @PathVariable @RequestParam(defaultValue = "5") int size,
+                                                      @RequestBody CabinetEasyQo cabinetEasyQo,
+                                                      String param) throws CancellationException {
         return cabinetService.listSimple(page, size, cabinetEasyQo, param);
     }
 
@@ -65,7 +65,7 @@ public class CabinetController {
     })
     @ApiOperation(value = "list", tags = "高级搜索")
     @GetMapping("/list/{page}/{size}")
-    public IPage<CabinetVo> list(@PathVariable @RequestParam(defaultValue = "1") int page,
+    public RespResult<PageInfo<CabinetVo>> list(@PathVariable @RequestParam(defaultValue = "1") int page,
                                  @PathVariable @RequestParam(defaultValue = "5") int size,
                                  CabinetHighQo cabinetHighQo) throws CancellationException {
         return cabinetService.list(page, size, cabinetHighQo);
@@ -97,12 +97,33 @@ public class CabinetController {
         return cabinetService.listOne(cabinetId);
     }
 
+    /**
+     * 修改柜机状态
+     */
     @PutMapping("/alter")
     @ApiOperation(value = "alter", tags = "修改柜机状态")
     @ApiImplicitParams({@ApiImplicitParam(name = "cabinetId", value = "柜机ID", dataType = "java.lang.Integer", required = true),
             @ApiImplicitParam(name = "type", value = "柜机状态", dataType = "java.lang.Integer", required = true)})
     public RespResult<Integer> alter(@RequestParam Integer cabinetId, @RequestParam Integer type) throws ControllerException {
         return cabinetService.alter(cabinetId, type);
+    }
+
+    @GetMapping("/show/box")
+    @ApiOperation(value = "showBox",tags = "箱格列表")
+    @ApiImplicitParam(name = "cabinetId",value = "柜机ID",required = true)
+    public RespResult<CabinetVo> showBox(@RequestParam int cabinetId) throws ControllerException {
+        return cabinetService.showBox(cabinetId);
+    }
+
+    /**
+     * 修改箱格界面的信息
+     */
+    @GetMapping("/alter/go")
+    @ApiOperation(nickname = "goAlter",value = "修改箱格界面的信息")
+    @ApiImplicitParams({@ApiImplicitParam(name = "cabinetId",value = "修改箱格接口"),
+            @ApiImplicitParam(name = "boxId",value = "箱格ID")})
+    public RespResult<CabinetVo> goAlter(@RequestParam int cabinetId, @RequestParam int boxId) throws ControllerException{
+        return null;
     }
 
 

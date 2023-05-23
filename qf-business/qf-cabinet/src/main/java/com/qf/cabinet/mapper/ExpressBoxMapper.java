@@ -2,11 +2,11 @@ package com.qf.cabinet.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageInfo;
 import com.qf.cabinet.entity.ExpressBox;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.util.ObjectUtils;
+
+import java.util.List;
 
 public interface ExpressBoxMapper extends BaseMapper<ExpressBox> {
 
@@ -30,27 +30,19 @@ public interface ExpressBoxMapper extends BaseMapper<ExpressBox> {
     /**
      * 根据柜机ID查询
      */
-    default IPage<ExpressBox> selectById(int page,int size,ExpressBox expressBox){
-        LambdaQueryWrapper<ExpressBox> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(ExpressBox::getCabinetId,expressBox.getCabinetId());
-        if (!ObjectUtils.isEmpty(expressBox.getBoxType())){
-            queryWrapper.eq(ExpressBox::getBoxType,expressBox.getBoxType());
-        }
-        if (!ObjectUtils.isEmpty(expressBox.getDoorStatus())){
-            queryWrapper.eq(ExpressBox::getDoorStatus,expressBox.getDoorStatus());
-        }
-        if (!ObjectUtils.isEmpty(expressBox.getStorageType())){
-            queryWrapper.eq(ExpressBox::getStorageType,expressBox.getStorageType());
-        }
-        if (!ObjectUtils.isEmpty(expressBox.getUsageStatus())){
-            queryWrapper.eq(ExpressBox::getUsageStatus,expressBox.getUsageStatus());
-        }
-        return this.selectPage(new Page<>(page,size),queryWrapper);
+    PageInfo<ExpressBox> selectById(@Param("expressBox") ExpressBox expressBox);
 
-    }
-
+    /**
+     * 查看箱格记录
+     */
     ExpressBox selectByBoxId(@Param("boxId") int boxId);
 
+    /**
+     * 根据柜机ID查询箱格
+     */
+    List<ExpressBox> selectByCabinetId(int cabinetId);
+
+    Integer update(@Param("expressBox") ExpressBox expressBox);
 
 
 }
