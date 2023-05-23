@@ -45,12 +45,32 @@
         </where>
     </select>
 
-
-    <resultMap id="BaseResultMapSub" type="com.qf.account.entity.Account" extends="BaseResultMap">
-        <collection property="paymentRecordList" resultMap="com.qf.account.mapper.PaymentRecordMapper.BaseResultMap">
-        </collection>
+    <resultMap id="BaseResultMapPry" type="com.qf.account.entity.PaymentRecord">
+        <!--@mbg.generated-->
+        <!--@Table payment_record-->
+        <id column="p_id" jdbcType="BIGINT" property="id"/>
+        <result column="p_trade_no" jdbcType="BIGINT" property="tradeNo"/>
+        <result column="p_member_type" jdbcType="INTEGER" property="memberType"/>
+        <result column="p_phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
+        <result column="p_order_type" jdbcType="INTEGER" property="orderType"/>
+        <result column="p_order_no" jdbcType="INTEGER" property="orderNo"/>
+        <result column="p_amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="p_payment_channel" jdbcType="INTEGER" property="paymentChannel"/>
+        <result column="p_payment_currency" jdbcType="INTEGER" property="paymentCurrency"/>
+        <result column="p_actual_payment_cny" jdbcType="DECIMAL" property="actualPaymentCny"/>
+        <result column="p_exchange_rate" jdbcType="DECIMAL" property="exchangeRate"/>
+        <result column="p_created_time" jdbcType="TIMESTAMP" property="createdTime"/>
+        <result column="p_completed_time" jdbcType="TIMESTAMP" property="completedTime"/>
+        <result column="p_status" jdbcType="INTEGER" property="status"/>
+        <result column="p_account_id" property="accountId"/>
     </resultMap>
 
+    <resultMap id="BaseResultMapSub" type="com.qf.account.entity.Account"
+               extends="BaseResultMap">
+        <collection property="paymentRecordList"
+                    resultMap="BaseResultMapPry">
+        </collection>
+    </resultMap>
 
     <select id="selectAdvancedSearch" resultMap="BaseResultMapSub">
         select a.id,
@@ -63,29 +83,29 @@
                a.create_time,
                a.last_login_time,
                a.status,
-               p.id,
-               p.account_id,
-               p.trade_no,
-               p.member_type,
-               p.phone_number,
-               p.order_type,
-               p.order_no,
-               p.amount,
-               p.payment_channel,
-               p.payment_currency,
-               p.actual_payment_cny,
-               p.exchange_rate,
-               p.created_time,
-               p.completed_time,
-               p.status
+               p.id                 as p_id,
+               p.account_id         as p_account_id,
+               p.trade_no           as p_trade_no,
+               p.member_type        as p_member_type,
+               p.phone_number       as p_phone_number,
+               p.order_type         as p_order_type,
+               p.order_no           as p_order_no,
+               p.amount             as p_amount,
+               p.payment_channel    as p_payment_channel,
+               p.payment_currency   as p_payment_currency,
+               p.actual_payment_cny as p_actual_payment_cny,
+               p.exchange_rate      as p_exchange_rate,
+               p.created_time       as p_created_time,
+               p.completed_time     as p_completed_time,
+               p.status             as p_status
         from t_account a
                  join payment_record p on a.id = p.account_id
         <where>
             <if test="Account.id != null">
-                a.id= #{Account.id}
+                a.id = #{Account.id}
             </if>
             <if test="Account.phone != null">
-                and a.phone= #{Account.phone}
+                and a.phone = #{Account.phone}
             </if>
             <if test="Account.memberType != null and Account.memberType == 1">
                 and a.member_type = #{Account.memberType}
@@ -112,5 +132,12 @@
                 and p.status = #{paymentStatus}
             </if>
         </where>
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List">
+        </include>
+        from t_account where id= #{id}
     </select>
 </mapper>

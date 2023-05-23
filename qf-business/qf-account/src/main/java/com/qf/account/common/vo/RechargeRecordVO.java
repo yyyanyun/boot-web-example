@@ -3,6 +3,7 @@ package com.qf.account.common.vo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.qf.account.entity.RechargeDetails;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -97,6 +98,7 @@ public class RechargeRecordVO {
      */
     @TableField(value = "create_time")
     @ApiModelProperty(value = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
@@ -104,6 +106,7 @@ public class RechargeRecordVO {
      */
     @TableField(value = "complete_time")
     @ApiModelProperty(value = "完成时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date completeTime;
 
     /**

@@ -1,9 +1,11 @@
 package com.qf.account.common.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.qf.account.entity.PaymentRecord;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -15,7 +17,7 @@ public class AccountVO {
     /**
      * ID
      */
-    @ApiModelProperty(value = "ID")
+    @ApiModelProperty(value = "ID 账户id")
     private Long id;
 
     /**
@@ -58,12 +60,14 @@ public class AccountVO {
      * 创建时间
      */
     @ApiModelProperty(value = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
     /**
      * 最近登录时间
      */
     @ApiModelProperty(value = "最近登录时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date lastLoginTime;
 
     /**
@@ -72,6 +76,8 @@ public class AccountVO {
     @ApiModelProperty(value = "状态 1表示正常  0表示锁定")
     private Integer status;
 
+
     private List<PaymentRecord> paymentRecordList;
+
 
 }

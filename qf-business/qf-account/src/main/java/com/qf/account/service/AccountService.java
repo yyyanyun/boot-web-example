@@ -10,9 +10,9 @@ public interface AccountService {
     PageInfo<AccountVO> pageInfo(Integer currentPageNO, Integer pageSize, Long id, String phone);
 
     //高级搜索
-    PageInfo<AccountVO> pageInfoList(AccountQO accountQO, Integer currentPageNO, Integer pageSize,int paymentStatus);
+    PageInfo<AccountVO> pageInfoList(AccountQO accountQO, Integer currentPageNO, Integer pageSize,Integer paymentStatus);
 
 
 
-    int updateUnlock(Long id, int status);
+    Integer updateUnlock(Long id, Integer status);
 }

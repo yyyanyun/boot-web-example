@@ -6,13 +6,17 @@ import com.qf.account.common.vo.AccountVO;
 import com.qf.account.service.AccountService;
 import com.qf.common.base.result.RespResult;
 import io.swagger.annotations.*;
+
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
+
 @RestController
 @RequestMapping("/account")
 @Api(tags = "财务管理Api接口")
+@Validated
 public class AccountController {
 
     @Resource
@@ -45,19 +49,20 @@ public class AccountController {
             @ApiImplicitParam(name = "currentPageNo", value = "当前页", defaultValue = "1"),
             @ApiImplicitParam(name = "pageSize", value = "页量", defaultValue = "10"),
             @ApiImplicitParam(name = "accountQO", value = "高级搜索参数"),
+            @ApiImplicitParam(name = "paymentStatus", value = "支付状态"),
 
     })
     @ApiResponses({
             @ApiResponse(code = 200, message = "成功"),
             @ApiResponse(code = 400, message = "失败")
     })
-    public RespResult<PageInfo<AccountVO>> queryList(@RequestParam(defaultValue = "1") Integer currentPageNo, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody AccountQO accountQO, int paymentStatus) {
+    public RespResult<PageInfo<AccountVO>> queryList(@RequestParam(defaultValue = "1") Integer currentPageNo, @RequestParam(defaultValue = "10") Integer pageSize, @RequestBody AccountQO accountQO, Integer paymentStatus) {
         return RespResult.success(accountService.pageInfoList(accountQO, currentPageNo, pageSize, paymentStatus));
     }
 
 
     @PutMapping("/update/unlock")
-    @ApiOperation("修改状态")
+    @ApiOperation("修改用户的状态")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "账户id", required = true),
             @ApiImplicitParam(name = "status", value = "状态", required = true)
@@ -66,7 +71,8 @@ public class AccountController {
             @ApiResponse(code = 200, message = "修改成功"),
             @ApiResponse(code = 400, message = "修改失败")
     })
-    public RespResult<Integer> updateUnlock(@RequestParam Long id, @RequestParam int status) {
+    public RespResult<Integer> updateUnlock(@RequestParam Long id, @RequestParam Integer status) {
+
         return RespResult.success(accountService.updateUnlock(id, status));
     }
 }

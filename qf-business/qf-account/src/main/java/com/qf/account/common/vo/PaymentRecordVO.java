@@ -1,5 +1,6 @@
 package com.qf.account.common.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.qf.account.entity.PaymentDetail;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -82,12 +83,14 @@ public class PaymentRecordVO {
      * 创建时间
      */
     @ApiModelProperty(value = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdTime;
 
     /**
      * 完成时间
      */
     @ApiModelProperty(value = "完成时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date completedTime;
 
     /**

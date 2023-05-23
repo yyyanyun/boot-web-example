@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -39,18 +40,21 @@ public class ExchangeRateVO {
      * 有效时间起始时间，格式为YYYY-MM-DD HH:mm:ss，设置默认值为当前时间
      */
     @ApiModelProperty(value = "有效时间起始时间，格式为YYYY-MM-DD HH:mm:ss，设置默认值为当前时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
     /**
      * 有效时间结束时间，格式为YYYY-MM-DD HH:mm:ss
      */
     @ApiModelProperty(value = "有效时间结束时间，格式为YYYY-MM-DD HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
     /**
      * 状态值：1表示生效中，2表示已过期
      */
     @ApiModelProperty(value = "状态值：1表示生效中，2表示已过期")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Integer status;
 
     /**

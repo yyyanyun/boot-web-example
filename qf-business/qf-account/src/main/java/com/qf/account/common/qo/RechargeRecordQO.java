@@ -12,7 +12,6 @@ import java.util.Date;
 @ApiModel("充值记录请求参数")
 public class RechargeRecordQO {
 
-
     /**
      * 交易号
      */
@@ -30,7 +29,6 @@ public class RechargeRecordQO {
     /**
      * 会员类型：1-快递员，2-普通会员
      */
-    @TableField(value = "member_type")
     @ApiModelProperty(value = "会员类型：1-快递员，2-普通会员")
     private Integer memberType;
 
@@ -38,14 +36,12 @@ public class RechargeRecordQO {
     /**
      * 状态：1-充值中，2-充值成功，3-充值失败，4-待支付，5-交易关闭
      */
-    @TableField(value = "`status`")
     @ApiModelProperty(value = "状态：1-充值中，2-充值成功，3-充值失败，4-待支付，5-交易关闭")
     private Integer status;
 
     /**
      * 充值渠道：1-微信，2-支付宝，3-贝宝，4-PayMaya，5-余额
      */
-    @TableField(value = "channel")
     @ApiModelProperty(value = "充值渠道：1-微信，2-支付宝，3-贝宝，4-PayMaya，5-余额")
     private Integer channel;
 

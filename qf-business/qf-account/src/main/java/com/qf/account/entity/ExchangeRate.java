@@ -62,7 +62,7 @@ public class ExchangeRate {
     private Integer status;
 
 
-    private List<ExchangeRateDetail> exchangeRateDetailList;
+    private ExchangeRateDetail exchangeRateDetailList;
 
     /**
      * 备注信息
@@ -70,6 +70,8 @@ public class ExchangeRate {
     @TableField(value = "remark")
     @ApiModelProperty(value="备注信息")
     private String remark;
+
+
 
     public static final String COL_ID = "id";
 

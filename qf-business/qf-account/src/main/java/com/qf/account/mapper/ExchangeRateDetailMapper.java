@@ -9,7 +9,7 @@ import java.util.List;
 public interface ExchangeRateDetailMapper extends BaseMapper<ExchangeRateDetail> {
 
 
-    List<ExchangeRateDetail> slectList(@Param("exchangeRateId") Long exchangeRateId);
+    ExchangeRateDetail selectList(@Param("exchangeRateId") Long exchangeRateId);
 
 
 }

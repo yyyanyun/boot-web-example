@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("/PaymentRecord")
+@RequestMapping("/paymentRecord")
 @Api(tags = "支付信息管理Api接口")
 public class PaymentRecordController {
 
@@ -55,6 +55,15 @@ public class PaymentRecordController {
     }
 
     @ApiOperation("支付记录的详细信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "支付记录交易号id", defaultValue = "1",required = true),
+
+
+    })
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "成功"),
+            @ApiResponse(code = 400, message = "失败")
+    })
     @GetMapping("/id")
     public RespResult<PaymentRecordVO> selectById(@RequestParam Long id) {
         return RespResult.success(paymentRecordService.selectById(id));

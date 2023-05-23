@@ -1,6 +1,7 @@
 package com.qf.account.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -84,20 +85,24 @@ public class PaymentRecord {
      * 创建时间
      */
     @ApiModelProperty(value = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdTime;
 
 
     @ApiModelProperty(value = "创建时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
 
     /**
      * 完成时间
      */
     @ApiModelProperty(value = "完成时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date completedTime;
 
 
     @ApiModelProperty(value = "完成时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date finishTime;
 
     /**
@@ -108,6 +113,7 @@ public class PaymentRecord {
 
     @ApiModelProperty(value = "所属账户id")
     private Long accountId;
+
 
     private PaymentDetail paymentDetail;
 
