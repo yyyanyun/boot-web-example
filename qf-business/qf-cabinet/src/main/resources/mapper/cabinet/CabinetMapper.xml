@@ -27,7 +27,7 @@
         <result column="starter" property="starter"/>
         <result column="version" property="version"/>
     </resultMap>
-    <select id="insertList" resultMap="ResultCabinetMap">
+    <insert id="insertList" >
         insert into t_cabinet(`cabinet_code`, `region`, `address`, `device_model`, `storage_type`, `MAC`,
                               `create_data`, `cabinet_status`, `activation_data`) value
         <foreach collection="cabinetList" item="li" separator=",">
@@ -42,5 +42,5 @@
              #{li.activationData}
                 )
         </foreach>
-    </select>
+    </insert>
 </mapper>

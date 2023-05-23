@@ -56,7 +56,7 @@ public class CabinetQo {
      */
     @ApiModelProperty(value = "安装日期")
     @JsonFormat(pattern = "yyyy-MM-dd")
-//    @NotBlank(message = "安装日期不能为空")
+    @NotBlank(message = "安装日期不能为空")
     private Date createData;
 
     /**

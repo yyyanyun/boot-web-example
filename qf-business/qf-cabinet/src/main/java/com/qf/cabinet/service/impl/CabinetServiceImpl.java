@@ -20,7 +20,6 @@ import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.function.Supplier;
 
 @Service
 public class CabinetServiceImpl implements CabinetService {
@@ -58,21 +57,31 @@ public class CabinetServiceImpl implements CabinetService {
     public RespResult<Integer> add(CabinetQo cabinetQo) throws ServiceException{
         Cabinet cabinet = new Cabinet();
         BeanUtils.copyProperties(cabinetQo,cabinet);
-        int insert = cabinetMapper.insert(cabinet);
-        if (insert>0){
-            return RespResult.success(insert);
+        if (!ObjectUtils.isEmpty(cabinetMapper.selectExists(cabinet))){
+            int insert = cabinetMapper.insert(cabinet);
+            if (insert>0){
+                return RespResult.success(insert);
+            }else {
+                throw new ServiceException(ResultCode.SYS_ERROR);
+            }
         }else {
-            throw new ServiceException(ResultCode.SYS_ERROR);
+            throw new ServiceException(ResultCode.CABINET_EXISTS);
         }
+
     }
 
     /**
      * 批量添加
      */
     @Override
-    public RespResult<Integer> listAdd(List<CabinetQo> cabinetQoList) {
+    public RespResult<Integer> listAdd(List<CabinetQo> cabinetQoList) throws ServiceException {
         List<Cabinet> copyList = CommonBeanUtils.copyList(cabinetQoList,Cabinet::new);
-        int count = cabinetMapper.insertList(copyList);
+        copyList.forEach(iter->{
+            if (!ObjectUtils.isEmpty(cabinetMapper.selectExists(iter))){
+                throw new ServiceException(ResultCode.CABINET_EXISTS);
+            }
+        });
+        Integer count = cabinetMapper.insertList(copyList);
         if (count>0){
             return RespResult.success(count);
         }else {

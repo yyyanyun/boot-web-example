@@ -1,7 +1,6 @@
 package com.qf.cabinet.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -14,11 +13,17 @@ import java.util.List;
 
 
 public interface CabinetMapper extends BaseMapper<Cabinet> {
+    /**
+     * 查询柜机编号
+     */
+    default Cabinet selectExists(Cabinet cabinet){
+        return this.selectOne(new LambdaQueryWrapper<Cabinet>().eq(Cabinet::getCabinetCode,cabinet.getCabinetCode()));
+    }
 
     /**
      * 批量添加
      */
-    int insertList(@Param("cabinetList") List<Cabinet> cabinetList);
+    Integer insertList(@Param("cabinetList") List<Cabinet> cabinetList);
 
     /**
      * 简单条件查询

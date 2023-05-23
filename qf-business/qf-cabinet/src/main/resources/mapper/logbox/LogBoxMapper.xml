@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.cabinet.mapper.LogBoxMapper">
+  <resultMap id="BaseResultMap" type="com.qf.cabinet.entity.LogBox">
+    <!--@mbg.generated-->
+    <id column="log_id" jdbcType="BIGINT" property="logId" />
+    <result column="express_box_id" jdbcType="BIGINT" property="expressBoxId" />
+    <result column="open_data" jdbcType="TIMESTAMP" property="openData" />
+    <result column="end_data" jdbcType="TIMESTAMP" property="endData" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="op_user" jdbcType="INTEGER" property="opUser" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="op_data" jdbcType="VARCHAR" property="opData" />
+    <result column="starter" jdbcType="INTEGER" property="starter" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+  </resultMap>
+
+  <select id="selectByBoxId" resultMap="BaseResultMap">
+      select l.log_id,
+             l.express_box_id,
+             l.open_data,
+             l.end_data,
+             l.type,
+             l.op_user,
+             l.phone,
+             l.op_data
+      from log_box l
+      <where>
+          express_box_id = #{boxId}
+      </where>
+  </select>
+</mapper>

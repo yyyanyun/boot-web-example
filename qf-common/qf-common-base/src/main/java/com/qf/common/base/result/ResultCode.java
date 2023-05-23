@@ -5,6 +5,7 @@ import lombok.Getter;
 @Getter
 public enum ResultCode {
     CABINET_NO_EXISTS(41000,"不存在"),
+    CABINET_EXISTS(41100,"已存在"),
     /**
      * 成功
      */

@@ -2,11 +2,13 @@ package com.qf.cabinet.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.qf.cabinet.entity.LogBox;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @ApiModel("箱格响应数据表")
@@ -118,4 +120,11 @@ public class ExpressBoxVo {
     @TableField(value = "version")
     @ApiModelProperty(value = "乐观锁")
     private Integer version;
+
+    /**
+     * 映射箱格记录
+     */
+    @TableField(value = "logBoxList")
+    private List<LogBox> logBoxList;
+
 }

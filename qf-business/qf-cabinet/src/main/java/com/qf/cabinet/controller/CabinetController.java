@@ -19,9 +19,9 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 
-@Api("快递柜机接口")
+@Api(value = "快递柜机接口")
 @RestController
-@RequestMapping("/xmh/Cabinet")
+@RequestMapping("/xmh/cabinet")
 public class CabinetController {
     @Resource
     private CabinetService cabinetService;
@@ -41,8 +41,8 @@ public class CabinetController {
             @ApiImplicitParam(name = "size", value = "页量", paramType = "path", dataType = "java.lang.int"),
             @ApiImplicitParam(name = "param", value = "详细地址/编码/型号/版本号/ID", paramType = "query"),
     })
-    @ApiOperation(value = "listSimple", tags = "简单搜索")
-    @PostMapping("/listSimple/{page}/{size}")
+    @ApiOperation(value = "list/simple", tags = "简单搜索")
+    @PostMapping("/list/simple/{page}/{size}")
     public IPage<CabinetVo> listSimple(@PathVariable @RequestParam(defaultValue = "1") int page,
                                        @PathVariable @RequestParam(defaultValue = "5") int size,
                                        @RequestBody CabinetEasyQo cabinetEasyQo,
@@ -72,32 +72,38 @@ public class CabinetController {
     }
 
     @PostMapping("/add")
-    @ApiOperation(value = "add",tags = "添加柜机")
+    @ApiOperation(value = "add", tags = "添加柜机")
     public RespResult<Integer> add(@RequestBody @Valid CabinetQo cabinetQo) throws ControllerException {
         return cabinetService.add(cabinetQo);
     }
 
 
-    @PostMapping("/listAdd")
-    @ApiOperation(value = "listAdd",tags = "批量添加柜机")
-    public RespResult<Integer> listAdd(@RequestBody List<CabinetQo> cabinetQoList) throws CancellationException{
+    /**
+     * 批量添加
+     */
+    @PostMapping("/list/add")
+    @ApiOperation(value = "listAdd", tags = "批量添加柜机")
+    public RespResult<Integer> listAdd(@RequestBody List<CabinetQo> cabinetQoList) throws CancellationException {
         return cabinetService.listAdd(cabinetQoList);
     }
 
-    @GetMapping("/listOne")
-    @ApiOperation(value = "listOne",tags = "柜机操作弹窗")
-    @ApiImplicitParam(name = "cabinetId",value = "柜机ID",required = true)
-    public RespResult<CabinetVo> listOne(@RequestParam Integer cabinetId) throws CancellationException{
+    /**
+     * 根据柜机ID查询 柜机详情
+     */
+    @GetMapping("/list/one")
+    @ApiOperation(value = "listOne", tags = "柜机操作弹窗")
+    @ApiImplicitParam(name = "cabinetId", value = "柜机ID", required = true)
+    public RespResult<CabinetVo> listOne(@RequestParam Integer cabinetId) throws ControllerException {
         return cabinetService.listOne(cabinetId);
     }
 
     @PutMapping("/alter")
-    @ApiOperation(value = "alter",tags = "修改柜机状态")
-    @ApiImplicitParams({@ApiImplicitParam(name = "cabinetId",value = "柜机ID",dataType = "java.lang.Integer",required = true),@ApiImplicitParam(name = "type",value = "柜机状态",dataType = "java.lang.Integer",required = true)})
-    public RespResult<Integer> alter(@RequestParam Integer cabinetId,@RequestParam Integer type) throws ControllerException{
-        return cabinetService.alter(cabinetId,type);
+    @ApiOperation(value = "alter", tags = "修改柜机状态")
+    @ApiImplicitParams({@ApiImplicitParam(name = "cabinetId", value = "柜机ID", dataType = "java.lang.Integer", required = true),
+            @ApiImplicitParam(name = "type", value = "柜机状态", dataType = "java.lang.Integer", required = true)})
+    public RespResult<Integer> alter(@RequestParam Integer cabinetId, @RequestParam Integer type) throws ControllerException {
+        return cabinetService.alter(cabinetId, type);
     }
-
 
 
 }

@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.qf.cabinet.entity.ExpressBox;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.util.ObjectUtils;
 
 public interface ExpressBoxMapper extends BaseMapper<ExpressBox> {
@@ -47,6 +48,8 @@ public interface ExpressBoxMapper extends BaseMapper<ExpressBox> {
         return this.selectPage(new Page<>(page,size),queryWrapper);
 
     }
+
+    ExpressBox selectByBoxId(@Param("boxId") int boxId);
 
 
 
