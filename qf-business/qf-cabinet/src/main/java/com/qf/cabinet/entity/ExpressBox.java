@@ -1,9 +1,6 @@
 package com.qf.cabinet.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
@@ -52,11 +49,23 @@ public class ExpressBox {
     private Integer boxType;
 
     /**
-     * 宽/高/深
+     * 宽
      */
-    @TableField(value = "`size`")
-    @ApiModelProperty(value="宽/高/深")
-    private String size;
+    @TableField(value = "`width`")
+    @ApiModelProperty(value="宽")
+    private String width;
+    /**
+     * 高
+     */
+    @TableField(value = "`height`")
+    @ApiModelProperty(value="高")
+    private String height;
+    /**
+     * 深
+     */
+    @TableField(value = "`depth`")
+    @ApiModelProperty(value="深")
+    private String depth;
 
     /**
      * 存储类型（1常温2冷藏）
@@ -105,6 +114,7 @@ public class ExpressBox {
      */
     @TableField(value = "starter")
     @ApiModelProperty(value="假删除 0删除 1正常")
+    @TableLogic(value = "1",delval = "0")
     private Integer starter;
 
     /**
@@ -112,6 +122,7 @@ public class ExpressBox {
      */
     @TableField(value = "version")
     @ApiModelProperty(value="乐观锁")
+    @Version
     private Integer version;
 
 }

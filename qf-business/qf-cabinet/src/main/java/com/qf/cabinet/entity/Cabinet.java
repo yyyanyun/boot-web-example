@@ -1,9 +1,6 @@
 package com.qf.cabinet.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -165,6 +162,7 @@ public class Cabinet {
      */
     @TableField(value = "starter")
     @ApiModelProperty(value = "假删除（0.删除 1.正常）")
+    @TableLogic(value = "1",delval = "0")
     private Integer starter;
 
     /**
@@ -172,5 +170,6 @@ public class Cabinet {
      */
     @TableField(value = "version")
     @ApiModelProperty(value = "乐观锁")
+    @Version
     private Byte version;
 }
