@@ -1,7 +1,6 @@
 package com.qf.config.controller;
 
 import com.qf.common.base.result.RespResult;
-import com.qf.config.entity.DeliverySetting;
 import com.qf.config.entity.PickupSetting;
 import com.qf.config.service.PickupSettingService;
 import io.swagger.annotations.Api;
@@ -14,7 +13,7 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("PickupSetting")
-@Api("取件设置接口")
+@Api(tags = "取件设置接口")
 public class PickupSettingController {
     @Resource
     private PickupSettingService pickupSettingService;

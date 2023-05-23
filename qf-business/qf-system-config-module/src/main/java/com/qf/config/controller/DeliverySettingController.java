@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("DeliverySetting")
-@Api("派送设置接口")
+@Api(tags = "派送设置接口")
 public class DeliverySettingController {
     @Resource
     private DeliverySettingService deliverySettingService;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.config.mapper.CabinetChargeSettingMapper">
+  <resultMap id="BaseResultMap" type="com.qf.config.entity.CabinetChargeSetting">
+    <!--@mbg.generated-->
+    <!--@Table cabinet_charge_setting-->
+    <id column="cabinet_id" jdbcType="INTEGER" property="cabinetId" />
+    <result column="send_fee" jdbcType="DECIMAL" property="sendFee" />
+    <result column="express_fee" jdbcType="DECIMAL" property="expressFee" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    cabinet_id, send_fee, express_fee
+  </sql>
+
+  <select id="selectByCabinetId" resultMap="BaseResultMap">
+    select cabinet_id, send_fee, express_fee
+    from cabinet_charge_setting
+    where cabinet_id = #{cabinetId}
+  </select>
+
+  <update id="updateCabinetChargeSetting">
+    update cabinet_charge_setting
+    set send_fee = #{cabinetChargeSetting.sendFee},express_fee = #{cabinetChargeSetting.expressFee}
+    where cabinet_id = #{cabinetChargeSetting.cabinetId}
+  </update>
+</mapper>
