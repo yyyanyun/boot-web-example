@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.cabinet.mapper.ExpressBoxMapper">
+  <resultMap id="BaseResultMap" type="com.qf.cabinet.entity.ExpressBox">
+    <id column="express_box_id" jdbcType="BIGINT" property="expressBoxId" />
+    <result column="box_id" jdbcType="TINYINT" property="boxId" />
+    <result column="cabinet_id" jdbcType="BIGINT" property="cabinetId" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="box_type" jdbcType="INTEGER" property="boxType" />
+    <result column="width" property="width"/>
+    <result column="height" property="height"/>
+    <result column="depth" property="depth"/>
+    <result column="storage_type" jdbcType="INTEGER" property="storageType" />
+    <result column="temperature" jdbcType="VARCHAR" property="temperature" />
+    <result column="door_status" jdbcType="INTEGER" property="doorStatus" />
+    <result column="open_count" jdbcType="TINYINT" property="openCount" />
+    <result column="last_open_time" jdbcType="TIMESTAMP" property="lastOpenTime" />
+    <result column="usage_status" jdbcType="INTEGER" property="usageStatus" />
+    <result column="starter" jdbcType="INTEGER" property="starter" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+  </resultMap>
+
+    <resultMap id="ListBaseResultMap" type="com.qf.cabinet.entity.ExpressBox" extends="BaseResultMap">
+        <collection property="logBoxList" javaType="java.util.List" column="express_box_id"
+                     select="com.qf.cabinet.mapper.LogBoxMapper.selectByBoxId"/>
+    </resultMap>
+  <select id="selectByBoxId" resultMap="ListBaseResultMap">
+      select b.express_box_id,
+             b.box_id,
+             b.cabinet_id,
+             b.position,
+             b.box_type,
+             b.storage_type,
+             b.temperature,
+             b.door_status,
+             b.open_count,
+             b.last_open_time,
+             b.usage_status
+      from express_box b
+      <where>
+          b.express_box_id = #{boxId}
+      </where>
+  </select>
+</mapper>

@@ -1,0 +1,17 @@
+swagger:
+  enable: true
+  base-package: com.qf.cabinet.controller
+  title: "柜机接口文档"
+  description: "柜机接口的使用"
+  version: "v 1.0.0"
+  name: "lsl"
+  url: "wangZhan"
+  email: "121231@136.com"
+spring:
+  datasource:
+    druid:
+      url: "jdbc:mysql:///spring_web"
+      username: "root"
+      password: "123456"
+      max-active: 8
+

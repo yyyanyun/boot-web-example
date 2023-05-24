@@ -18,6 +18,8 @@
   <modules>
     <module>qf-member</module>
     <module>qf-account</module>
+      <module>qf-system-config-module</module>
+    <module>qf-cabinet</module>
   </modules>
 
 
