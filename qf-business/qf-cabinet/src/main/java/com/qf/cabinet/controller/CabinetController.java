@@ -37,8 +37,8 @@ public class CabinetController {
      * @throws CancellationException： 控制层异常
      */
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "当前页", paramType = "path", dataType = "java.lang.int"),
-            @ApiImplicitParam(name = "size", value = "页量", paramType = "path", dataType = "java.lang.int"),
+            @ApiImplicitParam(name = "page", value = "当前页",required = true, paramType = "path", dataType = "java.lang.int"),
+            @ApiImplicitParam(name = "size", value = "页量",required = true, paramType = "path", dataType = "java.lang.int"),
             @ApiImplicitParam(name = "param", value = "详细地址/编码/型号/版本号/ID", paramType = "query"),
     })
     @ApiOperation(nickname = "listSimple", value = "简单搜索")
@@ -60,8 +60,8 @@ public class CabinetController {
      * @throws CancellationException： 控制层异常
      */
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "page", value = "当前页", paramType = "path", dataType = "java.lang.int"),
-            @ApiImplicitParam(name = "size", value = "页量", paramType = "path", dataType = "java.lang.int"),
+            @ApiImplicitParam(name = "page", value = "当前页",required = true, paramType = "path", dataType = "java.lang.int"),
+            @ApiImplicitParam(name = "size", value = "页量",required = true, paramType = "path", dataType = "java.lang.int"),
     })
     @ApiOperation(nickname = "list", value = "高级搜索")
     @PostMapping("/list")

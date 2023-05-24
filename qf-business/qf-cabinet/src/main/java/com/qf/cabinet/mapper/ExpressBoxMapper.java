@@ -3,10 +3,7 @@ package com.qf.cabinet.mapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.qf.cabinet.entity.ExpressBox;
-import com.qf.cabinet.qo.ExpressBoxQo;
-import com.qf.common.base.result.RespResult;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
