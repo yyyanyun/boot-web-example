@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.helpcenter.mapper.SuggestedFeedbackMapper">
+    <resultMap id="suggestedfeedback" type="com.qf.helpcenter.entity.SuggestedFeedback">
+        <id property="id" column="id"></id>
+        <result property="creationTime" column="creation_time"></result>
+        <result property="type" column="type"></result>
+        <result property="questionTitle" column="question_title"></result>
+        <result property="languageType" column="language_type"></result>
+        <result property="sortNumber" column="sort_number"></result>
+        <result property="client" column="client"></result>
+        <result property="questionClassification" column="question_classification"></result>
+    </resultMap>
+    <select id="showProblem" resultMap="suggestedfeedback">
+        select  creation_time,id, question_title, client, question_classification, language_type, sort_number, creation_time, type  from suggested_feedback
+    </select>
+
+    <select id="searchProblen" resultMap="suggestedfeedback">
+        select  creation_time,id, question_title, client, question_classification, language_type, sort_number, creation_time, type from suggested_feedback
+        <where>
+            <if test="suggestedFeedback.questionTitle != null  and suggestedFeedback.questionTitle != ''">
+                question_title like concat('%',#{suggestedFeedback.questionTitle},'%')
+            </if>
+            <if test="suggestedFeedback.questionClassification != null  and suggestedFeedback.questionClassification != ''">
+                and question_classification=#{suggestedFeedback.questionClassification}
+            </if>
+            <if test="suggestedFeedback.client != null  and suggestedFeedback.client != ''">
+                and client=#{suggestedFeedback.client}
+            </if>
+            <if test="suggestedFeedback.languageType != null and suggestedFeedback.languageType != ''">
+                and language_type=#{suggestedFeedback.languageType}
+            </if>
+            <if test="suggestedFeedback.type != null  and suggestedFeedback.languageType != ''">
+                and type=#{suggestedFeedback.type}
+            </if>
+        </where>
+
+    </select>
+
+    <insert id="addProblem">
+        insert into suggested_feedback( question_title, client, question_classification, language_type, sort_number,  Question_content) VALUES(#{suggestedFeedback.questionTitle},#{suggestedFeedback.client},#{suggestedFeedback.questionClassification},#{suggestedFeedback.languageType},#{suggestedFeedback.sortNumber},#{suggestedFeedback.questionTitle})
+    </insert>
+
+    <update id="updateProblem">
+        update suggested_feedback set type=#{type} where id=#{id}
+    </update>
+
+    <delete id="deleteProblem">
+        delete from suggested_feedback where id=#{id}
+    </delete>
+</mapper>

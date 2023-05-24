@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.order.mapper.QuerydetailsMapper">
+    <resultMap id="recipient" type="com.qf.order.entity.Recipient">
+        <id property="uid" column="uid"></id>
+        <result property="phone" column="phone"></result>
+        <result property="cabinetId" column="cid"></result>
+        <result property="uname" column="uname"></result>
+        <result property="cabinetId" column="cabinet_id"></result>
+        <collection property="couriers" ofType="com.qf.order.entity.Courier" column="cid">
+            <id property="cid" column="cid"></id>
+            <result property="phone" column="phone"></result>
+            <result property="cname" column="cname"></result>
+        </collection>
+        <collection property="cabinets" ofType="com.qf.order.entity.Cabinet" column="cabinet_id">
+            <id property="cabinetId" column="cabinet_id"></id>
+            <result property="address" column="address"></result>
+            <result property="cabinetCode" column="cabinet_code"></result>
+            <result property="deviceModel" column="device_model"></result>
+        </collection>
+        <collection property="orders" ofType="com.qf.order.entity.Order" column="purchaseid">
+            <id property="purchaseid" column="purchaseid"></id>
+            <result property="deliverytime" column="deliverytime"></result>
+            <result property="orderid" column=" orderid"></result>
+            <result property="packageid" column="packageid"></result>
+            <result property="ordertype" column="ordertype"></result>
+            <result property="deliverytimes" column="delivery_time"></result>
+            <result property="deliveryEndTime" column="delivery_end_time"></result>
+            <result property="creationTime" column="creation_time"></result>
+        </collection>
+        <collection property="payments" ofType="com.qf.order.entity.Payment" column="purchaseid">
+            <id property="paymentid" column="packageid"></id>
+            <result property="deliveryFee" column="delivery_fee"></result>
+            <result property="preferential" column="preferential"></result>
+            <result property="disbursements" column="disbursements"></result>
+            <result property="expenseType" column="expense_type"></result>
+            <result property="paymentMethod" column="Payment_method"></result>
+            <result property="paymentTime" column="payment_time"></result>
+            <result property="transactionNumber" column="Transaction_number"></result>
+        </collection>
+    </resultMap>
+    <select id="selectOrder" resultMap="recipient">
+        select r.uname,
+        r.phone,
+        c.cname,
+        c.phone,
+        tc.cabinet_code,
+        tc.address,
+        o.` orderid`,
+        o.packageid,
+        o.deliverytime,
+        o.ordertype,
+        o.delivery_end_time,
+        o.delivery_time,
+        o.creation_time,
+        p.delivery_fee,
+        p.preferential,
+        p.disbursements,
+        p.expense_type,
+        p.Payment_method,
+        p.payment_time,
+        p.Transaction_number,
+        p.purchaseid
+        from recipient r
+        LEFT JOIN courier c on r.cid = c.cid
+        left join t_cabinet tc on r.cabinet_id = tc.cabinet_id
+        left join `order` o on r.purchaseid = o.`purchaseid`
+        left join payment p on o.purchaseid = p.purchaseid
+        where o.` orderid` = #{orderid}
+    </select>
+</mapper>

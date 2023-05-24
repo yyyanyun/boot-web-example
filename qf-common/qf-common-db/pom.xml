@@ -41,6 +41,10 @@
       <groupId>com.qf.common.api</groupId>
       <artifactId>qf-common-base</artifactId>
     </dependency>
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper-spring-boot-starter</artifactId>
+    </dependency>
 
 
   </dependencies>

@@ -16,7 +16,8 @@
   <version>1.0.0</version>
 
   <modules>
-    <module>qf-member</module>
+    <module>qf-package</module>
+    <module>qf-helpcenter</module>
   </modules>
 
 

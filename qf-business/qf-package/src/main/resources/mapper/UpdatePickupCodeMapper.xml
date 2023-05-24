@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.order.mapper.UpdatePickupCodeMapper">
+    <resultMap id="order" type="com.qf.order.entity.Order">
+        <id property="purchaseid" column="purchaseid"></id>
+        <result property="creationTime" column="creation_time"></result>
+        <result property="deliveryEndTime" column="delivery_end_time"></result>
+        <result property="packageid" column="packageid"></result>
+        <result property="orderid" column=" orderid"></result>
+        <result property="ordertype" column="ordertype"></result>
+    </resultMap>
+
+    <update id="updatePickupCode">
+        UPDATE `order`set Pickup_code=#{pickupCode} where ` orderid`=#{orderid}
+    </update>
+    <select id="queryOrder" resultMap="order">
+        select purchaseid, ` orderid`, packageid, deliverytime, ordertype, creation_time, delivery_time, delivery_end_time, Pickup_code from `order`where ` orderid`= #{orderid}
+    </select>
+</mapper>

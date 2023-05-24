@@ -1,5 +1,6 @@
 package com.qf.common.base.utils;
 
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
 
 import java.util.List;
@@ -28,4 +29,11 @@ public class CommonBeanUtils extends BeanUtils {
                 }
         ).collect(Collectors.toList());
     }
+    public static <T, S> PageInfo<S> copyPageInfo(PageInfo<T> sources, PageInfo<S> pageInfo, Supplier<S> target) {
+        copyProperties(sources, pageInfo);
+        List<S> list = copyList(sources.getList(), target);
+        pageInfo.setList(list);
+        return pageInfo;
+    }
+
 }

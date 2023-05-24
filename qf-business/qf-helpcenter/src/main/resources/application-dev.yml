@@ -1,0 +1,28 @@
+
+logging:
+  level:
+    com.qf: debug
+
+
+
+
+spring:
+  datasource:
+    druid:
+      url: "jdbc:mysql://localhost:3306/package"
+      password: "root"
+      username: "root"
+      max-active: 20
+mybatis:
+  mapper-locations: "classpath:mapper/**/*.xml"
+  type-aliases-package: "com.qf.advertisement.entity"
+  configuration:
+    map-underscore-to-camel-case: true
+pagehelper:
+  auto-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+
+
+
+

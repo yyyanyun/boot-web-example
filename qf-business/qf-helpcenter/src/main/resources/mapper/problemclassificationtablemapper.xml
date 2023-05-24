@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.helpcenter.mapper.ProblemClassificationTableMapper">
+    <resultMap id="ProblemClassificationTable" type="com.qf.helpcenter.entity.ProblemClassificationTable">
+        <id property="id" column="id"></id>
+        <result property="client" column="client"></result>
+        <result property="sortNumber" column="sort_number"></result>
+        <result property="creationTime" column="creation_time"></result>
+        <result property="chineseName" column="chinese_name"></result>
+        <result property="englishName" column="english_name"></result>
+        <result property="type" column="type"></result>
+    </resultMap>
+
+    <select id="showClassification" resultMap="ProblemClassificationTable">
+        select  chinese_name, english_name, client, sort_number, creation_time, type from problem_classification_table
+    </select>
+
+    <select id="searchClassification" resultMap="ProblemClassificationTable">
+        select  chinese_name, english_name, client, type from problem_classification_table
+        <where>
+            <if test="problemClassificationTable.chineseName != null and problemClassificationTable.chineseName!='' ">
+               chinese_name like concat('%',#{problemClassificationTable.chineseName},'%')
+            </if>
+            <if test="problemClassificationTable.englishName != null and problemClassificationTable.englishName!=''">
+                and chinese_name like concat('%',#{problemClassificationTable.englishName},'%')
+            </if>
+            <if test="problemClassificationTable.client != null and problemClassificationTable.client!=''">
+                and client=#{problemClassificationTable.client}
+            </if>
+            <if test="problemClassificationTable.type != null and problemClassificationTable.type != ''">
+                and type=#{problemClassificationTable.type}
+            </if>
+
+        </where>
+    </select>
+
+    <insert id="addClassification">
+        INSERT INTO problem_classification_table(chinese_name,english_name,client,sort_number)values (#{problemClassificationTable.chineseName},#{problemClassificationTable.englishName},#{problemClassificationTable.client},#{problemClassificationTable.sortNumber})
+
+    </insert>
+
+    <update id="pudateClassification">
+        update problem_classification_table SET type=#{type} WHERE id=#{id}
+    </update>
+
+    <delete id="selectClassification" >
+        delete from problem_classification_table where id=#{id}
+    </delete>
+</mapper>
