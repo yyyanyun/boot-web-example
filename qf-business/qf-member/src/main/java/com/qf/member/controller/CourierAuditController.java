@@ -11,6 +11,7 @@ import com.qf.member.server.CourierAuditService;
 import com.qf.member.vo.AuditDetailsVOF;
 import com.qf.member.vo.AuditDetailsVoT;
 import com.qf.member.vo.CourierAuditMapperVo;
+import com.qf.member.vo.CourierAuditVO;
 import io.swagger.annotations.*;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class CourierAuditController {
         return courierAuditService.change(memberId, auditStates, RejectZhReasons, RejectEnReasons);
     }
 
-        @PostMapping("/save")
+//        @PostMapping("/save")
     @ApiOperation("增加快递员审核信息")
     @ApiImplicitParams({@ApiImplicitParam(name = "courierAudit", value = "审核人信息"),
             @ApiImplicitParam(name = "courierCertification", value = "快递员认证"),
@@ -61,11 +62,11 @@ public class CourierAuditController {
         return courierAuditService.list02(memberId);
     }
 
-//   @GetMapping("/list03")
+  @GetMapping("/list03")
     @ApiOperation("查询快递员审核列表")
     @ApiImplicitParams({@ApiImplicitParam(name = "page", value = "起始页量"),
             @ApiImplicitParam(name = "size", value = "页量"),
-            @ApiImplicitParam(name = "courierAudit", value = "审核人信息"),
+            @ApiImplicitParam(name = "CourierAuditVO", value = "审核人信息"),
             @ApiImplicitParam(name = "cStartTime", value = "创造时间的开始时间"),
             @ApiImplicitParam(name = "cEndTime", value = "创造时间的结束时间"),
             @ApiImplicitParam(name = "sStartTime", value = "审核的开始时间"),
@@ -73,8 +74,8 @@ public class CourierAuditController {
             @ApiImplicitParam(name = "documentType", value = "证件类型"),
             @ApiImplicitParam(name = "auditStates", value = "审核状态"),
             @ApiImplicitParam(name = "auditType", value = "审核类型"),})
-    public RespResult<PageInfo<CourierAuditMapperVo>> list03(@RequestParam(name = "page" ,defaultValue = "1") Integer page,@RequestParam(name = "size" ,defaultValue = "10") Integer size, CourierAudit courierAudit, Date cStartTime, Date cEndTime, Date sStartTime, Date sEndTime, Integer documentType, String auditStates, Integer auditType) {
-        return RespResult.success(courierAuditService.list03(page, size, courierAudit, cStartTime, cEndTime, sStartTime, sEndTime, documentType, auditStates, auditType));
+    public RespResult<PageInfo<CourierAuditMapperVo>> list03(@RequestParam(name = "page" ,defaultValue = "1") Integer page,@RequestParam(name = "size" ,defaultValue = "10") Integer size, CourierAuditVO courierAuditVo, Date cStartTime, Date cEndTime, Date sStartTime, Date sEndTime, Integer documentType, String auditStates, Integer auditType) {
+        return RespResult.success(courierAuditService.list03(page, size, courierAuditVo, cStartTime, cEndTime, sStartTime, sEndTime, documentType, auditStates, auditType));
     }
 
 }

@@ -9,6 +9,7 @@ import com.qf.member.entity.RealName;
 import com.qf.member.vo.AuditDetailsVOF;
 import com.qf.member.vo.AuditDetailsVoT;
 import com.qf.member.vo.CourierAuditMapperVo;
+import com.qf.member.vo.CourierAuditVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -18,5 +19,5 @@ public interface CourierAuditService {
     RespResult change(Long memberId,String auditStates,String RejectZhReasons,String RejectEnReasons);
     RespResult<AuditDetailsVoT> list01(Long memberId);
     RespResult<AuditDetailsVOF> list02(Long memberId);
-    PageInfo<CourierAuditMapperVo> list03(Integer page, Integer size,CourierAudit courierAudit, Date cStartTime, Date cEndTime ,Date sStartTime,  Date sEndTime, Integer documentType,  String auditStates,Integer auditType);
+    PageInfo<CourierAuditMapperVo> list03(Integer page, Integer size, CourierAuditVO courierAudit, Date cStartTime, Date cEndTime , Date sStartTime, Date sEndTime, Integer documentType, String auditStates, Integer auditType);
 }

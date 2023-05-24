@@ -19,6 +19,7 @@ import com.qf.member.server.CourierAuditService;
 import com.qf.member.vo.AuditDetailsVOF;
 import com.qf.member.vo.AuditDetailsVoT;
 import com.qf.member.vo.CourierAuditMapperVo;
+import com.qf.member.vo.CourierAuditVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
@@ -162,7 +163,7 @@ public class CourierAuditServiceImpl implements CourierAuditService {
     }
 
     @Override
-    public PageInfo<CourierAuditMapperVo> list03(Integer page, Integer size, CourierAudit courierAudit, Date cStartTime, Date cEndTime, Date sStartTime, Date sEndTime, Integer documentType, String auditStates, Integer auditType) {
+    public PageInfo<CourierAuditMapperVo> list03(Integer page, Integer size, CourierAuditVO courierAudit, Date cStartTime, Date cEndTime, Date sStartTime, Date sEndTime, Integer documentType, String auditStates, Integer auditType) {
         PageInfo<CourierAuditMapperVo> PageInfo = PageHelper.startPage(page, size).doSelectPageInfo(() ->
                 courierAuditMapper.selectAll(courierAudit, cStartTime, cEndTime, sStartTime, sEndTime, documentType, auditStates, auditType));
         return CommonBeanUtils.copyPageInfo(PageInfo,new PageInfo<>(),CourierAuditMapperVo::new);
