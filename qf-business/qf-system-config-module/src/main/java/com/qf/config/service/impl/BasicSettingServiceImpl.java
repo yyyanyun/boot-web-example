@@ -1,0 +1,26 @@
+package com.qf.config.service.impl;
+
+import com.qf.common.base.result.RespResult;
+import com.qf.common.base.result.ResultCode;
+import com.qf.config.entity.BasicSetting;
+import com.qf.config.mapper.BasicSettingMapper;
+import com.qf.config.service.BasicSettingService;
+import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
+
+import javax.annotation.Resource;
+@Service
+public class BasicSettingServiceImpl implements BasicSettingService {
+    @Resource
+    private BasicSettingMapper basicSettingMapper;
+
+    @Override
+    public RespResult<BasicSetting> selectByBasicId(int basicId) {
+        BasicSetting basicSetting = basicSettingMapper.selectByBasicId(basicId);
+        if (!ObjectUtils.isEmpty(basicSetting)){
+           return RespResult.success(basicSetting);
+        }else {
+           return RespResult.error(ResultCode.SYS_ERROR);
+        }
+    }
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.config.mapper.PickupSettingMapper">
+  <resultMap id="BaseResultMap" type="com.qf.config.entity.PickupSetting">
+    <!--@mbg.generated-->
+    <!--@Table pickup_setting-->
+    <id column="pickup_id" jdbcType="INTEGER" property="pickupId" />
+    <result column="pickup_code_expire" jdbcType="INTEGER" property="pickupCodeExpire" />
+    <result column="pickup_code_input_countdown" jdbcType="INTEGER" property="pickupCodeInputCountdown" />
+    <result column="pickup_phone_input_countdown" jdbcType="INTEGER" property="pickupPhoneInputCountdown" />
+    <result column="verify_code_countdown" jdbcType="INTEGER" property="verifyCodeCountdown" />
+    <result column="scan_code_countdown" jdbcType="INTEGER" property="scanCodeCountdown" />
+    <result column="pickup_door_open_countdown" jdbcType="INTEGER" property="pickupDoorOpenCountdown" />
+    <result column="auto_back_home_countdown" jdbcType="INTEGER" property="autoBackHomeCountdown" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    pickup_id, pickup_code_expire, pickup_code_input_countdown, pickup_phone_input_countdown, 
+    verify_code_countdown, scan_code_countdown, pickup_door_open_countdown, auto_back_home_countdown
+  </sql>
+</mapper>

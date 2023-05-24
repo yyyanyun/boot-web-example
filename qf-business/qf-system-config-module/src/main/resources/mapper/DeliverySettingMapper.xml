@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.config.mapper.DeliverySettingMapper">
+  <resultMap id="BaseResultMap" type="com.qf.config.entity.DeliverySetting">
+    <!--@mbg.generated-->
+    <!--@Table delivery_setting-->
+    <id column="delivery_id" jdbcType="INTEGER" property="deliveryId" />
+    <result column="scan_login_countdown" jdbcType="INTEGER" property="scanLoginCountdown" />
+    <result column="phone_countdown" jdbcType="INTEGER" property="phoneCountdown" />
+    <result column="pwd_countdown" jdbcType="INTEGER" property="pwdCountdown" />
+    <result column="recipient_phone_countdown" jdbcType="INTEGER" property="recipientPhoneCountdown" />
+    <result column="pay_countdown" jdbcType="INTEGER" property="payCountdown" />
+    <result column="delivery_door_open_countdown" jdbcType="INTEGER" property="deliveryDoorOpenCountdown" />
+    <result column="auto_logout_countdown" jdbcType="INTEGER" property="autoLogoutCountdown" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    delivery_id, scan_login_countdown, phone_countdown, pwd_countdown, recipient_phone_countdown, 
+    pay_countdown, delivery_door_open_countdown, auto_logout_countdown
+  </sql>
+</mapper>
