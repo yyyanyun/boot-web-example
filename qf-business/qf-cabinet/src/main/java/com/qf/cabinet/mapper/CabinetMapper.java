@@ -1,7 +1,6 @@
 package com.qf.cabinet.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.github.pagehelper.PageInfo;
 import com.qf.cabinet.entity.Cabinet;
 import org.apache.ibatis.annotations.Param;
 
