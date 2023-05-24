@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/xmh/box")
@@ -27,10 +28,10 @@ public class ExpressBoxController {
     @ApiOperation(nickname = "list", value = "箱格显示界面数据")
     @ApiImplicitParams({@ApiImplicitParam(name = "page", value = "当前页", required = true),
             @ApiImplicitParam(name = "size", value = "页量", required = true)})
-    @PostMapping("/list/{page}/{size}")
-    public RespResult<PageInfo<ExpressBoxVo>> list(@PathVariable @RequestParam(defaultValue = "1") int page,
-                                                   @PathVariable @RequestParam(defaultValue = "5") int size,
-                                                   @RequestBody ExpressBoxQo expressBoxQo) throws ControllerException {
+    @PostMapping("/list")
+    public RespResult<PageInfo<ExpressBoxVo>> list(@RequestParam(defaultValue = "1") int page,
+                                                   @RequestParam(defaultValue = "5") int size,
+                                                   @RequestBody @Valid ExpressBoxQo expressBoxQo) throws ControllerException {
         return expressBoxService.listBy(page, size, expressBoxQo);
     }
 
@@ -38,13 +39,13 @@ public class ExpressBoxController {
     /**
      * 箱格记录
      */
-    @GetMapping("/list/log/{page}/{size}")
+    @GetMapping("/list/log")
     @ApiOperation(nickname = "listByLog", value = "箱格记录查询")
     @ApiImplicitParams({@ApiImplicitParam(name = "page", value = "当前页", required = true),
             @ApiImplicitParam(name = "size", value = "页量", required = true),
             @ApiImplicitParam(name = "boxId", value = "箱格主键", required = true)})
-    public RespResult<PageInfo<ExpressBoxVo>> listByLog(@PathVariable @RequestParam(defaultValue = "1") int page,
-                                                        @PathVariable @RequestParam(defaultValue = "5") int size,
+    public RespResult<PageInfo<ExpressBoxVo>> listByLog(@RequestParam(defaultValue = "1") int page,
+                                                        @RequestParam(defaultValue = "5") int size,
                                                         @RequestParam int boxId) throws ControllerException {
         return expressBoxService.listByLog(page, size, boxId);
     }

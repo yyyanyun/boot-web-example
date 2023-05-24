@@ -22,13 +22,16 @@ public class ExpressBoxServiceImpl implements ExpressBoxService {
     @Resource
     private ExpressBoxMapper expressBoxMapper;
 
+    /**
+     * 箱格条件查询
+     */
     @Override
-    public RespResult<IPage<ExpressBoxVo>> listBy(int page, int size, ExpressBoxQo expressBoxQo) throws SecurityException {
+    public RespResult<PageInfo<ExpressBoxVo>> listBy(int page, int size, ExpressBoxQo expressBoxQo) throws SecurityException {
         ExpressBox expressBox = new ExpressBox();
         BeanUtils.copyProperties(expressBoxQo, expressBox);
-        IPage<ExpressBox> expressBoxIPage = expressBoxMapper.selectById(page, size, expressBox);
-        if (!ObjectUtils.isEmpty(expressBoxIPage.getRecords())) {
-            return RespResult.success(PageCommonUtils.copyPage(expressBoxIPage, new Page<>(), ExpressBoxVo::new));
+        PageInfo<ExpressBox> pageInfo = PageHelper.startPage(page, size).doSelectPageInfo(() -> expressBoxMapper.selectById(expressBox));
+        if (!ObjectUtils.isEmpty(pageInfo.getList())) {
+            return RespResult.success(MyCommonBeanUtils.copyPageInfo(pageInfo, new PageInfo<>(), ExpressBoxVo::new));
         } else {
             throw new ServiceException(ResultCode.SYS_ERROR);
         }
@@ -39,6 +42,24 @@ public class ExpressBoxServiceImpl implements ExpressBoxService {
         PageInfo<ExpressBox> pageInfo = PageHelper.startPage(page, size).doSelectPageInfo(() -> expressBoxMapper.selectByBoxId(boxId));
         return RespResult.success(MyCommonBeanUtils.copyPageInfo(pageInfo,new PageInfo<>(),ExpressBoxVo::new));
     }
+
+    /**
+     * 修改
+     */
+    @Override
+    public RespResult<Integer> alter(ExpressBoxQo expressBoxQo) throws ServiceException {
+        ExpressBox expressBox = new ExpressBox();
+        BeanUtils.copyProperties(expressBoxQo,expressBox);
+        Integer update = expressBoxMapper.update(expressBox);
+        if (update>0){
+            return RespResult.success(update);
+        }else {
+            throw new ServiceException(ResultCode.SYS_ERROR);
+        }
+
+    }
+
+
 
 
 }

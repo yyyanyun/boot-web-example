@@ -4,11 +4,14 @@ package com.qf.cabinet.qo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
 @ApiModel("箱格请求参数表")
+@Validated
 public class ExpressBoxQo {
     /**
      * 主键
@@ -25,6 +28,7 @@ public class ExpressBoxQo {
      * 柜机主键
      */
     @ApiModelProperty(value="柜机主键")
+    @NotNull(message = "柜机ID不能为空")
     private Long cabinetId;
 
     /**

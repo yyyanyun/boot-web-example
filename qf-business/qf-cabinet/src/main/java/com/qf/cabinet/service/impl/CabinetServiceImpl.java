@@ -33,7 +33,7 @@ public class CabinetServiceImpl implements CabinetService {
     public RespResult<PageInfo<CabinetVo>> listSimple(int page, int size, CabinetEasyQo cabinetEasyQo, String param) throws ServiceException{
         Cabinet cabinet = new Cabinet();
         BeanUtils.copyProperties(cabinetEasyQo,cabinet);
-        PageInfo<Object> pageInfo = PageHelper.startPage(page, size).doSelectPageInfo(() ->cabinetMapper.selectBy(cabinet, param));
+        PageInfo<Cabinet> pageInfo = PageHelper.startPage(page, size).doSelectPageInfo(() ->cabinetMapper.selectBy(cabinet, param));
         if (!ObjectUtils.isEmpty(pageInfo.getList())){
             return RespResult.success(MyCommonBeanUtils.copyPageInfo(pageInfo,new PageInfo<>(),CabinetVo::new));
         }else {
@@ -48,7 +48,7 @@ public class CabinetServiceImpl implements CabinetService {
     public RespResult<PageInfo<CabinetVo>> list(int page, int size, CabinetHighQo cabinetHighQo) throws ServiceException {
         Cabinet cabinet = new Cabinet();
         BeanUtils.copyProperties(cabinetHighQo,cabinet);
-        PageInfo<Object> pageInfo = PageHelper.startPage(page, size).doSelectPageInfo(() -> cabinetMapper.selectBys(cabinet));
+        PageInfo<Cabinet> pageInfo = PageHelper.startPage(page, size).doSelectPageInfo(() -> cabinetMapper.selectBys(cabinet));
         if (!ObjectUtils.isEmpty(pageInfo.getList())){
             return RespResult.success(MyCommonBeanUtils.copyPageInfo(pageInfo,new PageInfo<>(),CabinetVo::new));
         }else {
@@ -138,8 +138,16 @@ public class CabinetServiceImpl implements CabinetService {
     }
 
     @Override
-    public RespResult<CabinetVo> goAlter(int cabinetId, int boxId) {
-        return null;
+    public RespResult<CabinetVo> goAlter(int cabinetId, int boxId) throws ServiceException {
+        Cabinet cabinet = cabinetMapper.selectGo(cabinetId, boxId);
+        if (!ObjectUtils.isEmpty(cabinet)){
+            CabinetVo cabinetVo = new CabinetVo();
+            BeanUtils.copyProperties(cabinet,cabinetVo);
+            return RespResult.success(cabinetVo);
+        }else {
+            throw new ServiceException(ResultCode.SYS_ERROR);
+        }
+
     }
 
 }
