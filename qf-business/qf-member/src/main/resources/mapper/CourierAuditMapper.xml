@@ -3,18 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.member.mapper.CourierAuditMapper">
-<resultMap id="BaseResultMap" type="com.qf.member.vo.CourierAuditMapperVo">
+<resultMap id="BaseResultMap" type="com.qf.member.entity.CourierAudit">
     <id property="memberId" column="member_id"></id>
     <result property="phone" column="phone"></result>
     <result property="createTime" column="Create_time"></result>
     <result property="auditType" column="audit_type"></result>
     <result property="photo" column="photo"></result>
-    <result property="auditStates" column="audit_states"></result>
-    <result property="operationTime" column="operation_time"></result>
-    <result property="documentType" column="document_Type"></result>
 </resultMap>
-
-<select id="selectAll" resultMap="BaseResultMap">
+    <resultMap id="SubResultMap" type="com.qf.member.entity.AuditDetails">
+        <result property="operationTime" column="operation_time"></result>
+        <result property="auditStates" column="audit_states"></result>
+    </resultMap>
+    <resultMap id="TResultMap" type="com.qf.member.entity.RealName" >
+        <result property="documentType" column="operation_time"></result>
+    </resultMap>
+    <resultMap id="TTResultMap" type="com.qf.member.entity.CourierAudit" extends="BaseResultMap">
+        <collection property="auditDetails" resultMap="SubResultMap"></collection>
+    </resultMap>
+    <resultMap id="FResultMap" type="com.qf.member.entity.CourierAudit" extends="TTResultMap">
+        <collection property="realName" resultMap="TResultMap"></collection>
+    </resultMap>
+<select id="selectAll" resultMap="FResultMap">
     select c.member_id,
            c.phone,
            c.audit_type,

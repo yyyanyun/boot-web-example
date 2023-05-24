@@ -18,6 +18,6 @@ public interface CourierAuditMapper extends BaseMapper<CourierAudit> {
         lqw.eq(CourierAudit::getMemberId, MemberId);
         return this.selectOne(lqw);
     }
-    List<CourierAuditMapperVo> selectAll(@Param("courierAudit") CourierAuditVO courierAudit, @Param("cStartTime")Date cStartTime, @Param("cEndTime") Date cEndTime , @Param("sStartTime")Date sStartTime, @Param("sEndTime") Date sEndTime, @Param("documentType") Integer documentType, @Param("auditStates") String auditStates, @Param("auditType") Integer auditType);
+    List<CourierAudit> selectAll(@Param("courierAudit") CourierAuditVO courierAudit, @Param("cStartTime")Date cStartTime, @Param("cEndTime") Date cEndTime , @Param("sStartTime")Date sStartTime, @Param("sEndTime") Date sEndTime, @Param("documentType") Integer documentType, @Param("auditStates") String auditStates, @Param("auditType") Integer auditType);
 
 }
