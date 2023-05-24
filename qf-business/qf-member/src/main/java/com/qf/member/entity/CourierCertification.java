@@ -31,8 +31,8 @@ public class CourierCertification {
      * 快递公司
      */
     @TableField("express_company")
-    @Pattern(regexp = "\b[0,3]\b",message = "不符合公司名称")
     @ApiModelProperty(value = "快递公司")
+//    @Pattern(regexp ="^[0,3]$",message = "不符合公司名称")
     private Integer expressCompany;
 
     /**
@@ -47,5 +47,5 @@ public class CourierCertification {
      */
     @TableField("member_id")
     @ApiModelProperty(value = "ID")
-    private Integer memberId;
+    private Long memberId;
 }

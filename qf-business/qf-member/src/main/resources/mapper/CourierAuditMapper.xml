@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.member.mapper.CourierAuditMapper">
+<resultMap id="BaseResultMap" type="com.qf.member.entity.CourierAudit">
+    <id property="memberId" column="member_id"></id>
+    <result property="phone" column="phone"></result>
+    <result property="createTime" column="Create_time"></result>
+    <result property="auditType" column="audit_type"></result>
+    <result property="photo" column="photo"></result>
+</resultMap>
+    <resultMap id="SubResultMap" type="com.qf.member.entity.CourierAudit" extends="BaseResultMap">
+        <collection property="realName" column="member_id" select="com.qf.member.mapper.MemberMapper.selectByMemberId01"></collection>
+    </resultMap>
+    <resultMap id="TResultMap" type="com.qf.member.entity.CourierAudit" extends="SubResultMap">
+        <collection property="auditDetails" column="member_id" select="com.qf.member.mapper.AuditDetailsMapper.selectByMemberId01"></collection>
+    </resultMap>
+<select id="selectAll" resultMap="BaseResultMap">
+    select c.member_id,
+           phone,
+           audit_type,
+           photo,
+           Create_time,
+           operation_time,
+           audit_states,
+           document_Type
+    from t_courier_audit c
+             left join audit_details ad on c.member_id = ad.member_id
+             left join t_real_name trn on c.member_id = trn.member_id
+    <where>
+        <if test="courierAudit.memberId != null">
+            c.member_id = #{courierAudit.memberId}
+        </if>
+        <if test="courierAudit.phone != null and courierAudit.phone != ''">
+            and phone like concat('%', #{courierAudit.phone}, '%')
+        </if>
+        <if test="auditStates != null and auditStates != ''">
+            and audit_states = #{auditStates}
+        </if>
+        <if test="auditType != null">
+            and audit_type = #{auditType}
+        </if>
+        <if test="documentType != null">
+            and document_Type = #{documentType}
+        </if>
+        <if test="cStartTime != null and cEndTime != null">
+            and Create_time between #{cStartTime} and #{cEndTime}
+        </if>
+        <if test="sStartTime != null and sEndTime != null">
+            and operation_time between #{sStartTime} and #{sEndTime}
+        </if>
+    </where>
+</select>
+</mapper>

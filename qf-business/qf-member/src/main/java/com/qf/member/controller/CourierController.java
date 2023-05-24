@@ -11,22 +11,20 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import java.util.Date;
 
-
+@Validated
 @RestController
 @RequestMapping("/courier")
 @Api("快递员")
 public class CourierController {
     @Autowired
     private CourierService courierService;
-
     @GetMapping("list01")
     @ApiOperation("查询快递员列表")
     @ApiImplicitParams({@ApiImplicitParam(name = "page", value = "起始页面"),
@@ -46,12 +44,19 @@ public class CourierController {
     }
 
     @PutMapping("save")
+
     @ApiOperation("添加快递员")
     @ApiImplicitParams({@ApiImplicitParam(name = "courier", value = "快递员基本信息"),
             @ApiImplicitParam(name = "courierCertification", value = "快递员认证信息"),
-            @ApiImplicitParam(name = "phoneType" ,value = "手机区号")
+            @ApiImplicitParam(name = "phoneType", value = "手机区号")
     })
-    public RespResult save(@Valid Courier courier, @Valid CourierCertification courierCertification,@RequestParam("phoneType")@Pattern(regexp = "\b[0,1]\b",message = "不在范围") Integer phoneType ) {
-        return courierService.save(courier, courierCertification,phoneType);
+    public RespResult save(@Valid Courier courier, @Valid CourierCertification courierCertification, @RequestParam("phoneType") @Pattern(regexp = "^[0,1]$", message = "不在范围") String phoneType) {
+        return courierService.save(courier, courierCertification, phoneType);
+    }
+    @PutMapping("/Modification")
+    @ApiOperation("修改快递会员状态")
+    @ApiImplicitParams({@ApiImplicitParam( name = "memberId",value = "ID"),@ApiImplicitParam( name = "memberStatus",value = "会员状态")})
+    public RespResult Modification(@RequestParam("memberId")int memberId,@RequestParam("memberStatus")int memberStatus) {
+        return courierService.Change(memberId, memberStatus);
     }
 }

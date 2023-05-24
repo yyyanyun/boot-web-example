@@ -9,7 +9,7 @@ logging:
 spring:
   datasource:
     druid:
-      url: "jdbc:mysql:///example01?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&autoReconnect=true&failOverReadOnly=false"
+      url: "jdbc:mysql:///example01"
       password: "1234"
       username: "root"
       max-active: 20

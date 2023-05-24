@@ -63,4 +63,8 @@
     <insert id="insertCourierCertification" keyProperty="courierCertification.tCourierCertificationId" useGeneratedKeys="true">
         insert into t_courier_certification(express_company,member_id) value (#{courierCertification.expressCompany},#{courierCertification.memberId})
     </insert>
+
+    <update id="updateState">
+    update t_courier  set member_status=#{memberStatus} where member_id=#{memberId}
+    </update>
 </mapper>

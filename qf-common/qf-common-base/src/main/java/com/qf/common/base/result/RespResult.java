@@ -1,9 +1,15 @@
 package com.qf.common.base.result;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //用户名存在  40000
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class RespResult<T> {
     /**
      * 错误信息  产品经理

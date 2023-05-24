@@ -1,5 +1,9 @@
 package com.qf.member.vo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.Version;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -35,6 +39,8 @@ public class CourierVo {
     /**
      * 会员状态 0 正常 1 禁用
      */
+    @TableField("member_status")
+    @TableLogic(value = "0",delval = "1")
     @ApiModelProperty(value="会员状态 0 正常 1 禁用")
     @NotNull(message = "会员状态 0 正常 1 禁用不能为null")
     private Integer memberStatus;

@@ -13,6 +13,7 @@ import com.qf.member.vo.CourierVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.util.Date;
 
@@ -37,8 +38,8 @@ private CourierCertificationMapper courierCertificationMapper;
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public RespResult save(Courier courier, CourierCertification courierCertification,Integer phoneType) {
-        if(phoneType==0){
+    public RespResult save(Courier courier, CourierCertification courierCertification,String phoneType) {
+        if(phoneType.equals(0)){
             courier.setPhone("+86"+courier.getPhone());
         }else {
             courier.setPhone("+63"+courier.getPhone());
@@ -46,8 +47,7 @@ private CourierCertificationMapper courierCertificationMapper;
         int i = courierMapper.insertCourier(courier);
 
         if(i>0){
-            courierCertification.setMemberId(courier.getMemberId());
-            System.out.println(courier);
+            courierCertification.setMemberId(Long.parseLong(courier.getMemberId()+""));
             int i1 = courierMapper.insertCourierCertification(courierCertification);
             if(i1>0){
                 return RespResult.success("添加成功");
@@ -58,5 +58,21 @@ private CourierCertificationMapper courierCertificationMapper;
            return RespResult.error(ResultCode.USER_NO_ADD);
         }
 
+    }
+
+    @Override
+    public RespResult<String> Change(int memberId,int memberStatus) {
+        Courier courier = courierMapper.selectById(memberId);
+        System.out.println(courierMapper);
+        if(!ObjectUtils.isEmpty(courier)){
+            int i = courierMapper.updateState(memberId, memberStatus);
+            if(i>0){
+                return RespResult.success("修改成功");
+            }else {
+                return RespResult.error(ResultCode.USER_NO_UPDATE);
+            }
+
+        }
+        return RespResult.error(ResultCode.USER_NO_EXIST);
     }
 }

@@ -56,5 +56,5 @@ public interface MemberMapper extends BaseMapper<RealName> {
     int updateByPrimaryKey(Member record);
     List<MemberVO> selectAll(@Param("memberId") Integer memberId, @Param("phone") String phone, @Param("memberName") String memberName, @Param("registrationType") Integer registrationType, @Param("memberStatus") Integer memberStatus, @Param("startTime")Date startTime, @Param("endTime")Date endTime);
     BankCard selectByMemberId(@Param("memberId") Integer memberId);
-    RealName selectByMemberId01(@Param("memberId") Integer memberId);
+    RealName selectByMemberId01(@Param("memberId") Long memberId);
 }
