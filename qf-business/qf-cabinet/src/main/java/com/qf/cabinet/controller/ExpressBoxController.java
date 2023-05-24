@@ -37,10 +37,10 @@ public class ExpressBoxController {
 
 
     /**
-     * 箱格记录
+     * 箱格详情
      */
     @GetMapping("/list/log")
-    @ApiOperation(nickname = "listByLog", value = "箱格记录查询")
+    @ApiOperation(nickname = "listByLog", value = "箱格详情")
     @ApiImplicitParams({@ApiImplicitParam(name = "page", value = "当前页", required = true),
             @ApiImplicitParam(name = "size", value = "页量", required = true),
             @ApiImplicitParam(name = "boxId", value = "箱格主键", required = true)})
@@ -58,6 +58,7 @@ public class ExpressBoxController {
     public RespResult<Integer> alter(@RequestBody ExpressBoxQo expressBoxQo) throws ControllerException {
         return expressBoxService.alter(expressBoxQo);
     }
+
 
 
 }

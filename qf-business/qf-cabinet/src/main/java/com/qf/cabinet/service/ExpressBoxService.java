@@ -12,4 +12,5 @@ public interface ExpressBoxService {
 
     RespResult<Integer> alter(ExpressBoxQo expressBoxQo);
 
+
 }

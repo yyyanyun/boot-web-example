@@ -108,8 +108,8 @@
     <update id="update">
         UPDATE express_box b
         SET b.position_line=#{expressBox.positionLine},
-            b.position_column=#{expressBox.positionColumn},
-            b.box_type = #{expressBox.boxType},
+        b.position_column=#{expressBox.positionColumn},
+        b.box_type = #{expressBox.boxType},
         <if test="expressBox.height != null and expressBox.height != ''">
             b.height = #{expressBox.height},
         </if>
@@ -126,4 +126,5 @@
             b.box_id = #{expressBox.boxId}
         </where>
     </update>
+
 </mapper>
