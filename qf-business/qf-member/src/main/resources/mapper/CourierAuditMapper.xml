@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.member.mapper.CourierAuditMapper">
+<resultMap id="BaseResultMap" type="com.qf.member.vo.CourierAuditMapperVo">
+    <id property="memberId" column="member_id"></id>
+    <result property="phone" column="phone"></result>
+    <result property="createTime" column="Create_time"></result>
+    <result property="auditType" column="audit_type"></result>
+    <result property="photo" column="photo"></result>
+    <result property="auditStates" column="audit_states"></result>
+    <result property="operationTime" column="operation_time"></result>
+    <result property="documentType" column="document_Type"></result>
+</resultMap>
+
+<select id="selectAll" resultMap="BaseResultMap">
+    select c.member_id,
+           c.phone,
+           c.audit_type,
+           c.photo,
+           c.Create_time,
+           ad.operation_time,
+           ad.audit_states,
+           trn.document_Type
+    from t_courier_audit c
+             left join audit_details ad on c.member_id = ad.member_id
+             left join t_real_name trn on c.member_id = trn.member_id
+    <where>
+        <if test="courierAudit.memberId != null">
+            c.member_id = #{courierAudit.memberId}
+        </if>
+        <if test="courierAudit.phone != null and courierAudit.phone != ''">
+            and phone like concat('%', #{courierAudit.phone}, '%')
+        </if>
+        <if test="auditStates != null and auditStates != ''">
+            and audit_states = #{auditStates}
+        </if>
+        <if test="auditType != null">
+            and audit_type = #{auditType}
+        </if>
+        <if test="documentType != null">
+            and document_Type = #{documentType}
+        </if>
+        <if test="cStartTime != null and cEndTime != null">
+            and Create_time between #{cStartTime} and #{cEndTime}
+        </if>
+        <if test="sStartTime != null and sEndTime != null">
+            and operation_time between #{sStartTime} and #{sEndTime}
+        </if>
+    </where>
+</select>
+</mapper>
