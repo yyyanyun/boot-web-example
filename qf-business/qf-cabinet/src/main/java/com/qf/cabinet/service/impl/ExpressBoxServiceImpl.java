@@ -13,6 +13,7 @@ import com.qf.common.base.result.RespResult;
 import com.qf.common.base.result.ResultCode;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
@@ -58,8 +59,6 @@ public class ExpressBoxServiceImpl implements ExpressBoxService {
         }
 
     }
-
-
 
 
 }
