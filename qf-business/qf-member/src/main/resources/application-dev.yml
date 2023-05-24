@@ -9,12 +9,24 @@ logging:
 spring:
   datasource:
     druid:
-      url: "jdbc:mysql://localhost:3306/spring_web?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC&autoReconnect=true&failOverReadOnly=false"
-      password: "as200108"
+      url: "jdbc:mysql:///example01"
+      password: "1234"
       username: "root"
       max-active: 20
-
-
-
-
+aliyun:
+  oss:
+    endpoint: "https://oss-cn-guangzhou.aliyuncs.com"
+    access-key-id: "LTAI5tLp2votpCBiGkP8n2wp"
+    secret-access-key: "YxQVvM99VTIag3dweI7f8wOIG4M4wc"
+    bucket-name: "gz-qf-2301smx"
+mybatis:
+  mapper-locations: "classpath:mapper/**/*.xml"
+  type-aliases-package: "com.qf.member.entity"
+  configuration:
+    map-underscore-to-camel-case: true
+pagehelper:
+  helperDialect: mysql
+  supportMethodsArguments: ture
+  params: count=countSql
+  reasonable: true
 

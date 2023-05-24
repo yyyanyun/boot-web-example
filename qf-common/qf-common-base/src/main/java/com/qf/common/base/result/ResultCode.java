@@ -21,8 +21,10 @@ public enum ResultCode {
     /**
      *
      */
-    USER_EXIST(40101,"账号已存在");
-
+    USER_EXIST(40101,"账号已存在"),
+    USER_NO_ADD(40103,"添加失败"),
+    USER_NO_UPDATE(40104,"修改失败"),
+    USER_NO_EXIST(40102,"账号不存在");
     final int code;
     final String msg;
 

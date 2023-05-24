@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.member.mapper.AuditDetailsMapper">
+
+<update id="updateByMemberId" >
+    update audit_details set audit_states=#{auditStates} where member_id=#{memberId}
+    </update>
+
+<select id="selectByMemberId01" resultType="com.qf.member.entity.AuditDetails">
+    select audit_id, operation_time, reject_zh_Reasons, reject_en_Reasons, audit_states, member_id
+    from audit_details
+    where member_id = #{memberId}
+</select>
+</mapper>
