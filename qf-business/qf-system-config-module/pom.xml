@@ -35,6 +35,10 @@
             <groupId>com.qf.common.db</groupId>
             <artifactId>qf-common-db</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.qf.common.swagger</groupId>
+            <artifactId>qf-common-swagger</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

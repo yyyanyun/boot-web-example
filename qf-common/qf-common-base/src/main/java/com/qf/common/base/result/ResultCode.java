@@ -4,8 +4,6 @@ import lombok.Getter;
 
 @Getter
 public enum ResultCode {
-    CABINET_NO_EXISTS(41000,"不存在"),
-    CABINET_EXISTS(41100,"已存在"),
     /**
      * 成功
      */
@@ -22,9 +20,11 @@ public enum ResultCode {
      *
      */
     USER_EXIST(40101,"账号已存在"),
-    USER_NO_ADD(40103,"添加失败"),
-    USER_NO_UPDATE(40104,"修改失败"),
-    USER_NO_EXIST(40102,"账号不存在");
+
+    PARAMETER_MISSING(40200, "传递的参数为空"),
+
+    RESPONSE_NULL(40201,"返回的结果为空");
+
     final int code;
     final String msg;
 
