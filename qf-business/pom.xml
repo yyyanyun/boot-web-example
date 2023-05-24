@@ -21,6 +21,7 @@
       <module>qf-system-config-module</module>
     <module>qf-cabinet</module>
     <module>qf-advertisement</module>
+    <module>qf-system-config-module</module>
   </modules>
 
 
