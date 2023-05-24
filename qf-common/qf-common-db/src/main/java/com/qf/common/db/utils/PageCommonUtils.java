@@ -14,4 +14,5 @@ public class PageCommonUtils extends CommonBeanUtils {
         pageInfo.setRecords(list);
         return pageInfo;
     }
+
 }

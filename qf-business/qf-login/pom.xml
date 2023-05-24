@@ -40,7 +40,6 @@
     <artifactId>qf-login</artifactId>
     <version>1.0.0</version>
 
-
     <build>
         <finalName>boot-web-example</finalName>
     </build>

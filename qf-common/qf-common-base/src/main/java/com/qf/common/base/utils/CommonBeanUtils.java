@@ -35,4 +35,6 @@ public class CommonBeanUtils extends BeanUtils {
         pageInfo.setList(list);
         return pageInfo;
     }
+
+
 }

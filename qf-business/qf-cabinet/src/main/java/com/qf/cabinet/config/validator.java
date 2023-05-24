@@ -12,6 +12,8 @@ import javax.validation.Validator;
 public class validator {
 
     @Bean
+
+
     public Validator myValidator() {
         return Validation.byProvider(HibernateValidator.class).configure()
                 .failFast(true)
