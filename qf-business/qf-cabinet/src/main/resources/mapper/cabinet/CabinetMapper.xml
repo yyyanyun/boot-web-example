@@ -30,8 +30,7 @@
     <sql id="Base_Column_List">
         cabinet_id, cabinet_code, region, address, device_model, storage_type, box, sys_version,
         create_data, activation_data, end_data, box_boor_status, box_starter, cabinet_status,
-        MAC, host_width, host_depth, host_height, vice_width, vice_depth, vice_height, starter,
-        version
+        MAC, host_width, host_depth, host_height, vice_width, vice_depth, vice_height
     </sql>
 
     <insert id="insertList">
@@ -93,19 +92,19 @@
             <if test="cabinet.cabinetId != null">
                 t.cabinet_id = #{cabinet.cabinetId}
             </if>
-            <if test="cabinet.cabinetCode != null">
+            <if test="cabinet.cabinetCode != null and cabinet.cabinetCode != ''">
                 and t.cabinet_code = #{cabinet.cabinetCode}
             </if>
-            <if test="cabinet.deviceModel != null">
+            <if test="cabinet.deviceModel != null and cabinet.deviceModel != ''">
                 and t.device_model = #{cabinet.deviceModel}
             </if>
-            <if test="cabinet.sysVersion != null">
+            <if test="cabinet.sysVersion != null and cabinet.sysVersion != ''">
                 and t.sys_version = #{cabinet.sysVersion}
             </if>
-            <if test="cabinet.region != null">
+            <if test="cabinet.region != null and cabinet.region != ''">
                 and t.region = #{cabinet.region}
             </if>
-            <if test="cabinet.address != null">
+            <if test="cabinet.address != null and cabinet.address != ''">
                 and t.address = #{cabinet.address}
             </if>
             <if test="cabinet.createData != null">
@@ -149,8 +148,28 @@
 
     <select id="selectGo" resultMap="ResultCabinetMap">
         select t.cabinet_id,
-               t.address,
+               t.cabinet_code,
                t.region,
+               t.address,
+               t.device_model,
+               t.storage_type,
+               t.box,
+               t.sys_version,
+               t.create_data,
+               t.activation_data,
+               t.end_data,
+               t.box_boor_status,
+               t.box_starter,
+               t.cabinet_status,
+               t.MAC,
+               t.host_width,
+               t.host_depth,
+               t.host_height,
+               t.vice_width,
+               t.vice_depth,
+               t.vice_height,
+               t.starter,
+               t.version,
                b.box_id
         from t_cabinet t,
              express_box b

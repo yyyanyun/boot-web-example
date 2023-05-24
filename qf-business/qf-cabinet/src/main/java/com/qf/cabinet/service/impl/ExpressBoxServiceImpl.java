@@ -29,7 +29,7 @@ public class ExpressBoxServiceImpl implements ExpressBoxService {
     public RespResult<PageInfo<ExpressBoxVo>> listBy(int page, int size, ExpressBoxQo expressBoxQo) throws SecurityException {
         ExpressBox expressBox = new ExpressBox();
         BeanUtils.copyProperties(expressBoxQo, expressBox);
-        PageInfo<ExpressBox> pageInfo = expressBoxMapper.selectById(expressBox);
+        PageInfo<ExpressBox> pageInfo = PageHelper.startPage(page, size).doSelectPageInfo(() -> expressBoxMapper.selectById(expressBox));
         if (!ObjectUtils.isEmpty(pageInfo.getList())) {
             return RespResult.success(MyCommonBeanUtils.copyPageInfo(pageInfo, new PageInfo<>(), ExpressBoxVo::new));
         } else {
@@ -47,11 +47,16 @@ public class ExpressBoxServiceImpl implements ExpressBoxService {
      * 修改
      */
     @Override
-    public RespResult<Integer> alter(ExpressBoxQo expressBoxQo) {
+    public RespResult<Integer> alter(ExpressBoxQo expressBoxQo) throws ServiceException {
         ExpressBox expressBox = new ExpressBox();
         BeanUtils.copyProperties(expressBoxQo,expressBox);
+        Integer update = expressBoxMapper.update(expressBox);
+        if (update>0){
+            return RespResult.success(update);
+        }else {
+            throw new ServiceException(ResultCode.SYS_ERROR);
+        }
 
-        return null;
     }
 
 

@@ -2,6 +2,7 @@ package com.qf.cabinet.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.github.pagehelper.PageInfo;
 import com.qf.cabinet.entity.LogBox;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -132,5 +133,10 @@ public class ExpressBoxVo {
      */
     @TableField(value = "logBoxList")
     private List<LogBox> logBoxList;
+
+    /**
+     * 记录映射
+     */
+    private PageInfo<LogBoxVo> pageInfo;
 
 }

@@ -138,4 +138,11 @@ public class CabinetVo {
      */
     @ApiModelProperty(value = "映射箱格")
     private List<ExpressBox> expressBoxList;
+
+    /**
+     * 映射box_id
+     */
+    @ApiModelProperty(value = "映射箱格序号")
+    private int boxId;
+
 }

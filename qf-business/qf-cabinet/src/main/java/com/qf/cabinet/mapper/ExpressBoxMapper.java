@@ -30,7 +30,7 @@ public interface ExpressBoxMapper extends BaseMapper<ExpressBox> {
     /**
      * 根据柜机ID查询
      */
-    PageInfo<ExpressBox> selectById(@Param("expressBox") ExpressBox expressBox);
+    List<ExpressBox> selectById(@Param("expressBox") ExpressBox expressBox);
 
     /**
      * 查看箱格记录
@@ -42,6 +42,9 @@ public interface ExpressBoxMapper extends BaseMapper<ExpressBox> {
      */
     List<ExpressBox> selectByCabinetId(int cabinetId);
 
+    /**
+     *  根据柜机ID、箱格序号修改
+     */
     Integer update(@Param("expressBox") ExpressBox expressBox);
 
 

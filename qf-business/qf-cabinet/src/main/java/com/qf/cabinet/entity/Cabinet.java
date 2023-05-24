@@ -176,15 +176,15 @@ public class Cabinet {
     private Byte version;
 
     /**
-     * 映射箱格
+     * 箱格映射
      */
     @ApiModelProperty(value = "映射箱格")
     private List<ExpressBox> expressBoxList;
 
     /**
-     * 映射Bo_Id
+     * 映射box_id
      */
-    @ApiModelProperty(value = "映射箱格")
+    @ApiModelProperty(value = "映射箱格序号")
     private int boxId;
 
 }

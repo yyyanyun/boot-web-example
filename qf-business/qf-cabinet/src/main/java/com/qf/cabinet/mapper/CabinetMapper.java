@@ -27,12 +27,12 @@ public interface CabinetMapper extends BaseMapper<Cabinet> {
     /**
      * 简单条件查询
      */
-    PageInfo<Cabinet> selectBy(@Param("cabinet") Cabinet cabinet,@Param("param")  String param);
+    List<Cabinet> selectBy(@Param("cabinet") Cabinet cabinet,@Param("param")  String param);
 
     /**
      * 高级条件查询
      */
-    PageInfo<Cabinet> selectBys(@Param("cabinet") Cabinet cabinet);
+    List<Cabinet> selectBys(@Param("cabinet") Cabinet cabinet);
 
     /**
      * 查看详情

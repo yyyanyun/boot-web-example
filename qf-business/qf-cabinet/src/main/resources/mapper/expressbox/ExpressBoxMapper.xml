@@ -65,7 +65,7 @@
                b.version
         from express_box b
         <where>
-            b.express_box_id = #{cabinetId}
+            b.cabinet_id = #{cabinetId}
         </where>
     </select>
 
@@ -110,13 +110,13 @@
         SET b.position_line=#{expressBox.positionLine},
             b.position_column=#{expressBox.positionColumn},
             b.box_type = #{expressBox.boxType},
-        <if test="expressBox.height != null">
+        <if test="expressBox.height != null and expressBox.height != ''">
             b.height = #{expressBox.height},
         </if>
-        <if test="expressBox.width != null">
+        <if test="expressBox.width != null and expressBox.width != ''">
             b.width = #{expressBox.width},
         </if>
-        <if test="expressBox.depth != null">
+        <if test="expressBox.depth != null and expressBox.depth != ''">
             b.depth = #{expressBox.depth},
         </if>
         b.storage_type = #{expressBox.storageType}
