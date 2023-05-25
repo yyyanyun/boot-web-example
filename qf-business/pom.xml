@@ -16,8 +16,6 @@
   <version>1.0.0</version>
 
   <modules>
-    <module>qf-member</module>
-      <module>qf-system-config-module</module>
     <module>qf-cabinet</module>
   </modules>
 
