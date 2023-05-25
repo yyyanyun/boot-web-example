@@ -5,6 +5,7 @@ import com.qf.config.entity.DropdownConfig;
 import com.qf.config.service.DropdownConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,10 @@ public class DropdownConfigController {
 
     @GetMapping("updateKeyStatus")
     @ApiOperation("修改key的状态")
-    @ApiImplicitParam(name = "dropdownId,status",value = "请求对象")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "dropdownId",value = "请求对象"),
+            @ApiImplicitParam(name = "status",value = "请求对象")
+    })
     public RespResult<String> updateKeyStatus(@RequestParam Integer dropdownId, @Max (2) @Min (1) @RequestParam Integer status){
         return dropdownConfigService.updateKeyStatus(dropdownId,status);
     }
