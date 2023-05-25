@@ -18,7 +18,7 @@ public class DropdownConfigServiceImpl implements DropdownConfigService {
     @Override
     public RespResult<String> insertKey(DropdownConfig dropdownConfig) {
         if (!ObjectUtils.isEmpty(dropdownConfig)) {
-            int i = dropdownConfigMapper.insert(dropdownConfig);
+            int i = dropdownConfigMapper.insertKey(dropdownConfig);
             if (i > 0) {
                 return RespResult.success("增加成功");
             } else {
@@ -31,7 +31,7 @@ public class DropdownConfigServiceImpl implements DropdownConfigService {
 
     @Override
     public RespResult<String> updateKey(DropdownConfig dropdownConfig) {
-        if (ObjectUtils.isEmpty(dropdownConfig)){
+        if (!ObjectUtils.isEmpty(dropdownConfig)){
             int i = dropdownConfigMapper.updateKey(dropdownConfig);
             if (i > 0) {
                 return RespResult.success("修改成功");
