@@ -1,5 +1,4 @@
 package com.qf.helpcenter.server.impl;
-
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.common.base.exception.DaoException;
@@ -14,6 +13,7 @@ import com.qf.helpcenter.server.SuggestedFeedbackServer;
 import com.qf.helpcenter.vo.SuggestedFeedbackVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
@@ -36,7 +36,7 @@ public class SuggestedFeedbackServerImpl implements SuggestedFeedbackServer {
         return CommonBeanUtils.copyPageInfo(objectPageInfo,new PageInfo<>(),SuggestedFeedbackVo::new);
 
     }
-
+    @Transactional
     @Override
     public RespResult addProblem(SuggestedFeedbackAddQo suggestedFeedbackAddQo) {
         SuggestedFeedback suggestedFeedback=new SuggestedFeedback();
@@ -52,7 +52,7 @@ public class SuggestedFeedbackServerImpl implements SuggestedFeedbackServer {
             }
         }
     }
-
+    @Transactional
     @Override
     public RespResult updateProblem(Integer id, Integer tpye) {
         if (tpye == 3) {
