@@ -22,6 +22,9 @@ public enum ResultCode {
     USER_EXIST(40101,"账号已存在"),
 
     PARAMETER_MISSING(40200, "传递的参数为空"),
+     USER_NO_ADD(40400,"添加失败"),
+    USER_NO_EXIST(40401,"不存在"),
+    USER_NO_UPDATE(40402,"修改失败"),
 
     RESPONSE_NULL(40201,"返回的结果为空");
 

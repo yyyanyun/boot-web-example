@@ -45,7 +45,7 @@ public class CabinetServiceImpl implements CabinetService {
         BeanUtils.copyProperties(cabinetHighQo,cabinet);
         IPage<CabinetVo> cabinetVoIPage = PageCommonUtils.copyPage(cabinetMapper.selectBy(page, size, cabinet), new Page<>(), CabinetVo::new);
         if (ObjectUtils.isEmpty(cabinetVoIPage.getRecords())){
-            throw new ServiceException(ResultCode.CABINET_NO_EXISTS);
+            throw new ServiceException(ResultCode.RESPONSE_NULL);
         }
         return cabinetVoIPage;
     }
@@ -65,7 +65,7 @@ public class CabinetServiceImpl implements CabinetService {
                 throw new ServiceException(ResultCode.SYS_ERROR);
             }
         }else {
-            throw new ServiceException(ResultCode.CABINET_EXISTS);
+            throw new ServiceException(ResultCode.RESPONSE_NULL);
         }
 
     }
@@ -78,7 +78,7 @@ public class CabinetServiceImpl implements CabinetService {
         List<Cabinet> copyList = CommonBeanUtils.copyList(cabinetQoList,Cabinet::new);
         copyList.forEach(iter->{
             if (!ObjectUtils.isEmpty(cabinetMapper.selectExists(iter))){
-                throw new ServiceException(ResultCode.CABINET_EXISTS);
+                throw new ServiceException(ResultCode.RESPONSE_NULL);
             }
         });
         Integer count = cabinetMapper.insertList(copyList);

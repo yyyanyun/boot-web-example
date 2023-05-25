@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.member.mapper.CourierMapper">
+    <resultMap id="BaseResultMap" type="com.qf.member.vo.CourierVo">
+        <id column="member_id" property="memberId"></id>
+        <result column="member_name" property="memberName"></result>
+        <result column="phone" property="phone"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="member_status" property="memberStatus"></result>
+        <result column="member_balance" property="memberBalance"></result>
+        <result column="registration_type" property="registrationType"></result>
+        <result column="authentication_status" property="authenticationStatus"></result>
+        <result column="express_company" property="expressCompany"></result>
+    </resultMap>
+    <select id="selectAllCourier" resultMap="BaseResultMap">
+        select t.member_id,
+               t.member_name,
+               t.phone,
+               t.member_status,
+               t.registration_type,
+               t.create_time,
+               b.member_balance,
+               r.authentication_status,
+               tcc.express_company
+        from t_courier t
+                 left join t_bank_card b on t.member_id = b.member_id
+                 left join t_real_name r on t.member_id = r.member_id
+                 left join t_courier_certification tcc on t.member_id = tcc.member_id
+        <where>
+            <if test="courierVo.memberName != null">
+                member_name like concat('%', #{courierVo.memberName}, '%')
+            </if>
+            <if test="courierVo.phone != null">
+                and phone like concat('%', #{courierVo.phone}, '%')
+            </if>
+            <if test="courierVo.memberStatus != null">
+                and member_status = #{courierVo.memberStatus}
+            </if>
+            <if test="courierVo.registrationType != null">
+                and registration_type = #{courierVo.registrationType}
+            </if>
+            <if test="startTime != null and endTime != null">
+                and create_time between #{startTime} and #{endTime}
+            </if>
+            <if test="courierVo.memberId != null">
+                and t.member_id = #{courierVo.memberId}
+            </if>
+            <if test="courierVo.expressCompany != null">
+                and express_company=#{courierVo.expressCompany}
+            </if>
+            <if test="courierVo.authenticationStatus != null">
+                and authentication_status=#{courierVo.authenticationStatus}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertCourier" keyProperty="courier.memberId" useGeneratedKeys="true">
+        insert into t_courier(member_name, phone) value (#{courier.memberName}, #{courier.phone})
+    </insert>
+
+    <insert id="insertCourierCertification" keyProperty="courierCertification.tCourierCertificationId" useGeneratedKeys="true">
+        insert into t_courier_certification(express_company,member_id) value (#{courierCertification.expressCompany},#{courierCertification.memberId})
+    </insert>
+
+    <update id="updateState">
+    update t_courier  set member_status=#{memberStatus} where member_id=#{memberId}
+    </update>
+</mapper>
