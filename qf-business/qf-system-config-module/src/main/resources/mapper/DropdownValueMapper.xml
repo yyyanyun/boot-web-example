@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.config.mapper.DropdownValueMapper">
+  <resultMap id="BaseResultMap" type="com.qf.config.entity.DropdownValue">
+    <!--@mbg.generated-->
+    <!--@Table dropdown_value-->
+    <id column="sort_id" jdbcType="BIGINT" property="sortId" />
+    <result column="value_cn" jdbcType="VARCHAR" property="valueCn" />
+    <result column="value_en" jdbcType="VARCHAR" property="valueEn" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="dropdown_id" jdbcType="BIGINT" property="dropdownId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    sort_id, value_cn, value_en, `status`, dropdown_id
+  </sql>
+</mapper>
