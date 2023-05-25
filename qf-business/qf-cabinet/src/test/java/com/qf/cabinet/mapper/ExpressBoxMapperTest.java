@@ -15,13 +15,13 @@ class ExpressBoxMapperTest {
     private ExpressBoxMapper expressBoxMapper;
     @Test
     void count() {
-        Long count = expressBoxMapper.count(1,1);
+        Long count = expressBoxMapper.count(1L);
         log.info(count.toString());
     }
 
     @Test
     void countByCid() {
-        Long aLong = expressBoxMapper.countByCid(1);
+        Long aLong = expressBoxMapper.countByCid(1L);
         log.info(aLong.toString());
     }
 }

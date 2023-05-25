@@ -5,25 +5,24 @@ import com.qf.cabinet.qo.CabinetEasyQo;
 import com.qf.cabinet.qo.CabinetHighQo;
 import com.qf.cabinet.qo.CabinetQo;
 import com.qf.cabinet.vo.CabinetVo;
-import com.qf.common.base.result.RespResult;
 
 import java.util.List;
 
 public interface CabinetService {
-    RespResult<PageInfo<CabinetVo>> listSimple(int page, int size, CabinetEasyQo cabinetEasyQo, String param);
+    PageInfo<CabinetVo> listSimple(int page, int size, CabinetEasyQo cabinetEasyQo, String param);
 
-    RespResult<PageInfo<CabinetVo>> list(int page, int size, CabinetHighQo cabinetHighQo);
+    PageInfo<CabinetVo> list(int page, int size, CabinetHighQo cabinetHighQo);
 
-    RespResult<Integer> add(CabinetQo cabinetQo);
+    Integer add(CabinetQo cabinetQo);
 
-    RespResult<Integer> listAdd(List<CabinetQo> cabinetQoList);
+    Integer listAdd(List<CabinetQo> cabinetQoList);
 
-    RespResult<CabinetVo> listOne(int cabinetId);
+    CabinetVo listOne(int cabinetId);
 
-    RespResult<Integer> alter(int cabinetId,int type);
+    Integer alter(int cabinetId,int type);
 
-    RespResult<CabinetVo> showBox(int cabinetId);
+    CabinetVo showBox(int cabinetId);
 
-    RespResult<CabinetVo> goAlter(int cabinetId, int boxId);
+    CabinetVo goAlter(int cabinetId, int boxId);
 
 }

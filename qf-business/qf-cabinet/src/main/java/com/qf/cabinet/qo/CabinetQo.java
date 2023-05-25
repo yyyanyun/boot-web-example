@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotBlank;
@@ -55,8 +56,8 @@ public class CabinetQo {
      * 安装日期
      */
     @ApiModelProperty(value = "安装日期")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @NotBlank(message = "安装日期不能为空")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "安装日期不能为空")
     private Date createData;
 
     /**

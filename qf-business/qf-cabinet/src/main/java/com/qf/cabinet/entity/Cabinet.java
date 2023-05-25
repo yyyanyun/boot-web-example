@@ -185,6 +185,7 @@ public class Cabinet {
      * 映射box_id
      */
     @ApiModelProperty(value = "映射箱格序号")
+    @TableField(exist = false)
     private int boxId;
 
 }

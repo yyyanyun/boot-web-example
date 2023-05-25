@@ -12,16 +12,16 @@ public interface ExpressBoxMapper extends BaseMapper<ExpressBox> {
     /**
      * 统计使用中的个数
      */
-    default Long count(int cabinetId,int status){
+    default Long count(Long cabinetId){
         LambdaQueryWrapper<ExpressBox> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(ExpressBox::getCabinetId,cabinetId).eq(ExpressBox::getUsageStatus,status);
+        queryWrapper.eq(ExpressBox::getCabinetId,cabinetId).eq(ExpressBox::getUsageStatus,1);
         return this.selectCount(queryWrapper);
     }
 
     /**
      * 每个柜机的箱格数
      */
-    default Long countByCid(int cabinetId){
+    default Long countByCid(Long cabinetId){
         LambdaQueryWrapper<ExpressBox> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(ExpressBox::getCabinetId,cabinetId);
         return this.selectCount(queryWrapper);

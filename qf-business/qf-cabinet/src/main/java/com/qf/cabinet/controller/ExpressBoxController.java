@@ -25,14 +25,14 @@ public class ExpressBoxController {
     /**
      * 箱格显示界面数据
      */
-    @ApiOperation(nickname = "list", value = "箱格显示界面数据")
+    @ApiOperation(nickname = "list", value = "箱格条件查询")
     @ApiImplicitParams({@ApiImplicitParam(name = "page", value = "当前页", required = true),
             @ApiImplicitParam(name = "size", value = "页量", required = true)})
     @PostMapping("/list")
     public RespResult<PageInfo<ExpressBoxVo>> list(@RequestParam(defaultValue = "1") int page,
                                                    @RequestParam(defaultValue = "5") int size,
                                                    @RequestBody @Valid ExpressBoxQo expressBoxQo) throws ControllerException {
-        return expressBoxService.listBy(page, size, expressBoxQo);
+        return RespResult.success(expressBoxService.listBy(page, size, expressBoxQo));
     }
 
 
@@ -47,7 +47,7 @@ public class ExpressBoxController {
     public RespResult<PageInfo<ExpressBoxVo>> listByLog(@RequestParam(defaultValue = "1") int page,
                                                         @RequestParam(defaultValue = "5") int size,
                                                         @RequestParam int boxId) throws ControllerException {
-        return expressBoxService.listByLog(page, size, boxId);
+        return RespResult.success(expressBoxService.listByLog(page, size, boxId));
     }
 
     /**
@@ -55,8 +55,8 @@ public class ExpressBoxController {
      */
     @PutMapping("/alter")
     @ApiOperation(nickname = "alter", value = "修改箱格接口")
-    public RespResult<Integer> alter(@RequestBody ExpressBoxQo expressBoxQo) throws ControllerException {
-        return expressBoxService.alter(expressBoxQo);
+    public RespResult<Integer> alter(@RequestBody @Valid ExpressBoxQo expressBoxQo) throws ControllerException {
+        return RespResult.success(expressBoxService.alter(expressBoxQo));
     }
 
 

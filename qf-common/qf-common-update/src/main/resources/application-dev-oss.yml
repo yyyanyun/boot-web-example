@@ -1,0 +1,13 @@
+aliyun:
+  oss:
+    endpoint: "https://oss-cn-guangzhou.aliyuncs.com"
+    access-key-id: "LTAI5tNjXvRK4MZiSn3PHZQX"
+    access-key-secret: "aM3gUQcz5GCbjWIMH98u1roOqjIaRb"
+    bucket-name: "gz-qf-lsz"
+spring:
+  servlet:
+    multipart:
+      # 设置单个文件的大小
+      max-file-size: 50MB
+      # 设置单次请求文件的总大小
+      max-request-size: 50MB

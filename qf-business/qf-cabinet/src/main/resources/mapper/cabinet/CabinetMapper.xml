@@ -52,7 +52,7 @@
 
 
     <resultMap id="ListResultCabinetMap" type="com.qf.cabinet.entity.Cabinet" extends="ResultCabinetMap">
-        <collection property="expressBoxList" column="cabinet_id"
+        <collection property="expressBoxList" ofType="com.qf.cabinet.entity.ExpressBox" column="cabinet_id"
                     select="com.qf.cabinet.mapper.ExpressBoxMapper.selectByCabinetId"/>
     </resultMap>
     <select id="selectByCabinetId" resultMap="ListResultCabinetMap">
@@ -143,6 +143,8 @@
         from t_cabinet t
         <where>
             t.cabinet_code = #{cabinet.cabinetCode}
+            and t.address = #{cabinet.address}
+            and t.region = #{cabinet.region}
         </where>
     </select>
 

@@ -1,12 +1,18 @@
 package com.qf.common.base.result;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 //用户名存在  40000
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class RespResult<T> {
     /**
-     * 错误信息  产品经理
+     * 错误信息
      */
     private String msg;
     /**
@@ -40,6 +46,10 @@ public class RespResult<T> {
     public static <T> RespResult<T> error() {
         return error(ResultCode.SYS_ERROR);
     }
+    public static RespResult<String> error(String message) {
+        return common(ResultCode.SYS_ERROR,message);
+    }
+
 
     private static <T> RespResult<T> common(ResultCode resultCode, T data) {
         RespResult<T> result = new RespResult<>();

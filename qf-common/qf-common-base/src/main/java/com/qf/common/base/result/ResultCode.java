@@ -4,8 +4,6 @@ import lombok.Getter;
 
 @Getter
 public enum ResultCode {
-    CABINET_NO_EXISTS(41000,"不存在"),
-    CABINET_EXISTS(41100,"已存在"),
     /**
      * 成功
      */
@@ -17,7 +15,23 @@ public enum ResultCode {
     /**
      *
      */
+    NO_EXISTS(41000,"不存在"),
+    /**
+     * 参数校验失败
+     */
+    PARAMETER_ERROR(44001,"参数校验失败"),
+    /**
+     *
+     */
+    CREATE_EXISTS(41100,"已存在"),
+    /**
+     *
+     */
     USER_PASSWORD_ERROR(40100, "账号密码错误"),
+    /**
+     * 密码不一致
+     */
+    USER_COMFIRM_PWD_ERROR(40101,"密码错误"),
     /**
      *
      */
