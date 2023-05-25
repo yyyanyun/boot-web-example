@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("CabinetChargeSetting")
+@RequestMapping("cabinet/setting")
 @Api(tags = "智能柜收费设置接口")
 public class CabinetChargeSettingController {
     @Resource
     private CabinetChargeSettingService cabinetChargeSettingService;
 
-    @GetMapping("select")
+    @GetMapping("show")
     @ApiOperation("智能柜收费设置回显")
     @ApiImplicitParam(name = "cabinetId" , value = "收费设置的方案号",defaultValue = "1")
-    public RespResult<CabinetChargeSetting> selectByCabinetId(@RequestParam(defaultValue = "1") int cabinetId){
+    public RespResult<CabinetChargeSetting> dataEcho(@RequestParam(defaultValue = "1") int cabinetId){
         return cabinetChargeSettingService.selectByCabinetId(cabinetId);
     }
 
-    @PostMapping("update")
+    @PostMapping("mod")
     @ApiOperation("智能柜收费设置数据修改")
     @ApiImplicitParam(name = "cabinetChargeSetting",value = "请求对象")
-    public RespResult<String> updateCabinetChargeSetting(@RequestBody CabinetChargeSetting cabinetChargeSetting){
+    public RespResult<String> mod(@RequestBody CabinetChargeSetting cabinetChargeSetting){
         return cabinetChargeSettingService.updateCabinetChargeSetting(cabinetChargeSetting);
     }
 }

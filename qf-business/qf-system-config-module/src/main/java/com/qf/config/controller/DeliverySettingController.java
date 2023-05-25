@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("DeliverySetting")
+@RequestMapping("delivery/setting")
 @Api(tags = "派送设置接口")
 public class DeliverySettingController {
     @Resource
     private DeliverySettingService deliverySettingService;
 
-    @GetMapping("select")
+    @GetMapping("show")
     @ApiOperation("派送设置数据回显")
     @ApiImplicitParam(name = "deliveryId", value = "派送设置的方案号",defaultValue = "1")
-    public RespResult<DeliverySetting> selectByDeliveryId(@RequestParam(defaultValue = "1") int deliveryId){
+    public RespResult<DeliverySetting> dataEcho(@RequestParam(defaultValue = "1") int deliveryId){
         return deliverySettingService.selectByDeliveryId(deliveryId);
     }
-    @PostMapping("update")
+    @PostMapping("mod")
     @ApiOperation("派送设置数据修改")
     @ApiImplicitParam(name = "deliverySetting",value = "请求对象")
-    public RespResult<String> updateDeliverySetting(@RequestBody DeliverySetting deliverySetting){
+    public RespResult<String> mod(@RequestBody DeliverySetting deliverySetting){
         return deliverySettingService.updateDeliverySetting(deliverySetting);
     }
 }

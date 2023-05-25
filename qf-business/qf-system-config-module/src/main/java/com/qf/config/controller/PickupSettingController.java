@@ -18,16 +18,16 @@ public class PickupSettingController {
     @Resource
     private PickupSettingService pickupSettingService;
 
-    @GetMapping("select")
+    @GetMapping("show")
     @ApiOperation("取件设置数据回显")
     @ApiImplicitParam(name = "pickupId", value = "取件设置的方案号",defaultValue = "1")
-    public RespResult<PickupSetting> selectByPickupId(@RequestParam(defaultValue = "1") int pickupId){
+    public RespResult<PickupSetting> dataEcho(@RequestParam(defaultValue = "1") int pickupId){
         return pickupSettingService.selectByPickupId(pickupId);
     }
-    @PostMapping("update")
+    @PostMapping("mod")
     @ApiOperation("取件设置数据修改")
     @ApiImplicitParam(name = "pickupSetting",value = "请求对象")
-    public RespResult<String> updatePickupSetting(@RequestBody PickupSetting pickupSetting){
+    public RespResult<String> mod(@RequestBody PickupSetting pickupSetting){
         return pickupSettingService.updatePickupSetting(pickupSetting);
     }
 }

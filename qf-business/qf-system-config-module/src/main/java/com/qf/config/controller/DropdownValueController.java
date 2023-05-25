@@ -22,27 +22,27 @@ public class DropdownValueController {
     @Resource
     private DropdownValueService dropdownValueService;
 
-    @PostMapping("insert")
+    @PostMapping("add")
     @ApiOperation("增加value")
     @ApiImplicitParam(name = "dropdownValue",value = "请求对象")
-    public RespResult<String> insertValue(@RequestBody DropdownValue dropdownValue){
+    public RespResult<String> add(@RequestBody DropdownValue dropdownValue){
         return dropdownValueService.insertValue(dropdownValue);
     }
 
-    @PostMapping("updateKey")
+    @PostMapping("mod")
     @ApiOperation("修改value")
     @ApiImplicitParam(name = "dropdownValue",value = "请求对象")
-    public RespResult<String> updateValue(@RequestBody DropdownValue dropdownValue){
+    public RespResult<String> modValue(@RequestBody DropdownValue dropdownValue){
         return dropdownValueService.updateValue(dropdownValue);
     }
 
-    @GetMapping("updateKeyStatus")
+    @GetMapping("status")
     @ApiOperation("修改value的状态")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "sortId",value = "请求对象"),
             @ApiImplicitParam(name = "status",value = "请求对象")
     })
-    public RespResult<String> updateValueStatus(@RequestParam Integer sortId, @Max(2) @Min(1) @RequestParam Integer status){
+    public RespResult<String> modValueStatus(@RequestParam Integer sortId, @Max(2) @Min(1) @RequestParam Integer status){
         return dropdownValueService.updateValueStatus(sortId,status);
     }
 }
