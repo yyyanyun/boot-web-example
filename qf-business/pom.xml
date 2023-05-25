@@ -15,9 +15,18 @@
   <artifactId>qf-business</artifactId>
   <version>1.0.0</version>
 
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
   <modules>
     <module>qf-member</module>
-      <module>qf-system-config-module</module>
+    <module>qf-advertisement</module>
+    <module>qf-system-config-module</module>
   </modules>
 
 
