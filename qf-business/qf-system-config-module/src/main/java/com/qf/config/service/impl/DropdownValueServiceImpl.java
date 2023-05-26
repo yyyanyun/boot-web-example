@@ -1,5 +1,8 @@
 package com.qf.config.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.github.pagehelper.PageHelper;
 import com.qf.common.base.exception.ServiceException;
 import com.qf.common.base.result.RespResult;
 import com.qf.common.base.result.ResultCode;
@@ -58,4 +61,11 @@ public class DropdownValueServiceImpl implements DropdownValueService {
             throw new ServiceException(ResultCode.PARAMETER_MISSING);
         }
     }
+
+    @Override
+    public IPage<DropdownValue> search(int page, int size, String kw) {
+       return dropdownValueMapper.selectPage(new Page<>(page,size),kw == null ? null :dropdownValueMapper.searchValue(kw));
+    }
+
+
 }

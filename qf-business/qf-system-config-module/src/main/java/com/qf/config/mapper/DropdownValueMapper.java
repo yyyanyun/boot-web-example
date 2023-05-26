@@ -1,8 +1,12 @@
 package com.qf.config.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.qf.config.entity.DropdownValue;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface DropdownValueMapper extends BaseMapper<DropdownValue> {
     default int insertValue(DropdownValue dropdownValue) {
@@ -20,4 +24,12 @@ public interface DropdownValueMapper extends BaseMapper<DropdownValue> {
                 .eq(DropdownValue::getSortId,sortId);
         return this.update(dropdownValue, luw);
     }
+
+    default QueryWrapper<DropdownValue> searchValue(String kw){
+        QueryWrapper<DropdownValue> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like(DropdownValue.COL_VALUE_CN,kw);
+        return queryWrapper;
+    }
+
+
 }

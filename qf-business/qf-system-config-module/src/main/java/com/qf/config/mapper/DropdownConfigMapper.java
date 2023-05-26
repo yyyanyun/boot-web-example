@@ -2,7 +2,11 @@ package com.qf.config.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.qf.config.common.vo.DropdownConfigVO;
 import com.qf.config.entity.DropdownConfig;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface DropdownConfigMapper extends BaseMapper<DropdownConfig> {
     default int insertKey(DropdownConfig dropdownConfig) {
@@ -20,6 +24,9 @@ public interface DropdownConfigMapper extends BaseMapper<DropdownConfig> {
                 .eq(DropdownConfig::getDropdownId,dropdownId);
         return this.update(dropdownConfig, luw);
     }
+
+    List<DropdownConfigVO> selectList(@Param("kw") String kw);
+
 
     
 }

@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.config.mapper.DropdownConfigMapper">
-  <resultMap id="BaseResultMap" type="com.qf.config.entity.DropdownConfig">
-    <!--@mbg.generated-->
-    <!--@Table dropdown_config-->
-    <id column="dropdown_id" jdbcType="BIGINT" property="dropdownId" />
-    <result column="key_cn" jdbcType="VARCHAR" property="keyCn" />
-    <result column="key_en" jdbcType="VARCHAR" property="keyEn" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="notes" jdbcType="VARCHAR" property="notes" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    dropdown_id, key_cn, key_en, `status`, notes
-  </sql>
+    <resultMap id="BaseResultMap" type="com.qf.config.entity.DropdownConfig">
+        <!--@mbg.generated-->
+        <!--@Table dropdown_config-->
+        <id column="dropdown_id" jdbcType="BIGINT" property="dropdownId"/>
+        <result column="key_cn" jdbcType="VARCHAR" property="keyCn"/>
+        <result column="key_en" jdbcType="VARCHAR" property="keyEn"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="notes" jdbcType="VARCHAR" property="notes"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        dropdown_id,
+        key_cn,
+        key_en,
+        `status`,
+        notes
+    </sql>
+    <resultMap id="selectListResultMap" type="com.qf.config.common.vo.DropdownConfigVO" extends="BaseResultMap">
+        <result property="valueCn" column="v_value_cn" typeHandler="org.apache.ibatis.type.StringTypeHandler"/>
+    </resultMap>
+
+    <select id="selectList" resultMap="selectListResultMap">
+        select d.dropdown_id, d.key_cn, d.status, d.notes,dv.value_cn  as v_value_cn
+        from dropdown_config d
+                 inner join dropdown_value dv on
+            d.dropdown_id = dv.dropdown_id
+        <where>
+             <if test="kw != null and kw != ''">
+                 d.key_cn like concat('%',#{kw},'%') or  dv.value_cn like concat('%',#{kw},'%')
+             </if>
+        </where>
+    </select>
 </mapper>

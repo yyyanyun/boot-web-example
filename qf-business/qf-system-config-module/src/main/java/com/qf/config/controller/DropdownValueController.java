@@ -1,5 +1,6 @@
 package com.qf.config.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.qf.common.base.result.RespResult;
 import com.qf.config.entity.DropdownValue;
 import com.qf.config.service.DropdownValueService;
@@ -15,7 +16,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 @RestController
-@RequestMapping("DropdownConfigValue")
+@RequestMapping("value")
 @Api(tags = "Dropdown value 配置接口")
 @Validated
 public class DropdownValueController {
@@ -44,5 +45,17 @@ public class DropdownValueController {
     })
     public RespResult<String> modValueStatus(@RequestParam Integer sortId, @Max(2) @Min(1) @RequestParam Integer status){
         return dropdownValueService.updateValueStatus(sortId,status);
+    }
+
+    @GetMapping("list")
+    @ApiOperation("查询Dropdown value 配置的信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "page", value = "页码", defaultValue = "1"),
+            @ApiImplicitParam(name = "size", value = "页量", defaultValue = "5"),
+            @ApiImplicitParam(name = "kw", value = "搜索条件"),
+    })
+    public RespResult<IPage<DropdownValue>> searchValue(@RequestParam(defaultValue = "1") int page
+            , @RequestParam(defaultValue = "5") int size, String kw){
+        return RespResult.success(dropdownValueService.search(page,size,kw));
     }
 }
