@@ -15,4 +15,9 @@
     sort_id, value_cn, value_en, `status`, dropdown_id
   </sql>
 
+  <select id="searchValues" resultMap="BaseResultMap">
+    select value_cn
+    from dropdown_value
+    where dropdown_id = #{dropdownId}
+    </select>
 </mapper>

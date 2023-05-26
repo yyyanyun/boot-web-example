@@ -31,5 +31,6 @@ public interface DropdownValueMapper extends BaseMapper<DropdownValue> {
         return queryWrapper;
     }
 
+    DropdownValue searchValues(@Param("dropdownId") String dropdownId);
 
 }

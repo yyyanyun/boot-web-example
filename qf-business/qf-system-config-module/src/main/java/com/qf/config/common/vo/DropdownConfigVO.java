@@ -22,8 +22,6 @@ public class DropdownConfigVO {
     @ApiModelProperty(value = "中文key")
     private String keyCn;
 
-    @ApiModelProperty(value = "DropdownValue的中文values")
-    private String  valueCn;
 
     /**
      * 1启用 2禁用
@@ -37,4 +35,5 @@ public class DropdownConfigVO {
     @ApiModelProperty(value = "备注")
     private String notes;
 
+    private List<DropdownValue> list;
 }

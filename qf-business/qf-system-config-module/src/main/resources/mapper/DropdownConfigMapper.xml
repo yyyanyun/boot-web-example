@@ -19,18 +19,17 @@
         notes
     </sql>
     <resultMap id="selectListResultMap" type="com.qf.config.common.vo.DropdownConfigVO" extends="BaseResultMap">
-        <result property="valueCn" column="v_value_cn" typeHandler="org.apache.ibatis.type.StringTypeHandler"/>
+        <collection property="list" ofType="com.qf.config.entity.DropdownValue" column="dropdown_id"
+        select="com.qf.config.mapper.DropdownValueMapper.searchValues"/>
     </resultMap>
 
     <select id="selectList" resultMap="selectListResultMap">
-        select d.dropdown_id, d.key_cn, d.status, d.notes,dv.value_cn  as v_value_cn
-        from dropdown_config d
-                 inner join dropdown_value dv on
-            d.dropdown_id = dv.dropdown_id
+        select c.dropdown_id, c.key_cn, c.status, c.notes
+        from dropdown_config c
         <where>
-             <if test="kw != null and kw != ''">
-                 d.key_cn like concat('%',#{kw},'%') or  dv.value_cn like concat('%',#{kw},'%')
-             </if>
+            <if test="kw != null and kw != ''">
+                c.key_cn like concat('%', #{kw}, '%')
+            </if>
         </where>
     </select>
 </mapper>
