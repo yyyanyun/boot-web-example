@@ -24,11 +24,11 @@
     </resultMap>
 
     <select id="selectList" resultMap="selectListResultMap">
-        select c.dropdown_id, c.key_cn, c.status, c.notes
-        from dropdown_config c
+        select distinct c.dropdown_id, c.key_cn, c.status, c.notes
+        from dropdown_config c inner join dropdown_value v on c.dropdown_id = v.dropdown_id
         <where>
             <if test="kw != null and kw != ''">
-                c.key_cn like concat('%', #{kw}, '%')
+                c.key_cn like concat('%', #{kw}, '%') or v.value_cn like concat('%', #{kw}, '%')
             </if>
         </where>
     </select>
