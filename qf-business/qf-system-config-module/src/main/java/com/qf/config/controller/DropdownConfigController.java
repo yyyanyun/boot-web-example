@@ -57,7 +57,7 @@ public class DropdownConfigController {
             @ApiImplicitParam(name = "kw", value = "搜索条件"),
     })
     public RespResult<PageInfo<DropdownConfigVO>> searchKey(@RequestParam(defaultValue = "1") int page
-            , @RequestParam(defaultValue = "5") int size,@RequestParam String kw){
+            , @RequestParam(defaultValue = "5") int size, String kw){
         return RespResult.success(dropdownConfigService.search(page,size,kw));
     }
 }
